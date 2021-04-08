@@ -4,280 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21bf0722-f314-4e15-9da8-349494ddf3ee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/form/CreateMenteeRequest$CreateMenteeRequestBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/form/CreateMenteeRequest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/infra/config/security/CurrentUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/AbstractService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/exception/AlreadyExistException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/exception/InvalidInputException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/exception/NotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/MenteeRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/MentorRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/validator/MenteeRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/validator/MentorRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/activity/ActivityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/activity/ActivityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/award/AwardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/award/AwardService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/career/CareerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/career/CareerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/education/EducationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/education/EducationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/ResumeRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/activity/ActivityRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/activity/CreateActivityRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/activity/UpdateActivityRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/award/AwardRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/award/CreateAwardRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/award/UpdateAwardRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/career/CareerRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/career/CreateCareerRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/career/UpdateCareerRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/education/CreateEducationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/education/EducationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/education/UpdateEducationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/project/CreateProjectRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/project/ProjectRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/project/UpdateProjectRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/project/ProjectController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/project/ProjectService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/validator/ActivityRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/validator/AwardRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/validator/CareerRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/validator/EducationRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/validator/ProjectRequestValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/suggestion/SuggestionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/suggestion/SuggestionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/suggestion/SuggestionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/suggestion/form/SuggestionRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/classAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/jarAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/taskHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/configuration-cache/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/devidea.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/devidea.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    <list default="true" id="21bf0722-f314-4e15-9da8-349494ddf3ee" name="Default Changelist" comment="# - 제목(title) - 50자 이내로 ---&#10;# &lt;타입(type)&gt; &lt;제목(title)&gt;&#10;# 예시(ex) : Docs(Add) Commit docs Add&#10;# --- 본문(content) - 72자마다 줄바꾸기  ---&#10;# 예시(ex) :&#10;# - Workflow&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/infra/config/security/CustomUserDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/infra/config/security/CustomUserDetailService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/infra/config/security/LoginUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/infra/config/security/LoginUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/account/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/account/AccountController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/Mentee$MenteeBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/Mentee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/MenteeController$MenteeDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/MenteeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/MenteeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/Mentor$MentorBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/Mentor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/MentorController$MentorDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/MentorController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/mentoring/MentorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Activity$ActivityBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Activity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/ActivityController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Award$AwardBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Award.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/AwardController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Career$CareerBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Career.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/CareerController$CareerDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/CareerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Education$EducationBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Education.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/EducationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Project$ProjectBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/ProjectController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/QActivity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/QAward.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/QCareer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/QEducation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/QProject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Resume$ResumeBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/Resume.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/ResumeController$ResumeDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/ResumeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/ResumeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateActivityRequest$CreateActivityRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateActivityRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateAwardRequest$CreateAwardRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateAwardRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateCareerRequest$CreateCareerRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateCareerRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateEducationRequest$CreateEducationRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateEducationRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateProjectRequest$CreateProjectRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateProjectRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateResumeRequest$CreateResumeRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/CreateResumeRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/UpdateCareerRequest$UpdateCareerRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/UpdateCareerRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/UpdateResumeRequest$UpdateResumeRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/resume/form/UpdateResumeRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/content/suggestion/Suggestion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/tagzone/tag/Tag$TagBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/project/devidea/modules/tagzone/tag/Tag.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentee$MenteeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentee$MenteeBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MenteeController$MenteeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MenteeController$MenteeDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MenteeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MenteeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MenteeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MenteeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentor$MentorBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentor$MentorBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/Mentor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MentorController$MentorDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MentorController$MentorDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MentorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MentorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MentorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/mentoring/MentorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Activity$ActivityBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Activity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ActivityController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Award$AwardBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Award.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/AwardController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Career$CareerBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Career.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/CareerController$CareerDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/CareerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Education$EducationBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Education.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/EducationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Project$ProjectBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Project.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ProjectController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/QActivity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/QAward.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/QCareer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/QEducation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/QProject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Resume$ResumeBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Resume$ResumeBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Resume.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/Resume.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ResumeController$ResumeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ResumeController$ResumeDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ResumeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ResumeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ResumeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/ResumeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateActivityRequest$CreateActivityRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateActivityRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateAwardRequest$CreateAwardRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateAwardRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateCareerRequest$CreateCareerRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateCareerRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateEducationRequest$CreateEducationRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateEducationRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateProjectRequest$CreateProjectRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateProjectRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateResumeRequest$CreateResumeRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateResumeRequest$CreateResumeRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateResumeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/CreateResumeRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/UpdateCareerRequest$UpdateCareerRequestBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/UpdateCareerRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/UpdateResumeRequest$UpdateResumeRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/UpdateResumeRequest$UpdateResumeRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/UpdateResumeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/resume/form/UpdateResumeRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/suggestion/Suggestion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/content/suggestion/Suggestion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/account/QAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/account/QAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/account/QInterest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/account/QMainActivityZone.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/mentoring/QMentee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/mentoring/QMentor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/resume/QActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/resume/QAward.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/resume/QCareer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/resume/QEducation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/resume/QProject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/resume/QResume.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/study/QStudy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/study/QStudyMember.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/study/apply/QStudyApply.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/content/suggestion/QSuggestion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/notification/QNotification.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/tagzone/tag/QTag.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/project/devidea/modules/tagzone/zone/QZone.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/api/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/infra/error/GlobalExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/infra/error/GlobalExceptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/infra/error/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/infra/error/exception/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/Mentee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/Mentee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MenteeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MenteeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MenteeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MenteeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/Mentor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/Mentor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MentorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MentorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MentorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/MentorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/CreateMenteeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/CreateMenteeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/CreateMentorRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/CreateMentorRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/UpdateMenteeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/UpdateMenteeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/UpdateMentorRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/form/UpdateMentorRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/validator/CreateMenteeRequestValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/mentoring/validator/CreateMentorRequestValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/activity/Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ActivityController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ActivityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/activity/ActivityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ActivityService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Award.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/award/Award.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/AwardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/AwardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/award/AwardRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/AwardService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Career.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/career/Career.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/CareerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/CareerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/career/CareerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/CareerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Education.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/education/Education.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/EducationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/EducationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/education/EducationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/EducationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ProjectController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/project/ProjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ProjectService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Resume.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/Resume.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ResumeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ResumeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ResumeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/ResumeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateActivityRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateAwardRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateCareerRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateEducationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateProjectRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateResumeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/CreateResumeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateActivityRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateAwardRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateCareerRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateEducationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateProjectRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateResumeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/resume/form/UpdateResumeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/suggestion/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/content/suggestion/Suggestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/notification/NotificationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/notification/NotificationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/notification/NotificationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/notification/NotificationType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountInfoControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountInfoControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/mentoring/MenteeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/mentoring/MenteeControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/mentoring/MentorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/mentoring/MentorControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/resume/CareerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/resume/CareerControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/resume/ResumeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/resume/ResumeControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/tech/DaangnCrawlingTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/tech/JavableCrawlingTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/tech/LineCrawlingTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/tech/kakaoCrawlingTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/techNews/CrawlingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/techNews/CrawlingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/techNews/TechNewsControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/techNews/TechNewsControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/techNews/TechNewsRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/content/techNews/TechNewsRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/account/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/project/devidea/modules/account/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/Account.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,14 +65,38 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.com.project.devidea.modules.account in devidea.test">
+  <component name="RunManager" selected="JUnit.java in devidea.test">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="back-end [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -359,7 +113,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="com.project.devidea.modules.account in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -376,10 +132,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="java in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="devidea.test" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DevideaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="devidea.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.devidea.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.devidea.DevideaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.com.project.devidea.modules.account in devidea.test" />
+        <item itemvalue="JUnit.java in devidea.test" />
+        <item itemvalue="Spring Boot.DevideaApplication" />
         <item itemvalue="Gradle.back-end [jar]" />
+        <item itemvalue="JUnit.com.project.devidea.modules.account in devidea.test" />
       </list>
     </recent_temporary>
   </component>
@@ -391,33 +170,29 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617807302753</updated>
+      <workItem from="1617846115257" duration="1096000" />
+      <workItem from="1617847340977" duration="233000" />
+      <workItem from="1617847636412" duration="798000" />
     </task>
     <servers />
   </component>
-  <component name="WindowStateProjectService">
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1617808003631">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617808003631" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1617808003631">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617808003631" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1617808003630">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617808003630" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1617808003631">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617808003631" />
-    <state x="303" y="0" key="SettingsEditor" timestamp="1617807828804">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="303" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617807828804" />
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup" timestamp="1617807664883">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" width="672" height="677" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1617807664883" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

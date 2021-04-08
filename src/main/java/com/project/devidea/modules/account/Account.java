@@ -187,8 +187,7 @@ public class Account {
 
     @Transient
     public static Account generateAccountById(Long id){
-        return new Account().builder()
-                .id(id).build();
+        return Account.builder().id(id).build();
     }
 
     public void updateNotifications(Update.Notification request) {
