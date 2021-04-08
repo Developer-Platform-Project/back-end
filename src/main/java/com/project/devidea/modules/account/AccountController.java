@@ -8,6 +8,7 @@ import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.account.validator.NicknameValidator;
 import com.project.devidea.modules.account.validator.SignUpOAuthRequestValidator;
 import com.project.devidea.modules.account.validator.SignUpRequestValidator;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -40,12 +41,14 @@ public class AccountController {
     }
 
     @PostMapping("/sign-up")
+    @ApiOperation("회원가입")
     public ResponseEntity<?> signUp(@Valid @RequestBody SignUp.CommonRequest commonRequest) {
 
         return new ResponseEntity<>(GlobalResponse.of(accountService.signUp(commonRequest)), HttpStatus.OK);
     }
 
     @PostMapping("/sign-up/oauth")
+    @ApiOperation("회원가입 - OAuth")
     public ResponseEntity<?> signUpOAuth(@Valid @RequestBody SignUp.OAuthRequest oAuthRequest)
             throws NoSuchAlgorithmException {
 
@@ -53,6 +56,7 @@ public class AccountController {
     }
 
     @PostMapping("/login")
+    @ApiOperation("로그인")
     public ResponseEntity<?> login(@Valid @RequestBody Login.Common login) throws Exception {
 
         Map<String, String> result = accountService.login(login);
@@ -60,6 +64,7 @@ public class AccountController {
     }
 
     @PostMapping("/login/oauth")
+    @ApiOperation("로그인 - OAuth")
     public ResponseEntity<?> loginOAuth(@Valid @RequestBody Login.OAuth login) throws Exception {
 
         Map<String, String> result = accountService.loginOAuth(login);
@@ -73,6 +78,7 @@ public class AccountController {
     }
 
     @PostMapping("/sign-up/detail")
+    @ApiOperation("회원가입 디테일")
     public ResponseEntity<?> signUpDetail(@AuthenticationPrincipal LoginUser loginUser,
                                         @Valid @RequestBody SignUp.DetailRequest detailRequest) {
 
@@ -81,6 +87,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/account/quit")
+    @ApiOperation("회원탈퇴")
     public ResponseEntity<?> quit(@AuthenticationPrincipal LoginUser loginUser) {
 
         accountService.quit(loginUser);

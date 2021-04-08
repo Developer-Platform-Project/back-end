@@ -7,7 +7,9 @@ import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
 import com.project.devidea.modules.account.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.buf.StringUtils;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -100,7 +102,7 @@ class AccountInfoControllerTest {
 
     @Test
     @WithUserDetails(value = "test@test.com")
-    void 유저_패스워드_수정() throws Exception {
+    void 패스워드_수정() throws Exception {
 
 //        given
         LoginUser loginUser =

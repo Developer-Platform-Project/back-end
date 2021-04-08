@@ -45,6 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @WebAppConfiguration
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Slf4j
 class AccountControllerTest {
 
@@ -191,6 +192,7 @@ class AccountControllerTest {
 
     @Test
     @WithUserDetails("test@test.com")
+    @Order(value = Order.DEFAULT + 1)
     void 회원_탈퇴() throws Exception {
 
 //        given
