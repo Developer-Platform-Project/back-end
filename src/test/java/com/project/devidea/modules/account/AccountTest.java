@@ -148,4 +148,17 @@ class AccountTest {
 //        then
         assertThrows(AccountException.class, account::changeToQuit);
     }
+
+    @Test
+    void 토큰_생성() throws Exception {
+//        given
+        Account account = AccountDummy.getAccount();
+
+//        when
+        account.generateEmailToken();
+
+//        then
+        assertNotNull(account.getEmailCheckToken());
+        assertNotNull(account.getEmailCheckTokenGeneratedAt());
+    }
 }

@@ -2,6 +2,7 @@ package com.project.devidea.modules.account;
 
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.modules.account.dto.*;
+import com.project.devidea.modules.account.event.SendEmailToken;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
@@ -15,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
@@ -23,7 +25,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AccountServiceTest {
-
 
     @Mock
     ModelMapper modelMapper;
@@ -39,6 +40,8 @@ class AccountServiceTest {
     ZoneRepository zoneRepository;
     @Mock
     MainActivityZoneRepository mainActivityZoneRepository;
+    @Mock
+    ApplicationEventPublisher publisher;
     @InjectMocks
     AccountService accountService;
 
@@ -46,13 +49,31 @@ class AccountServiceTest {
     void 회원가입_일반() throws Exception {
 
 //        given
-
+        SignUp.CommonRequest request = mock(SignUp.CommonRequest.class);
+        Account account = mock(Account.class);
+        when(accountService.saveAccount(request)).thenReturn(account);
 
 //        when
-
+        accountService.signUp(request);
 
 //        then
+        verify(publisher).publishEvent(any(SendEmailToken.class));
+        verify(modelMapper).map(account, SignUp.Response.class);
+    }
 
+    @Test
+    void 회원가입_saveAccount_동작() throws Exception {
+
+//        given
+        SignUp.CommonRequest request = mock(SignUp.CommonRequest.class);
+        Account account = mock(Account.class);
+        when(accountRepository.save(any())).thenReturn(account);
+
+//        when
+        Account saved = accountService.saveAccount(request);
+
+//        then
+        verify(accountRepository).save(any());
     }
 
     @Test

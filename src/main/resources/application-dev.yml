@@ -1,0 +1,15 @@
+app:
+  host: http://localhost:8080
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kobeomseok95@gmail.com
+    password: dnjtaijhnflrtrra
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true

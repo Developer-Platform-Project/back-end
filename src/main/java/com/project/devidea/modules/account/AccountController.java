@@ -26,7 +26,6 @@ import java.util.Map;
 public class AccountController {
 
     private final AccountService accountService;
-    // TODO : Custom-Validator를 상속해도 잘 동작하는지?
     private final SignUpRequestValidator signUpRequestValidator;
     private final SignUpOAuthRequestValidator signUpOAuthRequestValidator;
 

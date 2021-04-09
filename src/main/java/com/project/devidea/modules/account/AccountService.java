@@ -4,9 +4,8 @@ import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.config.security.SHA256;
 import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
 import com.project.devidea.infra.config.security.oauth.OAuthService;
-import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.dto.*;
-import com.project.devidea.modules.account.exception.AccountException;
+import com.project.devidea.modules.account.event.SendEmailToken;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
@@ -16,6 +15,7 @@ import com.project.devidea.modules.tagzone.zone.Zone;
 import com.project.devidea.modules.tagzone.zone.ZoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -44,9 +44,18 @@ public class AccountService implements OAuthService {
     private final InterestRepository interestRepository;
     private final MainActivityZoneRepository mainActivityZoneRepository;
     private final String OAUTH_PASSWORD = "dev_idea_oauth_password";
+    private final ApplicationEventPublisher publisher;
 
     public SignUp.Response signUp(SignUp.CommonRequest signUpRequestDto) {
-        Account savedAccount = accountRepository.save(Account.builder()
+        Account savedAccount = saveAccount(signUpRequestDto);
+        publisher.publishEvent(SendEmailToken.builder()
+                .token(savedAccount.getEmailCheckToken())
+                .to(savedAccount.getEmail()).build());
+        return modelMapper.map(savedAccount, SignUp.Response.class);
+    }
+
+    public Account saveAccount(SignUp.CommonRequest signUpRequestDto) {
+        Account savedAccount = Account.builder()
                 .email(signUpRequestDto.getEmail())
                 .name(signUpRequestDto.getName())
                 .nickname(signUpRequestDto.getNickname())
@@ -56,9 +65,9 @@ public class AccountService implements OAuthService {
                 .modifiedAt(LocalDateTime.now())
                 .gender(signUpRequestDto.getGender())
                 .quit(false)
-                .build());
-
-        return modelMapper.map(savedAccount, SignUp.Response.class);
+                .build();
+        savedAccount.generateEmailToken();
+        return accountRepository.save(savedAccount);
     }
 
     @Override

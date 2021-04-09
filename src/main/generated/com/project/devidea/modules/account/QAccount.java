@@ -28,6 +28,8 @@ public class QAccount extends EntityPathBase<Account> {
 
     public final StringPath emailCheckToken = createString("emailCheckToken");
 
+    public final DateTimePath<java.time.LocalDateTime> emailCheckTokenGeneratedAt = createDateTime("emailCheckTokenGeneratedAt", java.time.LocalDateTime.class);
+
     public final StringPath gender = createString("gender");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
