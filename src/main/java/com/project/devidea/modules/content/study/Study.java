@@ -1,14 +1,18 @@
 package com.project.devidea.modules.content.study;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.content.study.form.StudyMakingForm;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.zone.Zone;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Data

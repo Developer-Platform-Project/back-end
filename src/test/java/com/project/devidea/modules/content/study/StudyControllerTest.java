@@ -15,6 +15,7 @@ import com.project.devidea.modules.content.study.form.StudySearchForm;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 import com.project.devidea.modules.content.study.repository.StudyRepository;
 
+import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.utils.MultiValueMapConverter;
 import org.junit.jupiter.api.*;
 import org.modelmapper.ModelMapper;
@@ -45,7 +46,7 @@ class StudyControllerTest {
 
 
     @Autowired
-    StudyService studyService;
+    StudyServiceImpl studyService;
     @Autowired
     MockMvc mockMvc;
     @Autowired

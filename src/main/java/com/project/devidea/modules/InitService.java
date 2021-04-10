@@ -11,7 +11,7 @@ import com.project.devidea.modules.content.resume.Resume;
 import com.project.devidea.modules.content.resume.ResumeRepository;
 import com.project.devidea.modules.content.study.StudyRole;
 import com.project.devidea.modules.content.study.StudySampleGenerator;
-import com.project.devidea.modules.content.study.StudyService;
+import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.modules.content.study.repository.StudyRepository;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.tag.TagRepository;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class InitService {
     private final AccountRepository accountRepository;
     private final StudyRepository studyRepository;
-    private final StudyService studyService;
+    private final StudyServiceImpl studyService;
     private final StudySampleGenerator studySampleGenerator;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 

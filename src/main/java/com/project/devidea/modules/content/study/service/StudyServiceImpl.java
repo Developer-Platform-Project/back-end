@@ -1,7 +1,10 @@
-package com.project.devidea.modules.content.study;
+package com.project.devidea.modules.content.study.service;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
+import com.project.devidea.modules.content.study.Study;
+import com.project.devidea.modules.content.study.StudyMember;
+import com.project.devidea.modules.content.study.StudyRole;
 import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
@@ -31,7 +34,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class StudyService {
+public class StudyServiceImpl implements StudyService {
     private final ModelMapper studyMapper;
     private final StudyRepository studyRepository;
     private final ZoneRepository zoneRepository;
@@ -48,43 +51,59 @@ public class StudyService {
         }).collect(Collectors.toList());
     }
 
+
     public StudyDetailForm getDetailStudy(Long id) {
         Study study = studyRepository.findById(id).orElseThrow();
         return studyMapper.map(study, StudyDetailForm.class);
     }
 
     public StudyDetailForm makingStudy(Account admin, @Valid StudyMakingForm studyMakingForm) { //study만들기
+        Study study = makingStudyEntity(admin, studyMakingForm);
+        return ConvertStudyDetailForm(study, admin);
+    }
+
+    public Study makingStudyEntity(Account admin, @Valid StudyMakingForm studyMakingForm) { //study만들기
         Study study = ConvertToStudy(studyMakingForm);
         studyRepository.save(study);
         studyMemberRepository.save(generateStudyMember(study, admin, StudyRole.팀장));
+        return study;
+    }
+
+    public StudyDetailForm ConvertStudyDetailForm(Study study, Account admin) { //study만들기
         StudyDetailForm studyDetailForm = studyMapper.map(study, StudyDetailForm.class);
         studyDetailForm.setMembers(new HashSet<String>(Arrays.asList(admin.getNickname())));
         return studyDetailForm;
     }
 
-    public String applyStudy(Account applicant,@Valid StudyApplyForm studyApplyForm) {
+    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) {
+        Study study = studyRepository.findById(studyApplyForm.getStudyId()).orElseThrow();
+        MakingStudyApplyEntity(study, applicant, studyApplyForm);
+        return "Yes";//완료 메시지 미완성
+    }
+
+    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm) {
         StudyApply studyApply = StudyApply.builder()
-                .study(Study.generateStudyById(studyApplyForm.getStudyId()))
+                .study(study)
                 .applicant(applicant)
                 .answer(studyApplyForm.getAnswer())
                 .etc(studyApplyForm.getEtc())
                 .build();
         studyApplyRepository.save(studyApply);
-        return "Yes";//완료 메시지 미완성
+        return studyApply;
     }
 
     public String decideJoin(Long id, Boolean accept) {
         StudyApply studyApply = studyApplyRepository.findById(id).orElseThrow();
         Account applicant = studyApply.getApplicant();
         Study study = studyApply.getStudy();
-        if(study.getCounts()==study.getMaxCount())
+        if (study.getCounts() == study.getMaxCount())
             return "인원이 꽉찼습니다.";
         studyApply.setAccpted(accept);
         if (accept) {
             return addMember(applicant, study, StudyRole.회원);
-        }
-        else return "성공적으로 거절하였습니다.";
+        } else return "성공적으로 거절하였습니다.";
     }
+
     public String addMember(Account applicant, Study study, StudyRole role) {
         studyMemberRepository.save(
                 StudyMember.
@@ -94,24 +113,28 @@ public class StudyService {
                         .role(role)
                         .build()
         );
-        notificationRepository.save(
-                        new Notification().builder()
-                            .account(applicant)
-                            .createdDateTime(LocalDateTime.now())
-                            .message(study.getTitle()+"스터디에 가입 됐습니다.")
-                            .title(study.getTitle()+"스터디 승인 완료")
-                            .build()
-        );
         return "성공적으로 저장하였습니다.";
     }
 
-    List<StudyApplyForm> getApplyForm(Long id) { //해당 스터디 가입신청 리스트 보기
+    @Override
+    public List<StudyApplyForm> getApplyForm(Long id) { //해당 스터디 가입신청 리스트 보기
         return studyApplyRepository.findById(id).stream()
                 .map(studyApply -> {
                     return studyMapper.map(studyApply, StudyApplyForm.class);
                 }).collect(Collectors.toList());
     }
-    public String deleteStudy(Long id) { //해당 스터디 가입신청 리스트 보기
+
+    @Override
+    public List<StudyListForm> getMyStudy(Account account) {
+        return null;
+    }
+
+    @Override
+    public List<StudyApplyForm> getMyApplyList(Account account) {
+        return null;
+    }
+
+    public String deleteStudy(Account account,Long id) { //해당 스터디 가입신청 리스트 보기
         Study study = studyRepository.findById(id).orElseThrow();
         studyRepository.delete(study);
         return "성공적으로 삭제하였습니다.";
@@ -139,7 +162,7 @@ public class StudyService {
     }
 
     public StudyApplyForm getApplyDetail(Long id) {
-        StudyApply studyApply=studyApplyRepository.findById(id).get();
+        StudyApply studyApply = studyApplyRepository.findById(id).get();
         return studyMapper.map(studyApply, StudyApplyForm.class);
     }
 
@@ -159,7 +182,7 @@ public class StudyService {
         return "success";
     }
 
-    public String UpdateTagAndZOne(Long id, TagZoneForm tagZoneForm) {
+    public String UpdateTagAndZone(Long id, TagZoneForm tagZoneForm) {
         Study study = studyRepository.findById(id).orElseThrow();
         return "success";
     }
@@ -174,6 +197,11 @@ public class StudyService {
                 .applicant("")
                 .build();
         return studyApplyForm;
+    }
+
+    @Override
+    public Study convertToStudy(StudyMakingForm studyMakingForm) {
+        return null;
     }
 
     public Study ConvertToStudy(StudyMakingForm studyMakingForm) {
@@ -197,6 +225,7 @@ public class StudyService {
                 .role(role)
                 .build();
     }
+
     public StudyApply generateStudyApply(Study study, Account account) {
         return new StudyApply().builder()
                 .study(study)
@@ -204,6 +233,7 @@ public class StudyService {
                 .build();
 
     }
+
     public String setEmpower(Long study_id, EmpowerForm empowerForm) {
         studyMemberRepository.updateRole(study_id, accountRepository.findByNickname(empowerForm.getNickName()).getId(), empowerForm.getRole());
         return "성공적으로 권한을 부여했습니다.";
