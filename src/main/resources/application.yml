@@ -58,17 +58,20 @@ spring:
     driverClassName: org.h2.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    database-platform: org.hibernate.dialect.H2Dialect
 #    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       use-new-id-generator-mappings: true
-      ddl-auto: create-drop
+      ddl-auto: none
+#      ddl-auto: create-drop
     properties:
       hibernate:
         cache:
           use_second_level_cache: true
           use_query_cache: true
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#        dialect: org.hibernate.dialect.H2Dialect
 #        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         show_sql: true
