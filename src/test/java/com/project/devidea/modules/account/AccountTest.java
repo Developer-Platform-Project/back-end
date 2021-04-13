@@ -9,6 +9,7 @@ import com.project.devidea.modules.tagzone.zone.ZoneDummy;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -160,5 +161,24 @@ class AccountTest {
 //        then
         assertNotNull(account.getEmailCheckToken());
         assertNotNull(account.getEmailCheckTokenGeneratedAt());
+    }
+
+    @Test
+    void 토큰이_맞지_않은_경우() throws Exception {
+//        given
+        Account account = AccountDummy.getAccountWithToken();
+        String token = "failToken";
+
+//        when, then
+        assertThrows(AccountException.class, () -> account.validateToken(token));
+    }
+
+    @Test
+    void 토큰_날짜가_30분이_지난_경우() throws Exception {
+//        given
+        Account account = AccountDummy.getAccountWithTokenAndBefore30Minutes();
+
+//        when, then
+        assertThrows(AccountException.class, () -> account.validateToken(account.getEmailCheckToken()));
     }
 }

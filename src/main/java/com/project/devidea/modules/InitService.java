@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -91,6 +92,8 @@ public class InitService {
                 .modifiedAt(LocalDateTime.now())
                 .interests(new HashSet<>())
                 .mainActivityZones(new HashSet<>())
+                .emailCheckToken(UUID.randomUUID().toString())
+                .emailCheckTokenGeneratedAt(LocalDateTime.now())
                 .build();
 
         Account account3=new Account().builder()

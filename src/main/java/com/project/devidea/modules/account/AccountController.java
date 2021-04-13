@@ -17,7 +17,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
@@ -46,6 +48,18 @@ public class AccountController {
         return new ResponseEntity<>(GlobalResponse.of(accountService.signUp(commonRequest)), HttpStatus.OK);
     }
 
+    /**
+     * 상헌님하고 작업했을 떄, redirect를 원하셔서 수정했습니다.
+     */
+    @GetMapping("/authenticate-email-token")
+    public void authenticateEmailToken(String email, String token,
+                                                    HttpServletResponse response) throws IOException {
+
+        accountService.authenticateEmailToken(email, token);
+//        return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
+        response.sendRedirect("http://shlee9412.iptime.org:3000/sign-up/detail?token=" + token);
+    }
+
     @PostMapping("/sign-up/oauth")
     @ApiOperation("회원가입 - OAuth")
     public ResponseEntity<?> signUpOAuth(@Valid @RequestBody SignUp.OAuthRequest oAuthRequest)
@@ -65,9 +79,15 @@ public class AccountController {
     @PostMapping("/login/oauth")
     @ApiOperation("로그인 - OAuth")
     public ResponseEntity<?> loginOAuth(@Valid @RequestBody Login.OAuth login) throws Exception {
-
+        // 디테일 입력했는지 여부 확인하기
         Map<String, String> result = accountService.loginOAuth(login);
-        return new ResponseEntity<>(GlobalResponse.of(), getHttpHeaders(result), HttpStatus.OK);
+        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)), getHttpHeaders(result), HttpStatus.OK);
+    }
+
+    private Login.Response getIsSavedDetails(Map<String, String> result) {
+        return Login.Response.builder()
+                .savedDetail(Boolean.parseBoolean(result.get("savedDetail")))
+                .emailCheckToken(result.get("emailCheckToken")).build();
     }
 
     private HttpHeaders getHttpHeaders(Map<String, String> result) {
@@ -78,10 +98,9 @@ public class AccountController {
 
     @PostMapping("/sign-up/detail")
     @ApiOperation("회원가입 디테일")
-    public ResponseEntity<?> signUpDetail(@AuthenticationPrincipal LoginUser loginUser,
-                                        @Valid @RequestBody SignUp.DetailRequest detailRequest) {
+    public ResponseEntity<?> signUpDetail(@Valid @RequestBody SignUp.DetailRequest detailRequest) {
 
-        accountService.saveSignUpDetail(loginUser, detailRequest);
+        accountService.saveSignUpDetail(detailRequest);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
     }
 

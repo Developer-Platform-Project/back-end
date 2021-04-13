@@ -107,13 +107,18 @@ public class Account {
     // 회원 탈퇴 여부 true가 탈퇴한 회원!
     private boolean quit;
 
+    // 회원 탈퇴 여부 true가 탈퇴한 회원!
+    private boolean authenticateEmail;
+
+    private boolean saveDetail;
+
     @Override
     public String toString() {
         return getNickname();
     }
 
     @Builder
-    public Account(Long id, String email, String password, String name, String nickname, String emailCheckToken, LocalDateTime emailCheckTokenGeneratedAt, String roles, LocalDateTime joinedAt, LocalDateTime modifiedAt, String bio, String profilePath, String url, String gender, String job, int careerYears, String techStacks, Set<Interest> interests, Set<MainActivityZone> mainActivityZones, Set<StudyMember> studies, String provider, boolean receiveEmail, boolean receiveNotification, boolean receiveTechNewsNotification, boolean receiveMentoringNotification, boolean receiveStudyNotification, boolean receiveRecruitingNotification, boolean quit) {
+    public Account(Long id, String email, String password, String name, String nickname, String emailCheckToken, LocalDateTime emailCheckTokenGeneratedAt, String roles, LocalDateTime joinedAt, LocalDateTime modifiedAt, String bio, String profilePath, String url, String gender, String job, int careerYears, String techStacks, Set<Interest> interests, Set<MainActivityZone> mainActivityZones, Set<StudyMember> studies, String provider, boolean receiveEmail, boolean receiveNotification, boolean receiveTechNewsNotification, boolean receiveMentoringNotification, boolean receiveStudyNotification, boolean receiveRecruitingNotification, boolean quit, boolean authenticateEmail, boolean saveDetail) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -142,6 +147,8 @@ public class Account {
         this.receiveStudyNotification = receiveStudyNotification;
         this.receiveRecruitingNotification = receiveRecruitingNotification;
         this.quit = quit;
+        this.authenticateEmail = authenticateEmail;
+        this.saveDetail = saveDetail;
     }
 
     //    편의 메서드
@@ -153,6 +160,7 @@ public class Account {
         this.careerYears = req.getCareerYears();
         this.job = req.getJobField();
         this.techStacks = StringUtils.join(req.getTechStacks(), '/');
+        this.saveDetail = true;
 
         this.interests.addAll(interests);
         this.mainActivityZones.addAll(mainActivityZones);
@@ -213,6 +221,17 @@ public class Account {
     public void generateEmailToken() {
         this.emailCheckToken = UUID.randomUUID().toString();
         this.emailCheckTokenGeneratedAt = LocalDateTime.now();
+    }
+
+    public void validateToken(String token) {
+        if (!token.equals(this.emailCheckToken)) {
+            throw new AccountException("토큰이 일치하지 않습니다.", ErrorCode.ACCOUNT_ERROR);
+        }
+        if (LocalDateTime.now().minusMinutes(30L).isAfter(this.emailCheckTokenGeneratedAt)) {
+            throw new AccountException("유효시간이 지났습니다.", ErrorCode.ACCOUNT_ERROR);
+        }
+
+        this.authenticateEmail = true;
     }
 }
 

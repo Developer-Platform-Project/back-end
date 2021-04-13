@@ -52,4 +52,13 @@ public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
                 .where(account.email.eq(email))
                 .fetchOne();
     }
+
+    @Override
+    public Account findByTokenWithMainActivityZoneAndInterests(String token) {
+        return query.selectFrom(account)
+                .leftJoin(account.interests, interest).fetchJoin()
+                .leftJoin(account.mainActivityZones, mainActivityZone).fetchJoin()
+                .where(account.emailCheckToken.eq(token))
+                .fetchOne();
+    }
 }

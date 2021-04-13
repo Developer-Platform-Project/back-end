@@ -1,8 +1,10 @@
 package com.project.devidea.modules.account;
 
 import com.project.devidea.infra.config.security.LoginUser;
+import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.dto.*;
 import com.project.devidea.modules.account.event.SendEmailToken;
+import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
@@ -21,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -314,5 +317,33 @@ class AccountServiceTest {
 //        then
         verify(accountRepository).findByEmail(any());
         verify(account).changeToQuit();
+    }
+
+    @Test
+    void 메일_인증() throws Exception{
+//        given
+        String email = "email";
+        String token = "token";
+        Account account = mock(Account.class);
+        when(accountRepository.findByEmail(email)).thenReturn(Optional.of(account));
+
+//        when
+        accountService.authenticateEmailToken(email, token);
+
+//        then
+        verify(account).validateToken(token);
+    }
+
+    @Test
+    void 메일_인증실패_회원이_없을_경우() throws Exception {
+
+//        given
+        String email = "email";
+        String token = "token";
+        when(accountRepository.findByEmail(email))
+                .thenThrow(new AccountException("회원을 찾을 수 없습니다.", ErrorCode.ACCOUNT_ERROR));
+
+//        when, then
+        assertThrows(AccountException.class, () -> accountService.authenticateEmailToken(email, token));
     }
 }

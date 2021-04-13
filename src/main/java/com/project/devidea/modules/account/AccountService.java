@@ -4,8 +4,10 @@ import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.config.security.SHA256;
 import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
 import com.project.devidea.infra.config.security.oauth.OAuthService;
+import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.dto.*;
 import com.project.devidea.modules.account.event.SendEmailToken;
+import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
@@ -20,6 +22,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +69,7 @@ public class AccountService implements OAuthService {
                 .modifiedAt(LocalDateTime.now())
                 .gender(signUpRequestDto.getGender())
                 .quit(false)
+                .saveDetail(false)
                 .build();
         savedAccount.generateEmailToken();
         return accountRepository.save(savedAccount);
@@ -73,8 +78,17 @@ public class AccountService implements OAuthService {
     @Override
     public SignUp.Response signUpOAuth(SignUp.OAuthRequest request) throws NoSuchAlgorithmException {
 
-        Account savedAccount = accountRepository.save(Account.builder()
-                .email(SHA256.encrypt(request.getId()))
+        Account savedAccount = saveOAuthAccount(request);
+        savedAccount.generateEmailToken();
+
+        return SignUp.Response.builder().provider(savedAccount.getProvider())
+                .id(savedAccount.getId().toString()).name(savedAccount.getName())
+                .emailCheckToken(savedAccount.getEmailCheckToken()).build();
+    }
+
+    private Account saveOAuthAccount(SignUp.OAuthRequest request) {
+        return accountRepository.save(Account.builder()
+                .email(request.getEmail())
                 .name(request.getName())
                 .nickname(request.getNickname())
                 .password("{bcrypt}" + passwordEncoder.encode(OAUTH_PASSWORD))
@@ -84,10 +98,9 @@ public class AccountService implements OAuthService {
                 .provider(request.getProvider())
                 .gender(request.getGender())
                 .quit(false)
+                .authenticateEmail(true)
+                .saveDetail(false)
                 .build());
-
-        return SignUp.Response.builder().provider(savedAccount.getProvider())
-                .id(savedAccount.getId().toString()).name(savedAccount.getName()).build();
     }
 
     public Map<String, String> login(Login.Common login) throws Exception {
@@ -97,13 +110,23 @@ public class AccountService implements OAuthService {
         return jwtTokenUtil.createTokenMap(jwtToken);
     }
 
-//    OAuth 로그인
     @Override
     public Map<String, String> loginOAuth(Login.OAuth login) throws Exception {
         Login.Common request = Login.Common.builder()
-                .email(SHA256.encrypt(login.getId()))
+                .email(login.getEmail())
                 .password(OAUTH_PASSWORD).build();
-        return login(request);
+        // 디테일을 입력한 회원인지 확인하는 메서드
+        Map<String, String> loginOAuth = login(request);
+
+        // 디테일을 입력하지 않은 경우 토큰도 반환시켜주기
+        Account account = accountRepository.findByEmail(login.getEmail()).get();
+        if (!account.isSaveDetail()) {
+            loginOAuth.put("savedDetail", "false");
+            loginOAuth.put("emailCheckToken", account.getEmailCheckToken());
+        } else {
+            loginOAuth.put("savedDetail", "true");
+        }
+        return loginOAuth;
     }
 
     private void authenticate(String email, String password) throws Exception {
@@ -112,13 +135,13 @@ public class AccountService implements OAuthService {
         } catch (DisabledException e) {
             throw new DisabledException("이미 탈퇴한 회원입니다.", e);
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("회원의 아이디와 비밀번호가 일치하지 않습니다.", e);
+            throw new BadCredentialsException("가입되지 않거나, 메일과 비밀번호가 맞지 않습니다.", e);
         }
     }
 
-    public void saveSignUpDetail(LoginUser loginUser, SignUp.DetailRequest req) {
-
-        Account account = accountRepository.findByEmailWithMainActivityZoneAndInterests(loginUser.getUsername());
+    public void saveSignUpDetail(SignUp.DetailRequest req) {
+//        token이 없을 경우 에러 발생시키기
+        Account account = accountRepository.findByTokenWithMainActivityZoneAndInterests(req.getToken());
 
 //        활동지역(mainActivityZones)
         Map<String, List<String>> cityProvince = req.splitCitiesAndProvinces();
@@ -246,5 +269,11 @@ public class AccountService implements OAuthService {
 
         Account account = accountRepository.findByEmail(loginUser.getUsername()).orElseThrow();
         account.changeToQuit();
+    }
+
+    public void authenticateEmailToken(String email, String token) {
+        Account account = accountRepository.findByEmail(email).orElseThrow(
+                () -> new AccountException("회원을 찾을 수 없습니다.", ErrorCode.ACCOUNT_ERROR));
+        account.validateToken(token);
     }
 }

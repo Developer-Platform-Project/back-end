@@ -23,8 +23,9 @@ public class AccountEventListener {
     @EventListener
     public void sendSignUpAuthenticationEmail(SendEmailToken sendEmailToken) {
 
-        String msg = "해당 주소로 접속하시면, 회원가입이 완료됩니다.\n"
-                + appProperties.getHost() + "/check-email-token?email=" + sendEmailToken.getTo()
+        String msg = "해당 주소로 접속하시면, 회원가입이 완료됩니다. 인증은 30분 내로 해주셔야 합니다.\n"
+                + appProperties.getHost()
+                + "/authenticate-email-token?email=" + sendEmailToken.getTo()
                 + "&token=" + sendEmailToken.getToken();
 
         EmailMessage message = EmailMessage.builder()

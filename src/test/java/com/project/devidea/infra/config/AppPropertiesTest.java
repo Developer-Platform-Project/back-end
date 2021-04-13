@@ -15,6 +15,6 @@ class AppPropertiesTest {
     @Test
     void host_가져오기_확인() throws Exception {
         String host = appProperties.getHost();
-        assertEquals(host, "http://localhost:8080");
+        assertEquals(host, "http://192.168.20.2:8080");
     }
 }
