@@ -9,6 +9,10 @@ com/project/devidea/modules/tagzone/zone/Zone.java
 com/project/devidea/modules/content/resume/form/project/UpdateProjectRequest.java
  com.project.devidea.modules.content.resume.form.project.UpdateProjectRequest
  com.project.devidea.modules.content.resume.form.project.UpdateProjectRequest$UpdateProjectRequestBuilder
+com/project/devidea/modules/content/study/service/StudyService.java
+ com.project.devidea.modules.content.study.service.StudyService
+com/project/devidea/modules/content/study/aop/StudyNotificationAspect.java
+ com.project.devidea.modules.content.study.aop.StudyNotificationAspect
 com/project/devidea/modules/content/resume/activity/QActivity.java
  com.project.devidea.modules.content.resume.activity.QActivity
 com/project/devidea/modules/content/resume/education/QEducation.java
@@ -75,14 +79,8 @@ com/project/devidea/modules/content/resume/award/QAward.java
 com/project/devidea/modules/content/resume/award/AwardController.java
  com.project.devidea.modules.content.resume.award.AwardController
  com.project.devidea.modules.content.resume.award.AwardController$AwardDto
-com/project/devidea/modules/content/study/notification/StudyJoinNotification.java
- com.project.devidea.modules.content.study.notification.StudyJoinNotification
-com/project/devidea/modules/content/study/notification/StudyApplyNotification.java
- com.project.devidea.modules.content.study.notification.StudyApplyNotification
 com/project/devidea/modules/content/resume/education/EducationRepository.java
  com.project.devidea.modules.content.resume.education.EducationRepository
-com/project/devidea/modules/content/study/aop/StudyAuthorityAop.java
- com.project.devidea.modules.content.study.aop.StudyAuthorityAop
 com/project/devidea/modules/tagzone/tag/Tag.java
  com.project.devidea.modules.tagzone.tag.Tag
  com.project.devidea.modules.tagzone.tag.Tag$TagBuilder
@@ -99,6 +97,8 @@ com/project/devidea/modules/content/resume/form/career/CreateCareerRequest.java
  com.project.devidea.modules.content.resume.form.career.CreateCareerRequest$CreateCareerRequestBuilder
 com/project/devidea/modules/content/recruit/validator/BasicValidator.java
  com.project.devidea.modules.content.recruit.validator.BasicValidator
+com/project/devidea/modules/content/study/notification/StudyNotificationImpl.java
+ com.project.devidea.modules.content.study.notification.StudyNotificationImpl
 com/project/devidea/modules/content/resume/validator/EducationRequestValidator.java
  com.project.devidea.modules.content.resume.validator.EducationRequestValidator
 com/project/devidea/infra/config/security/oauth/provider/SocialOAuth.java
@@ -149,6 +149,8 @@ com/project/devidea/infra/config/AppConfig.java
 com/project/devidea/modules/content/mentoring/MenteeController.java
  com.project.devidea.modules.content.mentoring.MenteeController
  com.project.devidea.modules.content.mentoring.MenteeController$MenteeDto
+com/project/devidea/modules/content/study/service/StudyServiceImpl.java
+ com.project.devidea.modules.content.study.service.StudyServiceImpl
 com/project/devidea/infra/aop/LoggingAspect.java
  com.project.devidea.infra.aop.LoggingAspect
 com/project/devidea/modules/content/study/controller/StudyBasicController.java
@@ -208,8 +210,6 @@ com/project/devidea/modules/content/resume/award/AwardRepository.java
  com.project.devidea.modules.content.resume.award.AwardRepository
 com/project/devidea/modules/content/techNews/crawling/KakaoCrawling.java
  com.project.devidea.modules.content.techNews.crawling.KakaoCrawling
-com/project/devidea/modules/content/study/StudyService.java
- com.project.devidea.modules.content.study.StudyService
 com/project/devidea/modules/account/validator/SignUpRequestValidator.java
  com.project.devidea.modules.account.validator.SignUpRequestValidator
 com/project/devidea/modules/account/validator/PasswordValidator.java
@@ -248,12 +248,12 @@ com/project/devidea/DevideaApplication.java
 com/project/devidea/modules/content/techNews/TechNews.java
  com.project.devidea.modules.content.techNews.TechNews
  com.project.devidea.modules.content.techNews.TechNews$TechNewsBuilder
-com/project/devidea/modules/content/study/notification/StudyRejectNotification.java
- com.project.devidea.modules.content.study.notification.StudyRejectNotification
 com/project/devidea/modules/content/resume/project/ProjectService.java
  com.project.devidea.modules.content.resume.project.ProjectService
 com/project/devidea/modules/content/study/Level.java
  com.project.devidea.modules.content.study.Level
+com/project/devidea/modules/content/study/notification/StudyNoticationType.java
+ com.project.devidea.modules.content.study.notification.StudyNoticationType
 com/project/devidea/infra/config/security/jwt/JwtTokenUtil.java
  com.project.devidea.infra.config.security.jwt.JwtTokenUtil
 com/project/devidea/modules/account/repository/MainActivityZoneRepository.java
@@ -275,6 +275,8 @@ com/project/devidea/modules/account/AccountController.java
 com/project/devidea/modules/content/resume/Resume.java
  com.project.devidea.modules.content.resume.Resume
  com.project.devidea.modules.content.resume.Resume$ResumeBuilder
+com/project/devidea/modules/content/study/aop/AlreadyExistError.java
+ com.project.devidea.modules.content.study.aop.AlreadyExistError
 com/project/devidea/modules/content/resume/form/activity/UpdateActivityRequest.java
  com.project.devidea.modules.content.resume.form.activity.UpdateActivityRequest
  com.project.devidea.modules.content.resume.form.activity.UpdateActivityRequest$UpdateActivityRequestBuilder
@@ -317,6 +319,8 @@ com/project/devidea/modules/content/mentoring/exception/NotFoundException.java
 com/project/devidea/modules/content/resume/form/award/UpdateAwardRequest.java
  com.project.devidea.modules.content.resume.form.award.UpdateAwardRequest
  com.project.devidea.modules.content.resume.form.award.UpdateAwardRequest$UpdateAwardRequestBuilder
+com/project/devidea/modules/content/study/aop/StudyAuthorityAspect.java
+ com.project.devidea.modules.content.study.aop.StudyAuthorityAspect
 com/project/devidea/modules/account/MainActivityZone.java
  com.project.devidea.modules.account.MainActivityZone
  com.project.devidea.modules.account.MainActivityZone$MainActivityZoneBuilder
@@ -341,6 +345,8 @@ com/project/devidea/modules/content/study/repository/StudyMemberRepository.java
  com.project.devidea.modules.content.study.repository.StudyMemberRepository
 com/project/devidea/modules/content/resume/career/QCareer.java
  com.project.devidea.modules.content.resume.career.QCareer
+com/project/devidea/infra/error/exception/DataBusinessException.java
+ com.project.devidea.infra.error.exception.DataBusinessException
 com/project/devidea/modules/content/mentoring/QMentee.java
  com.project.devidea.modules.content.mentoring.QMentee
 com/project/devidea/infra/config/security/oauth/provider/SocialLoginTypeConverter.java
@@ -422,6 +428,8 @@ com/project/devidea/modules/content/study/form/StudyMakingForm.java
  com.project.devidea.modules.content.study.form.StudyMakingForm
 com/project/devidea/modules/content/techNews/crawling/JavableCrawling.java
  com.project.devidea.modules.content.techNews.crawling.JavableCrawling
+com/project/devidea/modules/content/study/aop/StudyErrorAspect.java
+ com.project.devidea.modules.content.study.aop.StudyErrorAspect
 com/project/devidea/modules/content/study/repository/StudyRepositoryCustom.java
  com.project.devidea.modules.content.study.repository.StudyRepositoryCustom
 com/project/devidea/modules/account/dto/Login.java
@@ -458,6 +466,8 @@ com/project/devidea/modules/tagzone/tag/TagRepository.java
  com.project.devidea.modules.tagzone.tag.TagRepository
 com/project/devidea/modules/content/mentoring/exception/AlreadyExistException.java
  com.project.devidea.modules.content.mentoring.exception.AlreadyExistException
+com/project/devidea/modules/content/study/exception/StudyNullException.java
+ com.project.devidea.modules.content.study.exception.StudyNullException
 com/project/devidea/modules/account/QMainActivityZone.java
  com.project.devidea.modules.account.QMainActivityZone
 com/project/devidea/modules/content/resume/form/education/CreateEducationRequest.java
@@ -469,8 +479,6 @@ com/project/devidea/modules/tagzone/zone/QZone.java
  com.project.devidea.modules.tagzone.zone.QZone
 com/project/devidea/modules/account/QInterest.java
  com.project.devidea.modules.account.QInterest
-com/project/devidea/modules/content/study/notification/StudyCreatedNotification.java
- com.project.devidea.modules.content.study.notification.StudyCreatedNotification
 com/project/devidea/modules/notification/aop/WithNotification.java
  com.project.devidea.modules.notification.aop.WithNotification
 com/project/devidea/infra/mail/EmailService.java
@@ -480,6 +488,8 @@ com/project/devidea/modules/content/resume/activity/Activity.java
  com.project.devidea.modules.content.resume.activity.Activity$ActivityBuilder
 com/project/devidea/modules/content/techNews/TechNewsController.java
  com.project.devidea.modules.content.techNews.TechNewsController
+com/project/devidea/modules/content/study/exception/AlreadyApplyException.java
+ com.project.devidea.modules.content.study.exception.AlreadyApplyException
 com/project/devidea/modules/content/resume/ResumeController.java
  com.project.devidea.modules.content.resume.ResumeController
  com.project.devidea.modules.content.resume.ResumeController$ResumeDto

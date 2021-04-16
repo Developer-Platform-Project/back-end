@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @Getter
 @Table( indexes ={
         @Index(name = "account_index", columnList = "account_id"),
-        @Index(name = "study_index", columnList = "study_id")})
+        @Index(name = "study_index", columnList = "study_id")}
+        , uniqueConstraints=@UniqueConstraint(columnNames ={"study_id","account_id"}))
 @EqualsAndHashCode(of = "id")
 public class StudyApply {
 

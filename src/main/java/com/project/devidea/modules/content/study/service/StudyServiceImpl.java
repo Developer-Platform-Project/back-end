@@ -5,10 +5,13 @@ import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.content.study.Study;
 import com.project.devidea.modules.content.study.StudyMember;
 import com.project.devidea.modules.content.study.StudyRole;
+import com.project.devidea.modules.content.study.aop.AlreadyExistError;
 import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyRepository;
+import com.project.devidea.modules.content.study.exception.AlreadyApplyException;
+import com.project.devidea.modules.content.study.exception.StudyNullException;
 import com.project.devidea.modules.content.study.form.*;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 import com.project.devidea.modules.content.study.repository.StudyRepository;
@@ -22,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -63,7 +67,7 @@ public class StudyServiceImpl implements StudyService {
     }
 
     public Study makingStudyEntity(Account admin, @Valid StudyMakingForm studyMakingForm) { //study만들기
-        Study study = ConvertToStudy(studyMakingForm);
+        Study study = convertToStudy(studyMakingForm);
         studyRepository.save(study);
         studyMemberRepository.save(generateStudyMember(study, admin, StudyRole.팀장));
         return study;
@@ -74,21 +78,22 @@ public class StudyServiceImpl implements StudyService {
         studyDetailForm.setMembers(new HashSet<String>(Arrays.asList(admin.getNickname())));
         return studyDetailForm;
     }
-
-    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) {
-        Study study = studyRepository.findById(studyApplyForm.getStudyId()).orElseThrow();
-        MakingStudyApplyEntity(study, applicant, studyApplyForm);
+    @AlreadyExistError(message="이미 존재하는 스터디입니다.")
+    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException{
+        Study study = studyRepository.findById(studyApplyForm.getStudyId()).orElseThrow(StudyNullException::new);
+        StudyApply studypply=MakingStudyApplyEntity(study, applicant, studyApplyForm); //받는 인자가 없으면 그냥 스킵해버린다A..
         return "Yes";//완료 메시지 미완성
     }
-
-    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm) {
+    @AlreadyExistError(message="이미 존재하는 스터디입니다.")
+    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException{
         StudyApply studyApply = StudyApply.builder()
                 .study(study)
                 .applicant(applicant)
                 .answer(studyApplyForm.getAnswer())
                 .etc(studyApplyForm.getEtc())
                 .build();
-        studyApplyRepository.save(studyApply);
+
+        studyApplyRepository.saveAndFlush(studyApply);
         return studyApply;
     }
 
@@ -101,7 +106,7 @@ public class StudyServiceImpl implements StudyService {
         studyApply.setAccpted(accept);
         if (accept) {
             return addMember(applicant, study, StudyRole.회원);
-        } else return "성공적으로 거절하였습니다.";
+        } else return rejected(study,applicant);
     }
 
     public String addMember(Account applicant, Study study, StudyRole role) {
@@ -114,6 +119,9 @@ public class StudyServiceImpl implements StudyService {
                         .build()
         );
         return "성공적으로 저장하였습니다.";
+    }
+    public String rejected(Study study,Account applicant){
+        return "스터디 요청을 거절하였습니다.";
     }
 
     @Override
@@ -199,12 +207,8 @@ public class StudyServiceImpl implements StudyService {
         return studyApplyForm;
     }
 
-    @Override
-    public Study convertToStudy(StudyMakingForm studyMakingForm) {
-        return null;
-    }
 
-    public Study ConvertToStudy(StudyMakingForm studyMakingForm) {
+    public Study convertToStudy(StudyMakingForm studyMakingForm) {
         Study study = studyMakingForm.toStudy();
         String[] locations = studyMakingForm.getLocation().split("/");
         Zone zone = zoneRepository.findByCityAndProvince(locations[0], locations[1]);

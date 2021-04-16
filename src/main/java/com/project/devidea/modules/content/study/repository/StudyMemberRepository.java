@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public interface StudyMemberRepository extends JpaRepository<StudyMember,Long> {
@@ -28,7 +29,7 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember,Long> {
 
     StudyMember findByStudyAndMember(Study study,Account member);
 
-    StudyMember findByStudy_IdAndMember_Id(Long studyId,Long memberId);
+    Optional<StudyMember> findByStudy_IdAndMember_Id(Long studyId, Long memberId);
     List<StudyMember> findByStudy_Id(Long studyId);
     void deleteById(Long id);
 
