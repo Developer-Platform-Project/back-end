@@ -19,6 +19,7 @@ management:
       show-details: always
   endpoint.shutdown:
     enabled: true
+
 spring:
   boot:
     admin:
@@ -36,15 +37,15 @@ spring:
       port: 3306
       database: devidea
 
-#    mysql:
-#      host: localhost
-#      port: 3306
-#      database: test
-#
-#    mongodb:
-#      host: localhost
-#      port: 27017
-#      database: test
+  #    mysql:
+  #      host: localhost
+  #      port: 3306
+  #      database: test
+  #
+  #    mongodb:
+  #      host: localhost
+  #      port: 27017
+  #      database: test
 
   h2:
     console:
@@ -58,26 +59,28 @@ spring:
     driverClassName: org.h2.Driver
 
   jpa:
-     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-#    database-platform: org.hibernate.dialect.H2Dialect
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.H2Dialect
+    #    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       use-new-id-generator-mappings: true
-      ddl-auto: none
-#      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         cache:
           use_second_level_cache: true
           use_query_cache: true
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#        dialect: org.hibernate.dialect.H2Dialect
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
+        #        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.H2Dialect
+        #        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         show_sql: true
         default_batch_fetch_size: 1000
-logging.level: #띄어쓰기 없음
-      #  org.hibernate.SQL: debug #띄어쓰기 2칸
+
+logging:
+  level:
+    "[org.hibernate]": ERROR
+    #  org.hibernate.SQL: debug #띄어쓰기 2칸
   org.hibernate.type.descriptor.sql: trace
   root: info
 jwt:

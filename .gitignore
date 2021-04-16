@@ -46,6 +46,7 @@ src/main/generated/
 # *.ipr
 
 .idea/
+*-prod.yml
 
 # CMake
 cmake-build-*/
