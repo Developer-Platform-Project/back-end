@@ -1,6 +1,7 @@
 package com.project.devidea.modules.content.study.controller;
 
 import com.project.devidea.infra.config.security.LoginUser;
+import com.project.devidea.modules.content.study.exception.AlreadyApplyException;
 import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.form.*;
@@ -55,7 +56,7 @@ public class StudyBasicController {
 
     @PostMapping("/study/{id}/apply")
     public ResponseEntity<?> 가입_신청하기(@AuthenticationPrincipal LoginUser account,@PathVariable Long id,
-                                     @RequestBody StudyApplyForm studyApplyForm) {
+                                     @RequestBody StudyApplyForm studyApplyForm) throws  AlreadyApplyException {
         return new ResponseEntity<>(studyService.applyStudy(account.getAccount(),studyApplyForm), HttpStatus.OK);
     }
     @GetMapping("/study/{id}/applylist")

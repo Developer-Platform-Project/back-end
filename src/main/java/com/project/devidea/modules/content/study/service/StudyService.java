@@ -7,6 +7,7 @@ import com.project.devidea.modules.content.study.StudyRole;
 import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
+import com.project.devidea.modules.content.study.exception.AlreadyApplyException;
 import com.project.devidea.modules.content.study.form.*;
 import com.project.devidea.modules.notification.Notification;
 import com.project.devidea.modules.tagzone.tag.Tag;
@@ -35,8 +36,8 @@ public interface StudyService {
     //스터디관련 엔티티 생성 작업들
     public StudyDetailForm makingStudy(Account admin, @Valid StudyMakingForm studyMakingForm);
     public Study makingStudyEntity(Account admin, @Valid StudyMakingForm studyMakingForm);
-    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm);
-    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm);
+    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException;
+    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException;
     public String addMember(Account applicant, Study study, StudyRole role);
 
     //스터디 관련 삭제 작업들

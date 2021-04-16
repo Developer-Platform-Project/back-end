@@ -7,17 +7,19 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(indexes=@Index(columnList = "study_id,member_id"))
+@Table(indexes=@Index(columnList = "study_id,member_id"),
+        uniqueConstraints=@UniqueConstraint(columnNames ={"study_id","member_id"}))
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @EqualsAndHashCode(of="id")
+
 public class StudyMember {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name="study_member_id")
+    @Column(name="study_account_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,9 +1,11 @@
 package com.project.devidea.modules.content.study.aop;
 
+import com.project.devidea.infra.error.exception.BusinessException;
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.content.study.Study;
 import com.project.devidea.modules.content.study.apply.StudyApplyRepository;
+import com.project.devidea.modules.content.study.exception.StudyNullException;
 import com.project.devidea.modules.content.study.form.StudyDetailForm;
 import com.project.devidea.modules.content.study.notification.*;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 @RequiredArgsConstructor
-public class StudyNotificationAop {
+public class StudyNotificationAspect {
     private final StudyRepository studyRepository;
     private final StudyMemberRepository studyMemberRepository;
     private final StudyNotification studyNotification;
@@ -36,17 +38,28 @@ public class StudyNotificationAop {
     //스터디 삭제하기전에
     @Before(value = "execution(* com.project.devidea.modules.content.study.service.StudyServiceImpl.deleteStudy()) && args(id,account)")
     public void BeforeDeleteStudySuccess(JoinPoint joinPoint, Long id, Account account) throws RuntimeException {
-        studyNotification.sendAll(studyRepository.findById(id).orElseThrow(), account, StudyNoticationType.DELETE);
+        studyNotification.sendAll(studyRepository.findById(id).orElseThrow(() -> new StudyNullException()), account, StudyNoticationType.DELETE);
     }
 
     //스터디 성공적으로 떠낫을때
     @AfterReturning(value = "execution(* com.project.devidea.modules.content.study.service.StudyServiceImpl.leaveStudy()) && args(id,account)")
     public void LeaveStudySuccess(JoinPoint joinPoint, Long id, Account account) throws RuntimeException {
-        studyNotification.sendAll(studyRepository.findById(id).orElseThrow(), account, StudyNoticationType.LEAVED);
+        studyNotification.sendAll(studyRepository.findById(id).orElseThrow(() -> new StudyNullException()), account, StudyNoticationType.LEAVED);
     }
     //스터디 설정변경했을때
     @AfterReturning(value = "execution(* com.project.devidea.modules.content.study.service.StudyServiceImpl.Update*()) && args(id)")
     public void UpdateStudySuccess(JoinPoint joinPoint, Long id) throws RuntimeException {
-        studyNotification.sendRelated(studyRepository.findById(id).orElseThrow(), StudyNoticationType.CHANGED);
+        studyNotification.sendRelated(studyRepository.findById(id).orElseThrow(() -> new StudyNullException()), StudyNoticationType.CHANGED);
+    }
+    //스터디 지원시
+    @AfterReturning(value = "execution(* com.project.devidea.modules.content.study.service.StudyServiceImpl.MakingStudyApplyEntity()) && args(study,applicant,..)")
+    public void StudyApplySuccess(JoinPoint joinPoint, Study study, Account applicant) throws RuntimeException {
+        studyNotification.sendRelated(study, StudyNoticationType.APPLY);
+    }
+
+    //스터디 거절시
+    @AfterReturning(value = "execution(* com.project.devidea.modules.content.study.service.StudyServiceImpl.rejected()) && args(study,applicant)")
+    public void StudyApplyRejected(JoinPoint joinPoint, Study study, Account applicant) throws RuntimeException {
+        studyNotification.sendOwn(study,applicant, StudyNoticationType.REJECTED);
     }
 }
