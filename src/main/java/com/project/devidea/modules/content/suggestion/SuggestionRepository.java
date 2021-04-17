@@ -11,6 +11,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface SuggestionRepository extends JpaRepository<Suggestion, Long> {
 
-    @Query("select s from Suggestion s where s.from =:account or s.to =:account")
+    @Query("select s from Suggestion s where s.sender =:account or s.receiver =:account")
     List<Suggestion> findByAccount(@Param("account") Account account);
 }

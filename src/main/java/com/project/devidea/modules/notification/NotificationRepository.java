@@ -18,4 +18,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
     @Transactional
     void deleteByAccountAndChecked(Account account, boolean checked);
 
+    List<Notification> findByAccount(Account account);
+
 }
