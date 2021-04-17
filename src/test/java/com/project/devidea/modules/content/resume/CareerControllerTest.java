@@ -85,7 +85,7 @@ class CareerControllerTest {
         }
         while (updateTagSet.size() < 3) {
             int randomIdx = random.nextInt(tagList.size());
-            updateTagSet.add(tagList.get(randomIdx+1).toString());
+            updateTagSet.add(tagList.get(randomIdx).toString());
         }
     }
 

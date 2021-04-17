@@ -21,22 +21,21 @@ public class Suggestion {
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from")
-    private Account from;
+    @JoinColumn(name = "sender")
+    private Account sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "to")
-    private Account to;
+    @JoinColumn(name = "receiver")
+    private Account receiver;
 
-    private String subject;
+//    private String subject;
     private String message;
 
-    public static Suggestion createSuggestion(Account from, Account to, String subject, String message) {
+    public static Suggestion createSuggestion(Account sender, Account receiver, String message) {
 
         Suggestion suggestion = new Suggestion();
-        suggestion.setFrom(from);
-        suggestion.setTo(to);
-        suggestion.setSubject(subject);
+        suggestion.setSender(sender);
+        suggestion.setReceiver(receiver);
         suggestion.setMessage(message);
 
         suggestion.setDateTime(LocalDateTime.now());
