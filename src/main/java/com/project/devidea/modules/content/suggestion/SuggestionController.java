@@ -81,17 +81,15 @@ public class SuggestionController {
         private String emailFrom;
         private String nameTo;
         private String emailTo;
-        private String subject;
         private String message;
 
         public SuggestionDto(Suggestion suggestion) {
             this.id = suggestion.getId();
             this.dateTime = suggestion.getDateTime().toString();
-            this.nameFrom = suggestion.getFrom().getName();
-            this.emailFrom = suggestion.getFrom().getEmail();
-            this.nameTo = suggestion.getTo().getName();
-            this.emailTo = suggestion.getTo().getEmail();
-            this.subject = suggestion.getSubject();
+            this.nameFrom = suggestion.getSender().getName();
+            this.emailFrom = suggestion.getSender().getEmail();
+            this.nameTo = suggestion.getReceiver().getName();
+            this.emailTo = suggestion.getReceiver().getEmail();
             this.message = suggestion.getMessage();
         }
 

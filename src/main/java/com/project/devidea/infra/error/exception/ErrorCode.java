@@ -21,6 +21,7 @@ public enum ErrorCode {
 //    Account 관련 에러코드
     ACCOUNT_ERROR(400, "Invalid Input Value From Account"),
 
+    ENTITY_NOT_CORRECT(400, " Entity Not Correct"),
     ENTITY_ALREADY_EXIST(400, "Entity Already Exist");
 
 //    // Member
