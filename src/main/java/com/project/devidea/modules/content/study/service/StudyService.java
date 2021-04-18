@@ -7,7 +7,7 @@ import com.project.devidea.modules.content.study.StudyRole;
 import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
-import com.project.devidea.modules.content.study.exception.AlreadyApplyException;
+import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
 import com.project.devidea.modules.content.study.form.*;
 import com.project.devidea.modules.notification.Notification;
 import com.project.devidea.modules.tagzone.tag.Tag;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public interface StudyService {
     //스터디관련 검색 및 조회
     public List<StudyListForm> searchByCondition(@Valid StudySearchForm studySearchForm);
-    public List<StudyApplyForm> getApplyForm(Long id);
+    public List<StudyApplyForm> getApplyFormList(Long id);
     public List<StudyListForm> getMyStudy(Account account);
     public List<StudyApplyForm> getMyApplyList(Account account);
     public List<StudyApplyListForm> getApplyList(Long id); //studyid
@@ -32,12 +32,10 @@ public interface StudyService {
     public StudyApplyForm getApplyDetail(Long id);
     public OpenRecruitForm getOpenRecruitForm(Long id);
     public TagZoneForm getTagandZone(Long id);
-
+    public StudyApplyForm getStudyApplyForm(Long id);
     //스터디관련 엔티티 생성 작업들
     public StudyDetailForm makingStudy(Account admin, @Valid StudyMakingForm studyMakingForm);
-    public Study makingStudyEntity(Account admin, @Valid StudyMakingForm studyMakingForm);
-    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException;
-    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException;
+    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyStudyExistsException;
     public String addMember(Account applicant, Study study, StudyRole role);
 
     //스터디 관련 삭제 작업들
@@ -49,15 +47,4 @@ public interface StudyService {
     public String UpdateTagAndZone(Long id, TagZoneForm tagZoneForm);
     public String decideJoin(Long id, Boolean accept);
     public String setEmpower(Long study_id, EmpowerForm empowerForm);
-
-
-    //Dto관련 유틸들
-    public StudyApplyForm makeStudyForm(Long id);
-    public Study convertToStudy(StudyMakingForm studyMakingForm);
-    public StudyDetailForm ConvertStudyDetailForm(Study study, Account admin);
-
-
-    //generate 유틸들
-    public StudyMember generateStudyMember(Study study, Account account, StudyRole role);
-    public StudyApply generateStudyApply(Study study, Account account);
 }

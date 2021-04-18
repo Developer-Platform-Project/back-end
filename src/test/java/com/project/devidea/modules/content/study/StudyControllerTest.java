@@ -47,6 +47,9 @@ class StudyControllerTest {
 
     @Autowired
     StudyServiceImpl studyService;
+
+    @Autowired
+    StudyFactory studyFactory;
     @Autowired
     MockMvc mockMvc;
     @Autowired
@@ -251,8 +254,8 @@ class StudyControllerTest {
         Account account=accountRepository.findByNickname("me");
         Study study = studySampleGenerator.generateDumy(1).get(0);
         studyRepository.save(study);
-        studyMemberRepository.save(studyService.generateStudyMember(study,account, StudyRole.팀장));
-        StudyApply studyApply=studyService.generateStudyApply(study,User1);
+        studyMemberRepository.save(studyFactory.getStudyMember(study,account, StudyRole.팀장));
+        StudyApply studyApply=studyFactory.getStudyApply(study,User1);
         studyApplyRepository.save(studyApply);
         //when+then 거절했을시 잘 거절확인
         mockMvc.perform(post("/study/{study_id}/apply/{apply_id}/reject",study.getId().toString(),studyApply.getId().toString()))
@@ -269,9 +272,9 @@ class StudyControllerTest {
         Account account=accountRepository.findByNickname("me");
         Study study = studySampleGenerator.generateDumy(1).get(0);
         studyRepository.save(study);
-        studyMemberRepository.save(studyService.generateStudyMember(study,account, StudyRole.팀장));
-        StudyApply studyApply1=studyService.generateStudyApply(study,User1);
-        StudyApply studyApply2=studyService.generateStudyApply(study,User2);
+        studyMemberRepository.save(studyFactory.getStudyMember(study,account, StudyRole.팀장));
+        StudyApply studyApply1=studyFactory.getStudyApply(study,User1);
+        StudyApply studyApply2=studyFactory.getStudyApply(study,User2);
         studyApplyRepository.saveAll(Arrays.asList(studyApply1,studyApply2));
 
         mockMvc.perform(get("/study/{study_id}/apply/list",study.getId().toString()))
@@ -288,7 +291,7 @@ class StudyControllerTest {
         Account account=accountRepository.findByNickname("me");
         Study study = studySampleGenerator.generateDumy(1).get(0);
         studyRepository.save(study);
-        studyMemberRepository.save(studyService.generateStudyMember(study,account, StudyRole.팀장));
+        studyMemberRepository.save(studyFactory.getStudyMember(study,account, StudyRole.팀장));
         StudyApply studyApply1=new StudyApply().builder().study(study)
                             .applicant(User1)
                             .answer("answer")

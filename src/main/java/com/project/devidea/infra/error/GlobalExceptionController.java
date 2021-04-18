@@ -2,7 +2,6 @@ package com.project.devidea.infra.error;
 
 import com.project.devidea.infra.error.exception.BusinessException;
 import com.project.devidea.infra.error.exception.ErrorCode;
-import com.project.devidea.modules.content.study.exception.AlreadyApplyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,13 +73,6 @@ public class GlobalExceptionController {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(AlreadyApplyException.class)
-    protected ResponseEntity<ErrorResponse> handleAlreadyException(Exception e) {
-//        log.error("handleEntityNotFoundException", e);
-        log.error("custom__hihihihihihiihihihihih__________"+e.getMessage());
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.ENTITY_ALREADY_EXIST);
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
     /**
      * 인증 관련 에러처리
      */
