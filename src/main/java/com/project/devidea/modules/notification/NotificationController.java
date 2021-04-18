@@ -26,7 +26,7 @@ public class NotificationController {
 
     @GetMapping("/new")
     @ApiOperation("읽지 않은 알람들 조회")
-    public ResponseEntity<?> getNewNotifications(@AuthenticationPrincipal LoginUser loginUser) {
+    public ResponseEntity getNewNotifications(@AuthenticationPrincipal LoginUser loginUser) {
         Account account = loginUser.getAccount();
         List<Notification> notifications = notificationRepository.findByAccountAndCheckedOrderByCreatedDateTimeDesc(account, false);
         int countOldNotifications = notificationRepository.countByAccountAndChecked(account, true);
@@ -35,7 +35,7 @@ public class NotificationController {
 
     @GetMapping("/old")
     @ApiOperation("읽은 알람들 조회")
-    public ResponseEntity<?> getOldNotifications(@AuthenticationPrincipal LoginUser loginUser) {
+    public ResponseEntity getOldNotifications(@AuthenticationPrincipal LoginUser loginUser) {
         Account account = loginUser.getAccount();
         List<Notification> notifications = notificationRepository.findByAccountAndCheckedOrderByCreatedDateTimeDesc(account, true);
         int countNewNotifications = notificationRepository.countByAccountAndChecked(account, false);
@@ -44,14 +44,14 @@ public class NotificationController {
 
     @PostMapping("/delete")
     @ApiOperation("읽은 알람 전체 삭제")
-    public ResponseEntity<?> deleteAllOldNotifications(@AuthenticationPrincipal LoginUser loginUser) {
+    public ResponseEntity deleteAllOldNotifications(@AuthenticationPrincipal LoginUser loginUser) {
         notificationRepository.deleteByAccountAndChecked(loginUser.getAccount(), true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/{id}/delete")
     @ApiOperation("특정 알람 삭제")
-    public ResponseEntity<?> deleteNotification(@PathVariable("id") Long id) {
+    public ResponseEntity deleteNotification(@PathVariable("id") Long id) {
         Optional<Notification> findNotification = notificationRepository.findById(id);
         if(!findNotification.isPresent())
             throw new EntityNotFoundException("notification");
@@ -61,7 +61,7 @@ public class NotificationController {
     }
 
     @GetMapping("/entityErrorTest")
-    public ResponseEntity<?> entityErrorTest(Long id) {
+    public ResponseEntity entityErrorTest(Long id) {
         Optional<Notification> findNotification = notificationRepository.findById(id);
         if(!findNotification.isPresent())
             throw new EntityNotFoundException("notification");

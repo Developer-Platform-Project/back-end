@@ -29,32 +29,32 @@ public class TechNewsController {
 
     @GetMapping("")
     @ApiOperation("전체 테크 뉴스 조회")
-    public ResponseEntity<?> getAllTechNews() {
+    public ResponseEntity getAllTechNews() {
 
         return new ResponseEntity<>(techNewsRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/daangn")
     @ApiOperation("당근마켓 테크 뉴스 조회")
-    public ResponseEntity<?> getDaangnTechNews() {
+    public ResponseEntity getDaangnTechNews() {
         return new ResponseEntity<>(techNewsRepository.findAllByTechSite(TechSite.DAANGN), HttpStatus.OK);
     }
 
     @GetMapping("/javable")
     @ApiOperation("Javable 테크 뉴스 조회")
-    public ResponseEntity<?> getJavableTechNews() {
+    public ResponseEntity getJavableTechNews() {
         return new ResponseEntity<>(techNewsRepository.findAllByTechSite(TechSite.JAVABLE), HttpStatus.OK);
     }
 
     @GetMapping("/kakao")
     @ApiOperation("카카오 테크 뉴스 조회")
-    public ResponseEntity<?> getKakaoTechNews() {
+    public ResponseEntity getKakaoTechNews() {
         return new ResponseEntity<>(techNewsRepository.findAllByTechSite(TechSite.KAKAO), HttpStatus.OK);
     }
 
     @GetMapping("/line")
     @ApiOperation("라인 테크 뉴스 조회")
-    public ResponseEntity<?> getLineTechNews() {
+    public ResponseEntity getLineTechNews() {
         return new ResponseEntity<>(techNewsRepository.findAllByTechSite(TechSite.LINE), HttpStatus.OK);
     }
 
