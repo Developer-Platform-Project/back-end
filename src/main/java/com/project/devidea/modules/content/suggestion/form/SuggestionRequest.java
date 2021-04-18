@@ -12,14 +12,13 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class SuggestionRequest {
 
-    @NotEmpty
-    private String subject;
+//    @NotEmpty
+//    private String subject;
     @NotEmpty
     private String message;
 
     @Builder
-    public SuggestionRequest(@NotEmpty String subject, @NotEmpty String message) {
-        this.subject = subject;
+    public SuggestionRequest(@NotEmpty String message) {
         this.message = message;
     }
 }

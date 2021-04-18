@@ -5,6 +5,7 @@ import com.project.devidea.modules.content.mentoring.Mentee;
 import com.project.devidea.modules.content.mentoring.MenteeRepository;
 import com.project.devidea.modules.content.mentoring.Mentor;
 import com.project.devidea.modules.content.mentoring.MentorRepository;
+import com.project.devidea.modules.content.mentoring.exception.NotCorrectException;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.suggestion.form.SuggestionRequest;
 import com.project.devidea.modules.notification.Notification;
@@ -31,23 +32,23 @@ public class SuggestionService {
 
         Mentor findMentor = mentorRepository.findByAccountId(account.getId());
         Mentee findMentee = menteeRepository.findByAccountId(account.getId());
-        Account to = null;
+        Account receiver = null;
         if (findMentor != null && findMentee == null) {
             Mentee mentee = menteeRepository.findById(id)
                     .orElseThrow(() -> new NotFoundException("존재하지 않는 멘티입니다."));
-            to = mentee.getAccount();
+            receiver = mentee.getAccount();
         } else if (findMentor == null && findMentee != null) {
             Mentor mentor = mentorRepository.findById(id)
                     .orElseThrow(() -> new NotFoundException("존재하지 않는 멘토입니다."));
-            to = mentor.getAccount();
+            receiver = mentor.getAccount();
         } else {
             throw new NotFoundException();
         }
 
-        Suggestion suggestion = Suggestion.createSuggestion(account, to, request.getSubject(), request.getMessage());
+        Suggestion suggestion = Suggestion.createSuggestion(account, receiver, request.getMessage());
         // 알림 생성
         Notification notification = Notification.generateNotification(NOTIFICATION_TITLE_NEW,
-                "[" + request.getSubject() + "]\n" + request.getMessage(), NotificationType.SUGGESTION, to);
+                request.getMessage(), NotificationType.SUGGESTION, receiver);
         notificationRepository.save(notification);
         // TODO - 메일
         return suggestionRepository.save(suggestion).getId();
@@ -58,13 +59,12 @@ public class SuggestionService {
         Suggestion suggestion = suggestionRepository.findById(suggestionId)
                 .orElseThrow(() -> new NotFoundException());
 
-        // TODO - 예외 처리
-        if (suggestion.getFrom() != account) {
-
+        if (suggestion.getSender() != account) {
+            throw new NotCorrectException("제안을 보낸 사람만 취소 가능합니다.");
         }
         // 알림 생성
         Notification notification = Notification.generateNotification(NOTIFICATION_TITLE_CANCEL,
-                account.getName() + "님이 제안을 취소했습니다.", NotificationType.SUGGESTION, suggestion.getTo());
+                account.getName() + "님이 제안을 취소했습니다.", NotificationType.SUGGESTION, suggestion.getReceiver());
         notificationRepository.save(notification);
         // TODO - 메일
         suggestionRepository.delete(suggestion);
