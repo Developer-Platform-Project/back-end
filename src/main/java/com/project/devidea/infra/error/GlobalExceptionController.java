@@ -79,7 +79,7 @@ public class GlobalExceptionController {
     @ExceptionHandler(AuthenticationException.class)
     protected ResponseEntity<ErrorResponse> handleBadCredentialException(AuthenticationException e) {
         final ErrorResponse response = ErrorResponse.of(ErrorCode.ACCOUNT_ERROR, e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -94,7 +94,7 @@ public class GlobalExceptionController {
         if (!e.getMessage().equals("") && e.getErrors() != null) {
             response = ErrorResponse.of(errorCode, e.getErrors(), e.getMessage());
         } else if (e.getErrors() == null) {
-            response = ErrorResponse.of(errorCode, e.getMessage());
+            response = ErrorResponse.of(errorCode, e.getMessage(), e.getData());
         } else {
             response = ErrorResponse.of(errorCode);
         }

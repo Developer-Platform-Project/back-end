@@ -2,6 +2,7 @@ package com.project.devidea.modules.account.exception;
 
 import com.project.devidea.infra.error.exception.BusinessException;
 import com.project.devidea.infra.error.exception.ErrorCode;
+import com.project.devidea.modules.account.dto.Login;
 import lombok.Getter;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.Errors;
@@ -15,5 +16,9 @@ public class AccountException extends BusinessException {
 
     public AccountException(String message, ErrorCode errorCode) {
         super(message, errorCode);
+    }
+
+    public AccountException(ErrorCode errorCode, String message, Object data) {
+        super(errorCode, message, data);
     }
 }

@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**", "/v2/**", "/swagger-ui.html",
                 "/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/**").authenticated()
-                .antMatchers(HttpMethod.POST,"/login", "/sign-up").permitAll()
+                // 상세 정보 입력때는 로그인을 하지 않는 상황이라 수정했습니다.
+                .antMatchers(HttpMethod.POST,"/login", "/sign-up/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)

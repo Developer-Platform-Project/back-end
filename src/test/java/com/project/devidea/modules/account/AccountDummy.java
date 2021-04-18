@@ -41,17 +41,18 @@ public class AccountDummy {
     }
 
     public static SignUp.OAuthRequest getSignUpOAuthRequestDto() {
-        return SignUp.OAuthRequest.builder().id(SHA256.encrypt("google123412341234"))
-                .name("구글범석").provider("google").build();
+        return SignUp.OAuthRequest.builder().provider("naver").id(SHA256.encrypt("naver12341234"))
+                .email("oo@naver.com").nickname("고범숙").name("고범숙").gender("M").build();
     }
 
     public static SignUp.OAuthRequest getSignUpOAuthRequestDto2() {
-        return SignUp.OAuthRequest.builder().id(SHA256.encrypt("google56785678"))
-                .nickname("고오범석").name("고오범석").provider("google").build();
+        return SignUp.OAuthRequest.builder().provider("google").id(SHA256.encrypt("google12341234")).name("고범석")
+                .nickname("고범석짱짱").gender("M").email("oo2@gmail.com").build();
     }
 
-    public static Login.OAuth getLoginOAuthRequestDto() {
-        return Login.OAuth.builder().id(SHA256.encrypt("google56785678")).build();
+    public static SignUp.OAuthRequest getSignUpOAuthRequestDto3() {
+        return SignUp.OAuthRequest.builder().provider("google").id(SHA256.encrypt("google12341234")).name("고범석")
+                .nickname("고범서어억").gender("M").email("oo@gmail.com").build();
     }
 
     public static Update.ProfileResponse getAccountProfileResponseDtoAtMockito() {
@@ -106,16 +107,36 @@ public class AccountDummy {
     }
 
     public static SignUp.OAuthRequest getFailSignUpOAuthRequestWithValid() {
-        return SignUp.OAuthRequest.builder().provider("").id("").name("").nickname("").build();
+        return SignUp.OAuthRequest.builder().provider("").email("").id("").name("").nickname("").build();
     }
 
     public static SignUp.OAuthRequest getFailSignUpOAuthRequestWithValidator() {
-        return SignUp.OAuthRequest.builder().provider("kakao").id("asdfasdf").name("고범석").
-                nickname("DevIdea").build();
+        return SignUp.OAuthRequest.builder().provider("kakao").id("asdfasdf").name("고범석")
+                .email("kobeomseok95@kakao.com").nickname("DevIdea").build();
     }
 
     public static SignUp.DetailRequest getFailSignUpDetailRequestWithValid(){
-        return SignUp.DetailRequest.builder()
+        return SignUp.DetailRequest.builder().token("")
                 .careerYears(-1).build();
+    }
+
+    public static SignUp.CommonRequest getSignUpRequest() {
+        return SignUp.CommonRequest.builder()
+                .email("kob@naver.com").name("고범석").gender("male")
+                .nickname("구직왕고범석").password(SHA256.encrypt("12341234"))
+                .passwordConfirm(SHA256.encrypt("12341234")).build();
+    }
+
+    public static Account getAccountWithToken() {
+        return Account.builder().interests(new HashSet<>()).mainActivityZones(new HashSet<>()).nickname("고범석")
+                .password("1234").name("고범석").roles("ROLE_USER").email("ko@naver.com")
+                .emailCheckToken(UUID.randomUUID().toString()).emailCheckTokenGeneratedAt(LocalDateTime.now()).build();
+    }
+
+    public static Account getAccountWithTokenAndBefore30Minutes() {
+        return Account.builder().interests(new HashSet<>()).mainActivityZones(new HashSet<>()).nickname("고범석")
+                .password("1234").name("고범석").roles("ROLE_USER").email("ko@naver.com")
+                .emailCheckToken(UUID.randomUUID().toString())
+                .emailCheckTokenGeneratedAt(LocalDateTime.now().minusMinutes(31L)).build();
     }
 }
