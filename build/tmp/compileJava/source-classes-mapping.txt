@@ -3,6 +3,10 @@ com/project/devidea/modules/content/resume/form/education/EducationRequest.java
 com/project/devidea/modules/content/study/apply/StudyApply.java
  com.project.devidea.modules.content.study.apply.StudyApply
  com.project.devidea.modules.content.study.apply.StudyApply$StudyApplyBuilder
+com/project/devidea/infra/config/YamlPropertySourceFactory.java
+ com.project.devidea.infra.config.YamlPropertySourceFactory
+com/project/devidea/infra/config/AsyncConfig.java
+ com.project.devidea.infra.config.AsyncConfig
 com/project/devidea/modules/tagzone/zone/Zone.java
  com.project.devidea.modules.tagzone.zone.Zone
  com.project.devidea.modules.tagzone.zone.Zone$ZoneBuilder
@@ -19,6 +23,8 @@ com/project/devidea/modules/content/resume/education/QEducation.java
  com.project.devidea.modules.content.resume.education.QEducation
 com/project/devidea/infra/config/security/SecurityConfig.java
  com.project.devidea.infra.config.security.SecurityConfig
+com/project/devidea/modules/environment/QEnvironment.java
+ com.project.devidea.modules.environment.QEnvironment
 com/project/devidea/modules/content/tech/Crawling.java
  com.project.devidea.modules.content.tech.Crawling
 com/project/devidea/modules/content/study/controller/StudyAdminController.java
@@ -118,6 +124,9 @@ com/project/devidea/modules/content/resume/career/CareerService.java
  com.project.devidea.modules.content.resume.career.CareerService
 com/project/devidea/modules/account/exception/AccountException.java
  com.project.devidea.modules.account.exception.AccountException
+com/project/devidea/modules/environment/Environment.java
+ com.project.devidea.modules.environment.Environment
+ com.project.devidea.modules.environment.Environment$EnvironmentBuilder
 com/project/devidea/infra/config/security/jwt/JwtAuthenticationEntryPoint.java
  com.project.devidea.infra.config.security.jwt.JwtAuthenticationEntryPoint
 com/project/devidea/modules/content/resume/form/CreateResumeRequest.java
@@ -153,6 +162,8 @@ com/project/devidea/modules/content/study/service/StudyServiceImpl.java
  com.project.devidea.modules.content.study.service.StudyServiceImpl
 com/project/devidea/infra/aop/LoggingAspect.java
  com.project.devidea.infra.aop.LoggingAspect
+com/project/devidea/infra/mail/EmailServiceImpl.java
+ com.project.devidea.infra.mail.EmailServiceImpl
 com/project/devidea/modules/content/study/controller/StudyBasicController.java
  com.project.devidea.modules.content.study.controller.StudyBasicController
 com/project/devidea/infra/config/security/oauth/OAuthService.java
@@ -176,6 +187,9 @@ com/project/devidea/modules/content/mentoring/MenteeService.java
 com/project/devidea/modules/notification/Notification.java
  com.project.devidea.modules.notification.Notification
  com.project.devidea.modules.notification.Notification$NotificationBuilder
+com/project/devidea/modules/account/event/SendEmailToken.java
+ com.project.devidea.modules.account.event.SendEmailToken
+ com.project.devidea.modules.account.event.SendEmailToken$SendEmailTokenBuilder
 com/project/devidea/modules/account/repository/AccountRepositoryCustomImpl.java
  com.project.devidea.modules.account.repository.AccountRepositoryCustomImpl
 com/project/devidea/modules/content/study/exception/StudyResponse.java
@@ -256,6 +270,8 @@ com/project/devidea/modules/content/study/notification/StudyNoticationType.java
  com.project.devidea.modules.content.study.notification.StudyNoticationType
 com/project/devidea/infra/config/security/jwt/JwtTokenUtil.java
  com.project.devidea.infra.config.security.jwt.JwtTokenUtil
+com/project/devidea/modules/content/mentoring/exception/NotCorrectException.java
+ com.project.devidea.modules.content.mentoring.exception.NotCorrectException
 com/project/devidea/modules/account/repository/MainActivityZoneRepository.java
  com.project.devidea.modules.account.repository.MainActivityZoneRepository
 com/project/devidea/modules/content/study/apply/StudyApplyForm.java
@@ -275,6 +291,8 @@ com/project/devidea/modules/account/AccountController.java
 com/project/devidea/modules/content/resume/Resume.java
  com.project.devidea.modules.content.resume.Resume
  com.project.devidea.modules.content.resume.Resume$ResumeBuilder
+com/project/devidea/modules/account/event/AccountEventListener.java
+ com.project.devidea.modules.account.event.AccountEventListener
 com/project/devidea/modules/content/study/aop/AlreadyExistError.java
  com.project.devidea.modules.content.study.aop.AlreadyExistError
 com/project/devidea/modules/content/resume/form/activity/UpdateActivityRequest.java
@@ -390,6 +408,8 @@ com/project/devidea/modules/content/techNews/crawling/DaangnCrawling.java
  com.project.devidea.modules.content.techNews.crawling.DaangnCrawling
 com/project/devidea/modules/content/study/exception/StudyAuthorityRequiredException.java
  com.project.devidea.modules.content.study.exception.StudyAuthorityRequiredException
+com/project/devidea/modules/environment/EnvironmentRepository.java
+ com.project.devidea.modules.environment.EnvironmentRepository
 com/project/devidea/modules/account/dto/SignUp.java
  com.project.devidea.modules.account.dto.SignUp
  com.project.devidea.modules.account.dto.SignUp$CommonRequest
@@ -434,12 +454,17 @@ com/project/devidea/modules/content/study/aop/StudyErrorAspect.java
  com.project.devidea.modules.content.study.aop.StudyErrorAspect
 com/project/devidea/modules/content/study/repository/StudyRepositoryCustom.java
  com.project.devidea.modules.content.study.repository.StudyRepositoryCustom
+com/project/devidea/infra/mail/EmailMessage.java
+ com.project.devidea.infra.mail.EmailMessage
+ com.project.devidea.infra.mail.EmailMessage$EmailMessageBuilder
 com/project/devidea/modules/account/dto/Login.java
  com.project.devidea.modules.account.dto.Login
  com.project.devidea.modules.account.dto.Login$Common
  com.project.devidea.modules.account.dto.Login$Common$CommonBuilder
  com.project.devidea.modules.account.dto.Login$OAuth
  com.project.devidea.modules.account.dto.Login$OAuth$OAuthBuilder
+ com.project.devidea.modules.account.dto.Login$Response
+ com.project.devidea.modules.account.dto.Login$Response$ResponseBuilder
 com/project/devidea/modules/content/resume/form/education/UpdateEducationRequest.java
  com.project.devidea.modules.content.resume.form.education.UpdateEducationRequest
  com.project.devidea.modules.content.resume.form.education.UpdateEducationRequest$UpdateEducationRequestBuilder
@@ -453,6 +478,8 @@ com/project/devidea/modules/content/resume/activity/ActivityRepository.java
  com.project.devidea.modules.content.resume.activity.ActivityRepository
 com/project/devidea/modules/content/suggestion/SuggestionRepository.java
  com.project.devidea.modules.content.suggestion.SuggestionRepository
+com/project/devidea/infra/config/AppProperties.java
+ com.project.devidea.infra.config.AppProperties
 com/project/devidea/modules/content/resume/validator/CareerRequestValidator.java
  com.project.devidea.modules.content.resume.validator.CareerRequestValidator
 com/project/devidea/modules/content/study/form/TagZoneForm.java

@@ -40,6 +40,9 @@ import static org.mockito.Mockito.when;
 @Slf4j
 public class StudyServiceTest {
     ModuleGenerator moduleGenerator;
+
+    @SpyBean
+    StudyFactory studyFactory;
     @SpyBean
     ModelMapper studyMapper;
     @MockBean
