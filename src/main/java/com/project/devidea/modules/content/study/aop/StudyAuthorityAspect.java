@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 @RequiredArgsConstructor
-public class StudyAuthorityAop {
+public class StudyAuthorityAspect {
     private final StudyMemberRepository studyMemberRepository;
     private final StudyApplyRepository studyApplyRepository;
 
@@ -31,8 +31,7 @@ public class StudyAuthorityAop {
     @Before("스터디팀장권한() && args(account,study_id)")
     public void 팀장권한확인(LoginUser account, Long study_id) {
         StudyRole study_role = getRole(account,study_id);
-        if (study_role == null || study_role != StudyRole.팀장)
-            throw new StudyAuthorityRequiredException(account.getNickName());
+        if (study_role == null || study_role != StudyRole.팀장) throw new StudyAuthorityRequiredException(account.getNickName());
         else System.out.println("성공적으로 권한확인 했습니다.");
 
     }
@@ -45,7 +44,7 @@ public class StudyAuthorityAop {
             throw new StudyAuthorityRequiredException(account.getNickName());
         else System.out.println("성공적으로 권한확인 했습니다.");
     }
-    public StudyRole getRole(LoginUser account, Long study_id){
-        return studyMemberRepository.findByStudy_IdAndMember_Id(study_id, account.getAccount().getId()).getRole();
+    public StudyRole getRole(LoginUser account, Long study_id) throws StudyAuthorityRequiredException{
+        return studyMemberRepository.findByStudy_IdAndMember_Id(study_id, account.getAccount().getId()).orElseThrow(()->new StudyAuthorityRequiredException(account.getNickName())).getRole();
     }
  }
