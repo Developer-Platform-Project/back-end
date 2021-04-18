@@ -19,8 +19,9 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 public class StudyApply {
 
-    @GeneratedValue
     @Id
+    @SequenceGenerator(name = "SequenceGenerator", sequenceName = "mySeq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGenerator")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

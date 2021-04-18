@@ -3,6 +3,7 @@ package com.project.devidea.modules.content.study.service;
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.content.study.Study;
+import com.project.devidea.modules.content.study.StudyFactory;
 import com.project.devidea.modules.content.study.StudyMember;
 import com.project.devidea.modules.content.study.StudyRole;
 import com.project.devidea.modules.content.study.aop.AlreadyExistError;
@@ -10,7 +11,8 @@ import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyRepository;
-import com.project.devidea.modules.content.study.exception.AlreadyApplyException;
+import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
+import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
 import com.project.devidea.modules.content.study.exception.StudyNullException;
 import com.project.devidea.modules.content.study.form.*;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
@@ -23,6 +25,7 @@ import com.project.devidea.modules.tagzone.zone.Zone;
 import com.project.devidea.modules.tagzone.zone.ZoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -37,16 +40,15 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@Configuration
 @RequiredArgsConstructor
 public class StudyServiceImpl implements StudyService {
+    private final StudyFactory studyFactory;
     private final ModelMapper studyMapper;
     private final StudyRepository studyRepository;
-    private final ZoneRepository zoneRepository;
-    private final TagRepository tagRepository;
     private final AccountRepository accountRepository;
     private final StudyApplyRepository studyApplyRepository;
     private final StudyMemberRepository studyMemberRepository;
-    private final NotificationRepository notificationRepository;
 
     public List<StudyListForm> searchByCondition(@Valid StudySearchForm studySearchForm) {
         List<Study> studyList = studyRepository.findByCondition(studySearchForm);
@@ -57,67 +59,27 @@ public class StudyServiceImpl implements StudyService {
 
 
     public StudyDetailForm getDetailStudy(Long id) {
-        Study study = studyRepository.findById(id).orElseThrow();
-        return studyMapper.map(study, StudyDetailForm.class);
+        return studyFactory.getStudyDetailForm(id);
     }
 
-    public StudyDetailForm makingStudy(Account admin, @Valid StudyMakingForm studyMakingForm) { //study만들기
-        Study study = makingStudyEntity(admin, studyMakingForm);
-        return ConvertStudyDetailForm(study, admin);
-    }
-
-    public Study makingStudyEntity(Account admin, @Valid StudyMakingForm studyMakingForm) { //study만들기
-        Study study = convertToStudy(studyMakingForm);
-        studyRepository.save(study);
-        studyMemberRepository.save(generateStudyMember(study, admin, StudyRole.팀장));
-        return study;
-    }
-
-    public StudyDetailForm ConvertStudyDetailForm(Study study, Account admin) { //study만들기
-        StudyDetailForm studyDetailForm = studyMapper.map(study, StudyDetailForm.class);
-        studyDetailForm.setMembers(new HashSet<String>(Arrays.asList(admin.getNickname())));
-        return studyDetailForm;
-    }
-    @AlreadyExistError(message="이미 존재하는 스터디입니다.")
-    public String applyStudy(Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException{
-        Study study = studyRepository.findById(studyApplyForm.getStudyId()).orElseThrow(StudyNullException::new);
-        StudyApply studypply=MakingStudyApplyEntity(study, applicant, studyApplyForm); //받는 인자가 없으면 그냥 스킵해버린다A..
+    public String applyStudy(Account applicant,  StudyApplyForm studyApplyForm) throws AlreadyStudyExistsException{
+        studyApplyRepository.saveAndFlush(studyFactory.getStudyApply(applicant,studyApplyForm));
         return "Yes";//완료 메시지 미완성
     }
-    @AlreadyExistError(message="이미 존재하는 스터디입니다.")
-    public StudyApply MakingStudyApplyEntity(Study study, Account applicant, @Valid StudyApplyForm studyApplyForm) throws AlreadyApplyException{
-        StudyApply studyApply = StudyApply.builder()
-                .study(study)
-                .applicant(applicant)
-                .answer(studyApplyForm.getAnswer())
-                .etc(studyApplyForm.getEtc())
-                .build();
 
-        studyApplyRepository.saveAndFlush(studyApply);
-        return studyApply;
-    }
-
-    public String decideJoin(Long id, Boolean accept) {
-        StudyApply studyApply = studyApplyRepository.findById(id).orElseThrow();
+    public String decideJoin(Long studyApplyId, Boolean accept) {
+        StudyApply studyApply = studyApplyRepository.findById(studyApplyId).orElseThrow();
         Account applicant = studyApply.getApplicant();
         Study study = studyApply.getStudy();
-        if (study.getCounts() == study.getMaxCount())
-            return "인원이 꽉찼습니다.";
+        if (study.getCounts() == study.getMaxCount()) return "인원이 꽉찼습니다.";
         studyApply.setAccpted(accept);
         if (accept) {
             return addMember(applicant, study, StudyRole.회원);
         } else return rejected(study,applicant);
     }
 
-    public String addMember(Account applicant, Study study, StudyRole role) {
-        studyMemberRepository.save(
-                StudyMember.
-                        builder()
-                        .study(study)
-                        .member(applicant)
-                        .role(role)
-                        .build()
-        );
+    public String addMember(Account applicant, Study study, StudyRole role) throws AlreadyStudyExistsException{
+        studyMemberRepository.saveAndFlush(studyFactory.getStudyMember(study,applicant,role));
         return "성공적으로 저장하였습니다.";
     }
     public String rejected(Study study,Account applicant){
@@ -125,7 +87,7 @@ public class StudyServiceImpl implements StudyService {
     }
 
     @Override
-    public List<StudyApplyForm> getApplyForm(Long id) { //해당 스터디 가입신청 리스트 보기
+    public List<StudyApplyForm> getApplyFormList(Long id) { //해당 스터디 가입신청 리스트 보기
         return studyApplyRepository.findById(id).stream()
                 .map(studyApply -> {
                     return studyMapper.map(studyApply, StudyApplyForm.class);
@@ -134,8 +96,12 @@ public class StudyServiceImpl implements StudyService {
 
     @Override
     public List<StudyListForm> getMyStudy(Account account) {
-        return null;
+        List<StudyMember> studyList = studyMemberRepository.findByMember_Id(account.getId());
+        return studyList.stream().map(study -> {
+            return studyMapper.map(study.getStudy(), StudyListForm.class);
+        }).collect(Collectors.toList());
     }
+
 
     @Override
     public List<StudyApplyForm> getMyApplyList(Account account) {
@@ -153,14 +119,7 @@ public class StudyServiceImpl implements StudyService {
         studyRepository.LeaveStudy(study_id);
         return "스터디를 떠났습니다.";
     }
-
-    public List<StudyListForm> myStudy(Account account) {
-        List<StudyMember> studyList = studyMemberRepository.findByMember_Id(account.getId());
-        return studyList.stream().map(study -> {
-            return studyMapper.map(study.getStudy(), StudyListForm.class);
-        }).collect(Collectors.toList());
-    }
-
+    
     public List<StudyApplyListForm> getApplyList(Long id) {
         return studyApplyRepository.findByStudy_Id(id).stream().map(
                 studyApply -> {
@@ -184,6 +143,14 @@ public class StudyServiceImpl implements StudyService {
         return new TagZoneForm(study.getTags(), study.getLocation());
     }
 
+    @Override
+    public StudyDetailForm makingStudy(Account admin, @Valid StudyMakingForm studyMakingForm) throws AlreadyStudyExistsException {
+        Study study = studyFactory.getStudy(studyMakingForm);
+        studyRepository.save(study);
+        studyMemberRepository.saveAndFlush(studyFactory.getStudyMember(study, admin, StudyRole.팀장));
+        return studyFactory.getStudyDetailForm(study,admin);
+    }
+
     public String UpdateOpenRecruiting(Long id, OpenRecruitForm openRecruitForm) {
         Study study = studyRepository.findById(id).orElseThrow();
         study.setOpenAndRecruiting(openRecruitForm.isOpen(), openRecruitForm.isRecruiting());
@@ -193,49 +160,6 @@ public class StudyServiceImpl implements StudyService {
     public String UpdateTagAndZone(Long id, TagZoneForm tagZoneForm) {
         Study study = studyRepository.findById(id).orElseThrow();
         return "success";
-    }
-
-    public StudyApplyForm makeStudyForm(Long id) {
-        Study study = studyRepository.findById(id).orElseThrow();
-        StudyApplyForm studyApplyForm = new StudyApplyForm()
-                .builder()
-                .studyId(study.getId())
-                .study(study.getTitle())
-                .answer(study.getQuestion())
-                .applicant("")
-                .build();
-        return studyApplyForm;
-    }
-
-
-    public Study convertToStudy(StudyMakingForm studyMakingForm) {
-        Study study = studyMakingForm.toStudy();
-        String[] locations = studyMakingForm.getLocation().split("/");
-        Zone zone = zoneRepository.findByCityAndProvince(locations[0], locations[1]);
-        Set<Tag> tagsSet = studyMakingForm.getTags().stream().map(tag -> {
-            return tagRepository.findByFirstName(tag);
-        }).collect(Collectors.toSet());
-        study.setLocation(zone);
-        study.setTags(tagsSet);
-        study.setCounts(study.getCounts() + 1);
-        return study;
-    }
-
-    public StudyMember generateStudyMember(Study study, Account account, StudyRole role) {
-        return StudyMember.builder()
-                .study(study)
-                .member(account)
-                .JoinDate(LocalDateTime.now())
-                .role(role)
-                .build();
-    }
-
-    public StudyApply generateStudyApply(Study study, Account account) {
-        return new StudyApply().builder()
-                .study(study)
-                .applicant(account)
-                .build();
-
     }
 
     public String setEmpower(Long study_id, EmpowerForm empowerForm) {
@@ -249,5 +173,9 @@ public class StudyServiceImpl implements StudyService {
                     return studyMapper.map(studyApply, StudyApplyForm.class);
                 }
         ).collect(Collectors.toList());
+    }
+
+    public StudyApplyForm getStudyApplyForm(Long studyId) {
+        return studyFactory.getStudyForm( studyRepository.findById(studyId).orElseThrow(StudyNullException::new));
     }
 }

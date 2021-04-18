@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @EqualsAndHashCode(of="id")
-
 public class StudyMember {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name="study_account_id")
+    @SequenceGenerator(name = "SequenceGenerator", sequenceName = "mySeq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGenerator")
+    @Column(name="study_meber_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

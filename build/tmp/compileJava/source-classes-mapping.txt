@@ -424,6 +424,8 @@ com/project/devidea/modules/content/mentoring/AbstractService.java
 com/project/devidea/infra/error/GlobalResponse.java
  com.project.devidea.infra.error.GlobalResponse
  com.project.devidea.infra.error.GlobalResponse$GlobalResponseBuilder
+com/project/devidea/modules/content/study/StudyFactory.java
+ com.project.devidea.modules.content.study.StudyFactory
 com/project/devidea/modules/content/study/form/StudyMakingForm.java
  com.project.devidea.modules.content.study.form.StudyMakingForm
 com/project/devidea/modules/content/techNews/crawling/JavableCrawling.java
@@ -488,8 +490,6 @@ com/project/devidea/modules/content/resume/activity/Activity.java
  com.project.devidea.modules.content.resume.activity.Activity$ActivityBuilder
 com/project/devidea/modules/content/techNews/TechNewsController.java
  com.project.devidea.modules.content.techNews.TechNewsController
-com/project/devidea/modules/content/study/exception/AlreadyApplyException.java
- com.project.devidea.modules.content.study.exception.AlreadyApplyException
 com/project/devidea/modules/content/resume/ResumeController.java
  com.project.devidea.modules.content.resume.ResumeController
  com.project.devidea.modules.content.resume.ResumeController$ResumeDto
@@ -503,6 +503,8 @@ com/project/devidea/modules/content/mentoring/MenteeRepository.java
  com.project.devidea.modules.content.mentoring.MenteeRepository
 com/project/devidea/modules/content/resume/career/CareerRepository.java
  com.project.devidea.modules.content.resume.career.CareerRepository
+com/project/devidea/modules/content/study/exception/AlreadyStudyExistsException.java
+ com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException
 com/project/devidea/modules/notification/QNotification.java
  com.project.devidea.modules.notification.QNotification
 com/project/devidea/infra/config/WebConfig.java
