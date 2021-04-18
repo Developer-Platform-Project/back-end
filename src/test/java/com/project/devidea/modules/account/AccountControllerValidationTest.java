@@ -20,6 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -128,8 +129,8 @@ public class AccountControllerValidationTest {
         mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginRequestDto)))
                 .andDo(print())
-                .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.message", is("회원의 아이디와 비밀번호가 일치하지 않습니다.")));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message", is("가입되지 않거나, 메일과 비밀번호가 맞지 않습니다.")));
     }
 
     @Test
@@ -147,6 +148,18 @@ public class AccountControllerValidationTest {
                 .andExpect(jsonPath("$.errors.length()", is(3)));
     }
 
+    /**TODO
+     * {
+     *   "statusCode": 200,
+     *   "time": "2021-04-13T17:54:10.6931631",
+     *   "description": "요청이 정상적으로 처리되었습니다.",
+     *   "data": {
+     *     "savedDetail": false,
+     *     "emailCheckToken": null
+     *   }
+     * }
+     * @throws Exception
+     */
     @Test
     void OAuth로그인_미가입_회원의_경우() throws Exception {
 
@@ -158,8 +171,9 @@ public class AccountControllerValidationTest {
         mockMvc.perform(post("/login/oauth").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(login)))
                 .andDo(print())
-                .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.message", is("가입되지 않거나, 메일과 비밀번호가 맞지 않습니다.")));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.savedDetail", is(false)))
+                .andExpect(jsonPath("$.data.emailCheckToken", nullValue()));
     }
 
     @Test
@@ -206,6 +220,7 @@ public class AccountControllerValidationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(login)))
                 .andDo(print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message", is("이미 탈퇴한 회원입니다.")));
     }
 }

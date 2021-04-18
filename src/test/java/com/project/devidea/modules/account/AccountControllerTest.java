@@ -9,8 +9,6 @@ import com.project.devidea.modules.account.dto.*;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
-import com.project.devidea.modules.tagzone.tag.TagRepository;
-import com.project.devidea.modules.tagzone.zone.ZoneRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +16,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import javax.mail.Message;
-import java.security.MessageDigest;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -70,8 +62,7 @@ class AccountControllerTest {
     }
 
     @Test
-    @DisplayName("일반 회원가입")
-    void save() throws Exception {
+    void 일반_회원가입() throws Exception {
 
 //        given
         SignUp.CommonRequest request = SignUp.CommonRequest.builder().name("고범떡").email("kob@naver.com")
@@ -111,11 +102,13 @@ class AccountControllerTest {
 //        when
         mockMvc.perform(get("/authenticate-email-token").params(params))
                 .andDo(print())
-                .andExpect(status().is3xxRedirection());
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost:3000/sign-up/detail?token=" +
+                        account.getEmailCheckToken()));
 
 //        then
         Account find = accountRepository.findByEmail(join.getEmail()).get();
-        Assertions.assertTrue(find.isAuthenticateEmail());
+        assertTrue(find.isAuthenticateEmail());
     }
 
     @Test
@@ -137,8 +130,7 @@ class AccountControllerTest {
     }
 
     @Test
-    @DisplayName("로그인 시 jwt, 토큰의 username == 로그인 username 확인")
-    void confirmJwtTokenAndAuthorization() throws Exception {
+    void 일반_로그인_디테일을_입력받지_못한_회원() throws Exception {
 
 //        when, then
         MockHttpServletResponse mockHttpServletResponse = mockMvc.perform(post("/login")
@@ -147,6 +139,8 @@ class AccountControllerTest {
                         .email("test@test.com").password("1234").build())))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.savedDetail", is(false)))
+                .andExpect(jsonPath("$.data.emailCheckToken", notNullValue()))
                 .andExpect(header().exists("Authorization")).andReturn().getResponse();
 
         String jwtToken = mockHttpServletResponse.getHeader("Authorization").substring(7);
@@ -252,7 +246,7 @@ class AccountControllerTest {
 
     @Test
     @WithUserDetails("test@test.com")
-    @Order(value = Order.DEFAULT + 1)
+    @Order(value = Integer.MAX_VALUE - 1)
     void 회원_탈퇴() throws Exception {
 
 //        given

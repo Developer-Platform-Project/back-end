@@ -49,15 +49,14 @@ public class AccountController {
     }
 
     /**
-     * 상헌님하고 작업했을 떄, redirect를 원하셔서 수정했습니다.
+     * TODO 상헌님이 os 환경변수를 설정해서 redirect를 해달라고 하셨습니다.
      */
     @GetMapping("/authenticate-email-token")
-    public void authenticateEmailToken(String email, String token,
-                                                    HttpServletResponse response) throws IOException {
+    @ApiOperation("일반 회원가입 메일 인증")
+    public void authenticateEmailToken(String email, String token, HttpServletResponse response) throws IOException {
 
-        accountService.authenticateEmailToken(email, token);
-//        return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
-        response.sendRedirect("http://shlee9412.iptime.org:3000/sign-up/detail?token=" + token);
+        String url = accountService.authenticateEmailToken(email, token);
+        response.sendRedirect(url + "/sign-up/detail?token=" + token);
     }
 
     @PostMapping("/sign-up/oauth")
@@ -73,7 +72,8 @@ public class AccountController {
     public ResponseEntity<?> login(@Valid @RequestBody Login.Common login) throws Exception {
 
         Map<String, String> result = accountService.login(login);
-        return new ResponseEntity<>(GlobalResponse.of(), getHttpHeaders(result), HttpStatus.OK);
+        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)),
+                getHttpHeaders(result), HttpStatus.OK);
     }
 
     @PostMapping("/login/oauth")
@@ -81,7 +81,8 @@ public class AccountController {
     public ResponseEntity<?> loginOAuth(@Valid @RequestBody Login.OAuth login) throws Exception {
         // 디테일 입력했는지 여부 확인하기
         Map<String, String> result = accountService.loginOAuth(login);
-        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)), getHttpHeaders(result), HttpStatus.OK);
+        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)),
+                getHttpHeaders(result), HttpStatus.OK);
     }
 
     private Login.Response getIsSavedDetails(Map<String, String> result) {

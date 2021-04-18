@@ -1,5 +1,7 @@
 package com.project.devidea.modules;
 
+import com.project.devidea.modules.environment.Environment;
+import com.project.devidea.modules.environment.EnvironmentRepository;
 import com.project.devidea.infra.config.security.SHA256;
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
@@ -47,6 +49,7 @@ public class InitService {
     private final MenteeRepository menteeRepository;
     private final ResumeRepository resumeRepository;
     private final MentorRepository mentorRepository;
+    private final EnvironmentRepository environmentRepository;
 
     private Set<Tag> getTags(Set<String> tags) {
         return tags.stream()
@@ -220,6 +223,8 @@ public class InitService {
                 .build();
 
         accountRepository.saveAll(Arrays.asList(account4,account5,account6));
+        environmentRepository
+                .save(Environment.builder().description("FRONT").url("http://localhost:3000").build());
     }
 
 }
