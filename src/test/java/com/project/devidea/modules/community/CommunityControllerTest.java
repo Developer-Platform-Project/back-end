@@ -1,5 +1,6 @@
 package com.project.devidea.modules.community;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.devidea.infra.MockMvcTest;
 import com.project.devidea.infra.config.security.CustomUserDetailService;
@@ -9,25 +10,23 @@ import com.project.devidea.infra.error.exception.EntityNotFoundException;
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.AccountDummy;
 import com.project.devidea.modules.account.repository.AccountRepository;
+import com.project.devidea.modules.community.CommunityRepository;
 import com.project.devidea.modules.community.form.RequestCommunity;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import javax.validation.ValidationException;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,13 +41,15 @@ public class CommunityControllerTest {
     JwtTokenUtil jwtTokenUtil;
     @Autowired
     ObjectMapper objectMapper;
-
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    CommunityRepository communityRepository;
 
     @BeforeEach
     void init() {
         Account account = accountRepository.save(AccountDummy.getAccount());
+        communityRepository.saveAll(CommunityDummy.getCommunities(account));
     }
 
     private Class<? extends Exception> getApiResultExceptionClass(MvcResult result) {
@@ -130,5 +131,103 @@ public class CommunityControllerTest {
                         assertThat(getApiResultExceptionClass(result)).isEqualTo(MethodArgumentNotValidException.class)
                 )
                 .andReturn();
+    }
+
+    @Test
+    @DisplayName("커뮤니티 글 전체 조회")
+    public void getCommunities() throws Exception {
+        //given : 커뮤니티 글 3개 존재
+        //when : get, /community 으로 요청 시 커뮤니티 글 전체 조회
+        MvcResult mvcResult = mockMvc.perform(get("/community"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        //then : 3개의 커뮤니티 글 정상 조회 확인
+        String strResult = mvcResult.getResponse().getContentAsString();
+        List<Community> findCommunities = objectMapper.readValue(strResult, new TypeReference<List<Community>>() {});
+
+        String[] titles = new String[] {"커뮤니티제목1","커뮤니티제목2","커뮤니티제목3"};
+        String[] contents = new String[] {"커뮤니티내용1","커뮤니티내용2","커뮤니티내용3"};
+        assertAll(
+                () -> assertThat(findCommunities.size()).isEqualTo(3),
+                () -> findCommunities.forEach(community -> {
+                    assertThat(titles).contains(community.getTitle());
+                    assertThat(contents).contains(community.getContent());
+                })
+        );
+    }
+
+    @Test
+    @DisplayName("커뮤니티 글 상세 조회")
+    public void getCommunityDetail() throws Exception {
+        //given : 작성되어 있는 커뮤니티 글 1개 존재
+        List<Community> communities = communityRepository.findByWriter(accountRepository.findByEmail(AccountDummy.getAccount().getEmail()).get());
+        Community community = communities.get(0);
+
+        //when : get, /community/{id} 으로 요청 시 특정 커뮤니티 글 조회
+        MvcResult mvcResult = mockMvc.perform(get("/community/" + community.getId()))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        //then : id를 통해 찾은 커뮤니티 글이 찾고자하는 커뮤니티 글과 같은 지 확인
+        String strResult = mvcResult.getResponse().getContentAsString();
+        Community findCommunity = objectMapper.readValue(strResult, Community.class);
+
+        assertAll(
+                () -> assertThat(community.getTitle()).isEqualTo(findCommunity.getTitle()),
+                () -> assertThat(community.getContent()).isEqualTo(findCommunity.getContent()),
+                () -> assertThat(community.getId()).isEqualTo(findCommunity.getId())
+        );
+    }
+
+    @Test
+    @DisplayName("커뮤니티 글 상세 조회_실패_존재하지 않는 커뮤니티 글")
+    public void getCommunityDetail_fail() throws Exception {
+        //given : 존재하지 않는 커뮤니티 id
+        Long id = Long.MAX_VALUE;
+
+        //when : get, /community/{id} 으로 요청 시 특정 커뮤니티 글 조회
+        //then : 존재하지 않는 id를 통한 커뮤니티 조회 요청으로 EntityNotFoundException 발생 확인
+        MvcResult mvcResult = mockMvc.perform(get("/community/" + id))
+                .andExpect(status().is4xxClientError())
+                .andExpect(result -> {
+                    assertThat(getApiResultExceptionClass(result)).isEqualTo(EntityNotFoundException.class);
+                })
+                .andReturn();
+    }
+
+    @Test
+    @DisplayName("커뮤니티 글 삭제")
+    public void deleteCommunity() throws Exception {
+        //given : 작성되어 있는 커뮤니티 글 1개 존재
+        List<Community> communities = communityRepository.findByWriter(accountRepository.findByEmail(AccountDummy.getAccount().getEmail()).get());
+        Community community = communities.get(0);
+        LoginUser loginUser =
+                (LoginUser) customUserDetailService.loadUserByUsername(AccountDummy.getAccount().getEmail());
+
+        //when : post, /community/{id}/delete 으로 요청 시 특정 커뮤니티 글 삭제
+        mockMvc.perform(post("/community/" + community.getId() + "/delete")
+                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        //then : 커뮤니티 글 삭제 확인
+        Optional<Community> findCommunity = communityRepository.findById(community.getId());
+        assertFalse(findCommunity.isPresent());
+    }
+
+    @Test
+    @DisplayName("커뮤니티 글 삭제_실패_존재하지 않는 커뮤니티 글")
+    public void deleteCommunity_fail() throws Exception {
+        //given : 존재하지 않는 커뮤니티 id
+        Long id = Long.MAX_VALUE;
+
+        //when : get, /community/{id}/delete 으로 요청 시 특정 커뮤니티 글 삭제
+        //then : 존재하지 않는 id를 통한 커뮤니티 삭제 요청으로 EntityNotFoundException 발생 확인
+        mockMvc.perform(post("/community/" + id + "/delete"))
+                .andExpect(status().is4xxClientError())
+                .andExpect(result -> {
+                    assertThat(getApiResultExceptionClass(result)).isEqualTo(EntityNotFoundException.class);
+        });
     }
 }

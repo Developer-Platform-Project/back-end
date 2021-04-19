@@ -52,20 +52,16 @@ public class NotificationController {
     @PostMapping("/{id}/delete")
     @ApiOperation("특정 알람 삭제")
     public ResponseEntity deleteNotification(@PathVariable("id") Long id) {
-        Optional<Notification> findNotification = notificationRepository.findById(id);
-        if(!findNotification.isPresent())
-            throw new EntityNotFoundException("notification");
-
+        Notification findNotification = notificationRepository.findById(id).orElseThrow(()
+                -> new EntityNotFoundException("notification"));
         notificationRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/entityErrorTest")
     public ResponseEntity entityErrorTest(Long id) {
-        Optional<Notification> findNotification = notificationRepository.findById(id);
-        if(!findNotification.isPresent())
-            throw new EntityNotFoundException("notification");
-
+        Notification findNotification = notificationRepository.findById(id).orElseThrow(()
+                -> new EntityNotFoundException("notification"));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
