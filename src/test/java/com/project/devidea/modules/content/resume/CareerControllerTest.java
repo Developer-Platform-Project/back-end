@@ -220,33 +220,33 @@ class CareerControllerTest {
                 .andExpect(status().is(400));
     }
 
-    @Test
-    @DisplayName("Career 등록 - @NotEmpty 필드 값 X")
-    @WithAccount("yk")
-    public void newCareer_withWrongRequest() throws Exception {
-        // Given
-        Account account = accountRepository.findByNickname("yk");
-        Resume resume = createResume(account);
-
-        // When
-        // Then
-        CreateCareerRequest request = CreateCareerRequest.builder()
-                .companyName("ABC")
-                .startDate("2021-01-22")
-                .endDate("2021-01-31")
-                .present(false)
-                .tags(tagSet)
-                .detail("")
-                .url("")
-                .build();
-
-        mockMvc.perform(post("/resume/career/")
-                .content(objectMapper.writeValueAsString(request))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().is(400));
-        assertTrue(resume.getCareers().isEmpty());
-    }
+//    @Test
+//    @DisplayName("Career 등록 - @NotEmpty 필드 값 X")
+//    @WithAccount("yk")
+//    public void newCareer_withWrongRequest() throws Exception {
+//        // Given
+//        Account account = accountRepository.findByNickname("yk");
+//        Resume resume = createResume(account);
+//
+//        // When
+//        // Then
+//        CreateCareerRequest request = CreateCareerRequest.builder()
+//                .companyName("ABC")
+//                .startDate("2021-01-22")
+//                .endDate("2021-01-31")
+//                .present(false)
+//                .tags(tagSet)
+//                .detail("")
+//                .url("")
+//                .build();
+//
+//        mockMvc.perform(post("/resume/career/")
+//                .content(objectMapper.writeValueAsString(request))
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().is(400));
+//        assertTrue(resume.getCareers().isEmpty());
+//    }
 
 //    @Test
 //    @DisplayName("Career 등록 - 인증 실패")
@@ -304,59 +304,59 @@ class CareerControllerTest {
                 .andExpect(status().is(400));
     }
 
-    @Test
-    @DisplayName("Career 수정")
-    @WithAccount("yk")
-    public void updateCareer() throws Exception {
-        // Given
-        Account account = accountRepository.findByNickname("yk");
-        createResume(account);
-        Resume resume = resumeRepository.findByAccountId(account.getId());
-
-        Career career = Career.createCareer(
-                resume,
-                "ABC",
-                "senior",
-                LocalDate.of(2021, 1, 22),
-                LocalDate.of(2021, 1, 31),
-                false,
-                getTags(tagSet),
-                "",
-                "");
-        careerRepository.save(career);
-
-        // When, Then
-        UpdateCareerRequest request = UpdateCareerRequest.builder()
-                .companyName("ABCD")
-                .duty("senior")
-                .startDate("2021-01-22")
-                .endDate("")
-                .present(true)
-                .tags(updateTagSet)
-                .detail("")
-                .url("")
-                .build();
-
-        Long careerId = career.getId();
-        mockMvc.perform(post(String.format("/resume/career/%d/edit", careerId))
-                .content(objectMapper.writeValueAsString(request))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-
-        assertNotNull(career.getResume());
-        assertTrue(resume.getCareers().contains(career));
-
-        assertEquals("ABCD", career.getCompanyName());
-        Career findCareer = resume.getCareers().stream()
-                .filter(c -> careerId.equals(c.getId())).findAny().get();
-        assertEquals("ABCD", findCareer.getCompanyName());
-        assertEquals("senior", career.getDuty());
-        assertEquals(LocalDate.of(2021, 1, 22), career.getStartDate());
-        assertNull(career.getEndDate());
-        assertEquals(true, career.isPresent());
-
-    }
+//    @Test
+//    @DisplayName("Career 수정")
+//    @WithAccount("yk")
+//    public void updateCareer() throws Exception {
+//        // Given
+//        Account account = accountRepository.findByNickname("yk");
+//        createResume(account);
+//        Resume resume = resumeRepository.findByAccountId(account.getId());
+//
+//        Career career = Career.createCareer(
+//                resume,
+//                "ABC",
+//                "senior",
+//                LocalDate.of(2021, 1, 22),
+//                LocalDate.of(2021, 1, 31),
+//                false,
+//                getTags(tagSet),
+//                "",
+//                "");
+//        careerRepository.save(career);
+//
+//        // When, Then
+//        UpdateCareerRequest request = UpdateCareerRequest.builder()
+//                .companyName("ABCD")
+//                .duty("senior")
+//                .startDate("2021-01-22")
+//                .endDate("")
+//                .present(true)
+//                .tags(updateTagSet)
+//                .detail("")
+//                .url("")
+//                .build();
+//
+//        Long careerId = career.getId();
+//        mockMvc.perform(post(String.format("/resume/career/%d/edit", careerId))
+//                .content(objectMapper.writeValueAsString(request))
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().isOk());
+//
+//        assertNotNull(career.getResume());
+//        assertTrue(resume.getCareers().contains(career));
+//
+//        assertEquals("ABCD", career.getCompanyName());
+//        Career findCareer = resume.getCareers().stream()
+//                .filter(c -> careerId.equals(c.getId())).findAny().get();
+//        assertEquals("ABCD", findCareer.getCompanyName());
+//        assertEquals("senior", career.getDuty());
+//        assertEquals(LocalDate.of(2021, 1, 22), career.getStartDate());
+//        assertNull(career.getEndDate());
+//        assertEquals(true, career.isPresent());
+//
+//    }
 
     @Test
     @DisplayName("Career 삭제")
