@@ -7,7 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(indexes=@Index(columnList = "study_id,member_id"))
+@Table(indexes=@Index(columnList = "study_id,member_id"),
+        uniqueConstraints=@UniqueConstraint(columnNames ={"study_id","member_id"}))
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -15,9 +16,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of="id")
 public class StudyMember {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name="study_member_id")
+    @SequenceGenerator(name = "SequenceGenerator", sequenceName = "mySeq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGenerator")
+    @Column(name="study_meber_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

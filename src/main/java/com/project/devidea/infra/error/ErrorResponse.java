@@ -25,6 +25,8 @@ public class ErrorResponse {
     private String code;
     private String message;
     private List<FieldError> errors;
+//    에러 발생시 줘야할 데이터가 있을거 같아서 추가했습니다. -범석
+    private Object data;
 
 
     private ErrorResponse(final ErrorCode code, final List<FieldError> errors) {
@@ -55,6 +57,13 @@ public class ErrorResponse {
         this.message = message;
     }
 
+    public ErrorResponse(ErrorCode code, String message, Object data) {
+        this.code = code.getCode();
+        this.status = code.getStatus();
+        this.message = message;
+        this.data = data;
+    }
+
     public static ErrorResponse of(final ErrorCode code, String message) {
         return new ErrorResponse(code, message);
     }
@@ -83,6 +92,10 @@ public class ErrorResponse {
 
     public static ErrorResponse of(final ErrorCode code, final Errors errors, String message) {
         return new ErrorResponse(code, FieldError.of(errors), message);
+    }
+
+    public static ErrorResponse of(ErrorCode code, String message, Object data) {
+        return new ErrorResponse(code, message, data);
     }
 
     @Getter

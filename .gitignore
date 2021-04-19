@@ -196,4 +196,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+### yml ###
+/src/main/resources/application-dev.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,intellij,java,gradle

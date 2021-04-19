@@ -13,4 +13,6 @@ public interface AccountRepositoryCustom {
     Account findByEmailWithInterests(String email);
 
     Account findByEmailWithMainActivityZones(String email);
+
+    Account findByTokenWithMainActivityZoneAndInterests(String token);
 }

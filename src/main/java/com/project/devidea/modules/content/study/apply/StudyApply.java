@@ -14,12 +14,14 @@ import java.time.LocalDateTime;
 @Getter
 @Table( indexes ={
         @Index(name = "account_index", columnList = "account_id"),
-        @Index(name = "study_index", columnList = "study_id")})
+        @Index(name = "study_index", columnList = "study_id")}
+        , uniqueConstraints=@UniqueConstraint(columnNames ={"study_id","account_id"}))
 @EqualsAndHashCode(of = "id")
 public class StudyApply {
 
-    @GeneratedValue
     @Id
+    @SequenceGenerator(name = "SequenceGenerator", sequenceName = "mySeq", allocationSize = 50)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGenerator")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

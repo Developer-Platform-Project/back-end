@@ -1,7 +1,12 @@
 package com.project.devidea.modules.account;
 
+import com.project.devidea.modules.environment.Environment;
+import com.project.devidea.modules.environment.EnvironmentRepository;
 import com.project.devidea.infra.config.security.LoginUser;
+import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.dto.*;
+import com.project.devidea.modules.account.event.SendEmailToken;
+import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.repository.InterestRepository;
 import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
@@ -15,15 +20,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AccountServiceTest {
-
 
     @Mock
     ModelMapper modelMapper;
@@ -39,6 +46,10 @@ class AccountServiceTest {
     ZoneRepository zoneRepository;
     @Mock
     MainActivityZoneRepository mainActivityZoneRepository;
+    @Mock
+    ApplicationEventPublisher publisher;
+    @Mock
+    EnvironmentRepository projectEnvironmentRepository;
     @InjectMocks
     AccountService accountService;
 
@@ -46,13 +57,31 @@ class AccountServiceTest {
     void 회원가입_일반() throws Exception {
 
 //        given
-
+        SignUp.CommonRequest request = mock(SignUp.CommonRequest.class);
+        Account account = mock(Account.class);
+        when(accountService.saveAccount(request)).thenReturn(account);
 
 //        when
-
+        accountService.signUp(request);
 
 //        then
+        verify(publisher).publishEvent(any(SendEmailToken.class));
+        verify(modelMapper).map(account, SignUp.Response.class);
+    }
 
+    @Test
+    void 회원가입_saveAccount_동작() throws Exception {
+
+//        given
+        SignUp.CommonRequest request = mock(SignUp.CommonRequest.class);
+        Account account = mock(Account.class);
+        when(accountRepository.save(any())).thenReturn(account);
+
+//        when
+        Account saved = accountService.saveAccount(request);
+
+//        then
+        verify(accountRepository).save(any());
     }
 
     @Test
@@ -293,5 +322,57 @@ class AccountServiceTest {
 //        then
         verify(accountRepository).findByEmail(any());
         verify(account).changeToQuit();
+    }
+
+    @Test
+    void 메일_인증() throws Exception{
+//        given
+        String email = "email";
+        String token = "token";
+        Account account = mock(Account.class);
+        Environment environment = mock(Environment.class);
+        String url = "url";
+        when(accountRepository.findByEmail(email)).thenReturn(Optional.of(account));
+        when(projectEnvironmentRepository.findByDescription(any()))
+                .thenReturn(environment);
+        when(environment.getUrl()).thenReturn(url);
+
+//        when
+        String returnUrl = accountService.authenticateEmailToken(email, token);
+
+//        then
+        verify(account).validateToken(token);
+        assertEquals(returnUrl, url);
+    }
+
+    @Test
+    void 메일_인증실패_회원이_없을_경우() throws Exception {
+
+//        given
+        String email = "email";
+        String token = "token";
+        when(accountRepository.findByEmail(email))
+                .thenThrow(new AccountException("회원을 찾을 수 없습니다.", ErrorCode.ACCOUNT_ERROR));
+
+//        when, then
+        assertThrows(AccountException.class, () -> accountService.authenticateEmailToken(email, token));
+    }
+
+    @Test
+    void 프론트_URL_가져오기() throws Exception {
+
+        // given
+        Environment environment = mock(Environment.class);
+        String front = "FRONT";
+        when(projectEnvironmentRepository.findByDescription(front))
+                .thenReturn(environment);
+        when(environment.getUrl()).thenReturn(anyString());
+
+        // when
+        accountService.getFrontURL();
+
+        // then
+        verify(projectEnvironmentRepository).findByDescription(front);
+        verify(environment).getUrl();
     }
 }

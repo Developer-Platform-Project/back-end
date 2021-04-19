@@ -7,8 +7,6 @@ import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.content.study.StudyMember;
 import lombok.*;
 import org.apache.tomcat.util.buf.StringUtils;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,6 +36,9 @@ public class Account {
     private String nickname;
 
     private String emailCheckToken;
+
+//    토큰이 발행된 시간
+    private LocalDateTime emailCheckTokenGeneratedAt;
 
     private String roles;
 
@@ -106,24 +107,30 @@ public class Account {
     // 회원 탈퇴 여부 true가 탈퇴한 회원!
     private boolean quit;
 
+    // 회원 탈퇴 여부 true가 탈퇴한 회원!
+    private boolean authenticateEmail;
+
+    private boolean saveDetail;
+
     @Override
     public String toString() {
         return getNickname();
     }
 
     @Builder
-    public Account(Long id, String email, String password, String name, String nickname, String emailCheckToken, String roles, LocalDateTime joinedAt, LocalDateTime modifiedAt, String bio, String profileImage, String url, String gender, String job, int careerYears, String techStacks, Set<Interest> interests, Set<MainActivityZone> mainActivityZones, Set<StudyMember> studies, String provider, boolean receiveEmail, boolean receiveNotification, boolean receiveTechNewsNotification, boolean receiveMentoringNotification, boolean receiveStudyNotification, boolean receiveRecruitingNotification, boolean quit) {
+    public Account(Long id, String email, String password, String name, String nickname, String emailCheckToken, LocalDateTime emailCheckTokenGeneratedAt, String roles, LocalDateTime joinedAt, LocalDateTime modifiedAt, String bio, String profilePath, String url, String gender, String job, int careerYears, String techStacks, Set<Interest> interests, Set<MainActivityZone> mainActivityZones, Set<StudyMember> studies, String provider, boolean receiveEmail, boolean receiveNotification, boolean receiveTechNewsNotification, boolean receiveMentoringNotification, boolean receiveStudyNotification, boolean receiveRecruitingNotification, boolean quit, boolean authenticateEmail, boolean saveDetail) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.nickname = nickname;
         this.emailCheckToken = emailCheckToken;
+        this.emailCheckTokenGeneratedAt = emailCheckTokenGeneratedAt;
         this.roles = roles;
         this.joinedAt = joinedAt;
         this.modifiedAt = modifiedAt;
         this.bio = bio;
-        this.profilePath = profileImage;
+        this.profilePath = profilePath;
         this.url = url;
         this.gender = gender;
         this.job = job;
@@ -140,6 +147,8 @@ public class Account {
         this.receiveStudyNotification = receiveStudyNotification;
         this.receiveRecruitingNotification = receiveRecruitingNotification;
         this.quit = quit;
+        this.authenticateEmail = authenticateEmail;
+        this.saveDetail = saveDetail;
     }
 
     //    편의 메서드
@@ -151,6 +160,7 @@ public class Account {
         this.careerYears = req.getCareerYears();
         this.job = req.getJobField();
         this.techStacks = StringUtils.join(req.getTechStacks(), '/');
+        this.saveDetail = true;
 
         this.interests.addAll(interests);
         this.mainActivityZones.addAll(mainActivityZones);
@@ -187,8 +197,7 @@ public class Account {
 
     @Transient
     public static Account generateAccountById(Long id){
-        return new Account().builder()
-                .id(id).build();
+        return Account.builder().id(id).build();
     }
 
     public void updateNotifications(Update.Notification request) {
@@ -207,6 +216,22 @@ public class Account {
             throw new AccountException("이미 탈퇴한 회원입니다.", ErrorCode.ACCOUNT_ERROR);
         }
         this.quit = true;
+    }
+
+    public void generateEmailToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+        this.emailCheckTokenGeneratedAt = LocalDateTime.now();
+    }
+
+    public void validateToken(String token) {
+        if (!token.equals(this.emailCheckToken)) {
+            throw new AccountException("토큰이 일치하지 않습니다.", ErrorCode.ACCOUNT_ERROR);
+        }
+        if (LocalDateTime.now().minusMinutes(30L).isAfter(this.emailCheckTokenGeneratedAt)) {
+            throw new AccountException("유효시간이 지났습니다.", ErrorCode.ACCOUNT_ERROR);
+        }
+
+        this.authenticateEmail = true;
     }
 }
 

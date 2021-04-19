@@ -3,14 +3,13 @@ package com.project.devidea.modules.content.study;
 import com.project.devidea.infra.config.AppConfig;
 import com.project.devidea.modules.ModuleGenerator;
 import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.AccountService;
 import com.project.devidea.modules.account.repository.AccountRepository;
-import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyRepository;
 import com.project.devidea.modules.content.study.form.StudyDetailForm;
 import com.project.devidea.modules.content.study.form.StudyMakingForm;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 import com.project.devidea.modules.content.study.repository.StudyRepository;
+import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.modules.notification.NotificationRepository;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.tag.TagRepository;
@@ -20,23 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.NameTokenizers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.awt.*;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -45,12 +34,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {AppConfig.class, StudyService.class},
+@SpringBootTest(classes = {AppConfig.class, StudyServiceImpl.class},
         webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @Slf4j
 public class StudyServiceTest {
     ModuleGenerator moduleGenerator;
+
+    @SpyBean
+    StudyFactory studyFactory;
     @SpyBean
     ModelMapper studyMapper;
     @MockBean
@@ -75,7 +67,7 @@ public class StudyServiceTest {
     StudyMember studyMember1, studyMember2;
 
     @Autowired
-    StudyService studyService;
+    StudyServiceImpl studyService;
     String TITLE="송파스터디";
     Zone 서울송파구;
     Zone 서울강남구;

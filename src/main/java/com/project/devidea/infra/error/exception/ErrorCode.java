@@ -9,6 +9,8 @@ import lombok.Setter;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ErrorCode {
 
+    OK(200, "OK"),
+
     // Common
     INVALID_INPUT_VALUE(400, "Invalid Input Value"),
     METHOD_NOT_ALLOWED(400," Invalid Input Value"),

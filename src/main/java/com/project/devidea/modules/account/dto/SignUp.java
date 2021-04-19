@@ -49,6 +49,10 @@ public class SignUp {
         @NotBlank(message = "인증한 소셜 사이트 제공자를 입력해주세요.")
         private String provider;
 
+        @NotBlank(message = "이메일을 입력해주세요.")
+        @Email(message = "이메일 형식으로 입력해주세요.")
+        private String email;
+
         @NotBlank(message = "인증한 소셜 사이트의 고유 식별자 값을 입력해주세요.")
         private String id;
 
@@ -66,7 +70,7 @@ public class SignUp {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class Response{
+    public static class Response {
 
         private String id;
 
@@ -79,6 +83,8 @@ public class SignUp {
         private String gender;
 
         private String provider;
+
+        private String emailCheckToken;
     }
 
     @Getter
@@ -87,6 +93,9 @@ public class SignUp {
     @AllArgsConstructor
     @Builder
     public static class DetailRequest{
+
+        @NotBlank(message = "인증 토큰을 입력해주세요.")
+        private String token;
 
         private String profilePath;
 
