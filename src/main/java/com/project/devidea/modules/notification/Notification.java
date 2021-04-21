@@ -10,9 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Notification {
 
     @Id
@@ -49,5 +47,18 @@ public class Notification {
             .createdDateTime(LocalDateTime.now())
             .checked(false)
             .build();
+    }
+
+    @Builder
+    public Notification(Long id, String title, String message, NotificationType notificationType, String link, Account account, boolean checked, LocalDateTime createdDateTime, LocalDateTime checkedDateTime) {
+        this.id = id;
+        this.title = title;
+        this.message = message;
+        this.notificationType = notificationType;
+        this.link = link;
+        this.account = account;
+        this.checked = checked;
+        this.createdDateTime = createdDateTime;
+        this.checkedDateTime = checkedDateTime;
     }
 }

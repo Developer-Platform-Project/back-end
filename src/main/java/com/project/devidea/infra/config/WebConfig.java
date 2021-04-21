@@ -1,5 +1,6 @@
 package com.project.devidea.infra.config;
 
+import com.project.devidea.modules.community.interceptor.CommunityInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.StaticResourceLocation;
 import org.springframework.context.annotation.Configuration;
@@ -15,21 +16,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
-//    private final NotificationInterceptor notificationInterceptor;
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**")
-                    .allowedOrigins("*")
-                    .exposedHeaders("Authorization");
+    private final CommunityInterceptor communityInterceptor;
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .exposedHeaders("Authorization");
     }
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-////        List<String> staticResourcesPath = Arrays.stream(StaticResourceLocation.values())
-////                .flatMap(StaticResourceLocation::getPatterns)
-////                .collect(Collectors.toList());
-////        staticResourcesPath.add("/node_modules/**");
-//
-//        registry.addInterceptor(notificationInterceptor);
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(communityInterceptor)
+                .addPathPatterns("/community/*/delete");
+
+    }
+
+
 }
