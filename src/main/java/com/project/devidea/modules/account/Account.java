@@ -7,6 +7,8 @@ import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.content.study.StudyMember;
 import lombok.*;
 import org.apache.tomcat.util.buf.StringUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -224,6 +226,7 @@ public class Account {
     }
 
     public void validateToken(String token) {
+
         if (!token.equals(this.emailCheckToken)) {
             throw new AccountException("토큰이 일치하지 않습니다.", ErrorCode.ACCOUNT_ERROR);
         }
@@ -232,6 +235,41 @@ public class Account {
         }
 
         this.authenticateEmail = true;
+    }
+
+    public static Account createAccount(SignUp.CommonRequest request, PasswordEncoder encoder) {
+
+        return Account.builder()
+            .email(request.getEmail())
+            .name(request.getName())
+            .nickname(request.getNickname())
+            .password("{bcrypt}" + encoder.encode(request.getPassword()))
+            .roles("ROLE_USER")
+            .joinedAt(LocalDateTime.now())
+            .modifiedAt(LocalDateTime.now())
+            .gender(request.getGender())
+            .quit(false)
+            .saveDetail(false)
+            .build();
+    }
+
+    public static Account createOAuthAccount(SignUp.OAuthRequest request,
+                                             PasswordEncoder passwordEncoder, String OAUTH_PASSWORD) {
+
+        return Account.builder()
+            .email(request.getEmail())
+            .name(request.getName())
+            .nickname(request.getNickname())
+            .password("{bcrypt}" + passwordEncoder.encode(OAUTH_PASSWORD))
+            .roles("ROLE_USER")
+            .joinedAt(LocalDateTime.now())
+            .modifiedAt(LocalDateTime.now())
+            .provider(request.getProvider())
+            .gender(request.getGender())
+            .quit(false)
+            .authenticateEmail(true)
+            .saveDetail(false)
+            .build();
     }
 }
 

@@ -1,5 +1,8 @@
-package com.project.devidea.modules.account;
+package com.project.devidea.modules.account.service;
 
+import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.Interest;
+import com.project.devidea.modules.account.MainActivityZone;
 import com.project.devidea.modules.environment.EnvironmentRepository;
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
@@ -34,7 +37,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountService implements OAuthService {
+public class AccountServiceImpl implements OAuthService, AccountService, AccountInfoService {
 
     private final BCryptPasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
@@ -49,6 +52,7 @@ public class AccountService implements OAuthService {
     private final EnvironmentRepository environmentRepository;
     private final String OAUTH_PASSWORD = "dev_idea_oauth_password";
 
+    @Override
     public SignUp.Response signUp(SignUp.CommonRequest signUpRequestDto) {
         Account savedAccount = saveAccount(signUpRequestDto);
         publisher.publishEvent(SendEmailToken.builder()
@@ -57,21 +61,11 @@ public class AccountService implements OAuthService {
         return modelMapper.map(savedAccount, SignUp.Response.class);
     }
 
-    public Account saveAccount(SignUp.CommonRequest signUpRequestDto) {
-        Account savedAccount = Account.builder()
-                .email(signUpRequestDto.getEmail())
-                .name(signUpRequestDto.getName())
-                .nickname(signUpRequestDto.getNickname())
-                .password("{bcrypt}" + passwordEncoder.encode(signUpRequestDto.getPassword()))
-                .roles("ROLE_USER")
-                .joinedAt(LocalDateTime.now())
-                .modifiedAt(LocalDateTime.now())
-                .gender(signUpRequestDto.getGender())
-                .quit(false)
-                .saveDetail(false)
-                .build();
-        savedAccount.generateEmailToken();
-        return accountRepository.save(savedAccount);
+    @Override
+    public Account saveAccount(SignUp.CommonRequest request) {
+        Account account = Account.createAccount(request, passwordEncoder);
+        account.generateEmailToken();
+        return accountRepository.save(account);
     }
 
     @Override
@@ -85,26 +79,15 @@ public class AccountService implements OAuthService {
                 .emailCheckToken(savedAccount.getEmailCheckToken()).build();
     }
 
-    private Account saveOAuthAccount(SignUp.OAuthRequest request) {
-        return accountRepository.save(Account.builder()
-                .email(request.getEmail())
-                .name(request.getName())
-                .nickname(request.getNickname())
-                .password("{bcrypt}" + passwordEncoder.encode(OAUTH_PASSWORD))
-                .roles("ROLE_USER")
-                .joinedAt(LocalDateTime.now())
-                .modifiedAt(LocalDateTime.now())
-                .provider(request.getProvider())
-                .gender(request.getGender())
-                .quit(false)
-                .authenticateEmail(true)
-                .saveDetail(false)
-                .build());
+    @Override
+    public Account saveOAuthAccount(SignUp.OAuthRequest request) {
+        return accountRepository.save(Account.createOAuthAccount(request, passwordEncoder, OAUTH_PASSWORD));
     }
 
+    @Override
     public Map<String, String> login(Login.Common login) throws Exception {
         authenticate(login.getEmail(), login.getPassword());
-        return createLoginResponse(createToken(login.getEmail()));
+        return createLoginResponse(createToken(login.getEmail(), jwtTokenUtil));
     }
 
     @Override
@@ -113,15 +96,9 @@ public class AccountService implements OAuthService {
                 .email(login.getEmail())
                 .password(OAUTH_PASSWORD).build();
         login(request);
-        return createLoginResponse(createToken(request.getEmail()));
+        return createLoginResponse(createToken(request.getEmail(), jwtTokenUtil));
     }
 
-    private Map<String, String> createToken(String email) {
-        String jwtToken = jwtTokenUtil.generateToken(email);
-        return jwtTokenUtil.createTokenMap(jwtToken);
-    }
-
-    // 테스트 작성하기
     private Map<String, String> createLoginResponse(Map<String, String> response) {
         String email = jwtTokenUtil.getUsernameFromToken(response.get("token").substring(7));
         Account account = accountRepository.findByEmail(email).get();
@@ -147,6 +124,7 @@ public class AccountService implements OAuthService {
         }
     }
 
+    @Override
     public void saveSignUpDetail(SignUp.DetailRequest req) {
 //        token이 없을 경우 에러 발생시키기
         Account account = accountRepository.findByTokenWithMainActivityZoneAndInterests(req.getToken());
@@ -169,39 +147,26 @@ public class AccountService implements OAuthService {
         interestRepository.saveAll(interests);
     }
 
-    private Set<MainActivityZone> getMainActivityZones(Account account, List<Zone> zones) {
-        Set<MainActivityZone> mainActivityZones = new HashSet<>();
-        zones.forEach(zone -> {
-            mainActivityZones.add(MainActivityZone.builder().account(account).zone(zone).build());
-        });
-        return mainActivityZones;
-    }
-
-    private Set<Interest> getInterests(Account account, List<Tag> tags) {
-        Set<Interest> interests = new HashSet<>();
-        tags.forEach(tag -> {
-            interests.add(Interest.builder().tag(tag).account(account).build());
-        });
-        return interests;
-    }
-
+    @Override
     @Transactional(readOnly = true)
     public Update.ProfileResponse getProfile(LoginUser loginUser) {
-
         return modelMapper.map(loginUser.getAccount(), Update.ProfileResponse.class);
     }
 
+    @Override
     public void updateProfile(LoginUser loginUser, Update.ProfileRequest request) {
         Account account = accountRepository.findByEmail(loginUser.getUsername()).orElseThrow();
         account.updateProfile(request);
     }
 
+    @Override
     public void updatePassword(LoginUser loginUser,
                                Update.PasswordRequest request) {
         Account account = accountRepository.findByEmail(loginUser.getUsername()).orElseThrow();
         account.updatePassword("{bcrypt}" + passwordEncoder.encode(request.getPassword()));
     }
 
+    @Override
     public Update.Interest getAccountInterests(LoginUser loginUser) {
         Set<Interest> interests =
                 accountRepository.findByEmailWithInterests(loginUser.getUsername()).getInterests();
@@ -211,6 +176,7 @@ public class AccountService implements OAuthService {
                         .collect(Collectors.toList())).build();
     }
 
+    @Override
     public void updateAccountInterests(LoginUser loginUser, Update.Interest request) {
 
         Account account = accountRepository.findByEmailWithInterests(loginUser.getUsername());
@@ -225,6 +191,7 @@ public class AccountService implements OAuthService {
         interestRepository.saveAll(interests);
     }
 
+    @Override
     public Update.MainActivityZone getAccountMainActivityZones(LoginUser loginUser) {
         Set<MainActivityZone> mainActivityZones =
                 accountRepository.findByEmailWithMainActivityZones(loginUser.getUsername()).getMainActivityZones();
@@ -234,6 +201,7 @@ public class AccountService implements OAuthService {
                 .build();
     }
 
+    @Override
     public void updateAccountMainActivityZones(LoginUser loginUser,
                                                Update.MainActivityZone request) {
         Account account = accountRepository.findByEmailWithMainActivityZones(loginUser.getUsername());
@@ -250,35 +218,38 @@ public class AccountService implements OAuthService {
         mainActivityZoneRepository.saveAll(mainActivityZones);
     }
 
+    @Override
     public Map<String, String> getAccountNickname(LoginUser loginUser) {
         Map<String, String> map = new HashMap<>();
         map.put("nickname", loginUser.getAccount().getNickname());
         return map;
     }
 
+    @Override
     public void updateAccountNickname(LoginUser loginUser, Update.NicknameRequest request) {
         Account account = accountRepository.findByEmail(loginUser.getUsername()).orElseThrow();
         account.changeNickname(request.getNickname());
     }
 
+    @Override
     public Update.Notification getAccountNotification(LoginUser loginUser) {
-
         Account account = loginUser.getAccount();
         return modelMapper.map(account, Update.Notification.class);
     }
 
+    @Override
     public void updateAccountNotification(LoginUser loginUser, Update.Notification request) {
-
         Account account = accountRepository.findByEmail(loginUser.getUsername()).orElseThrow();
         account.updateNotifications(request);
     }
 
+    @Override
     public void quit(LoginUser loginUser) {
-
         Account account = accountRepository.findByEmail(loginUser.getUsername()).orElseThrow();
         account.changeToQuit();
     }
 
+    @Override
     public String authenticateEmailToken(String email, String token) {
         Account account = accountRepository.findByEmail(email).orElseThrow(
                 () -> new AccountException("회원을 찾을 수 없습니다.", ErrorCode.ACCOUNT_ERROR));

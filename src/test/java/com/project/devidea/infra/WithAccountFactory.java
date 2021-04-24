@@ -1,7 +1,7 @@
 package com.project.devidea.infra;
 
 import com.project.devidea.infra.config.security.CustomUserDetailService;
-import com.project.devidea.modules.account.AccountService;
+import com.project.devidea.modules.account.service.AccountServiceImpl;
 import com.project.devidea.modules.account.dto.SignUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 
 public class WithAccountFactory implements WithSecurityContextFactory<WithAccount> {
     @Autowired
-    AccountService accountService;
+    AccountServiceImpl accountServiceImpl;
 
     @Autowired
     CustomUserDetailService customUserDetailService;
@@ -33,7 +33,7 @@ public class WithAccountFactory implements WithSecurityContextFactory<WithAccoun
                 .gender("남성")
                 .passwordConfirm("yes")
                 .build();
-        accountService.signUp(signUpRequestDto);
+        accountServiceImpl.signUp(signUpRequestDto);
         entityManager.flush();
         UserDetails principal = customUserDetailService.loadUserByUsername(withAccount.NickName());
         Authentication authentication = new UsernamePasswordAuthenticationToken(principal, principal.getPassword(), principal.getAuthorities());

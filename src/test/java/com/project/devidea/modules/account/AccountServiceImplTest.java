@@ -1,5 +1,6 @@
 package com.project.devidea.modules.account;
 
+import com.project.devidea.modules.account.service.AccountServiceImpl;
 import com.project.devidea.modules.environment.Environment;
 import com.project.devidea.modules.environment.EnvironmentRepository;
 import com.project.devidea.infra.config.security.LoginUser;
@@ -30,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class AccountServiceTest {
+class AccountServiceImplTest {
 
     @Mock
     ModelMapper modelMapper;
@@ -51,7 +52,7 @@ class AccountServiceTest {
     @Mock
     EnvironmentRepository projectEnvironmentRepository;
     @InjectMocks
-    AccountService accountService;
+    AccountServiceImpl accountServiceImpl;
 
     @Test
     void 회원가입_일반() throws Exception {
@@ -59,10 +60,10 @@ class AccountServiceTest {
 //        given
         SignUp.CommonRequest request = mock(SignUp.CommonRequest.class);
         Account account = mock(Account.class);
-        when(accountService.saveAccount(request)).thenReturn(account);
+        when(accountServiceImpl.saveAccount(request)).thenReturn(account);
 
 //        when
-        accountService.signUp(request);
+        accountServiceImpl.signUp(request);
 
 //        then
         verify(publisher).publishEvent(any(SendEmailToken.class));
@@ -78,7 +79,7 @@ class AccountServiceTest {
         when(accountRepository.save(any())).thenReturn(account);
 
 //        when
-        Account saved = accountService.saveAccount(request);
+        Account saved = accountServiceImpl.saveAccount(request);
 
 //        then
         verify(accountRepository).save(any());
@@ -89,12 +90,12 @@ class AccountServiceTest {
 
 //        given
         LoginUser loginUser = mock(LoginUser.class);
-        when(accountService.getProfile(loginUser))
+        when(accountServiceImpl.getProfile(loginUser))
                 .thenReturn(AccountDummy.getAccountProfileResponseDtoAtMockito());
 
 //        when
         Update.ProfileResponse accountProfileResponseDto =
-                accountService.getProfile(loginUser);
+                accountServiceImpl.getProfile(loginUser);
 
 //        then
         verify(modelMapper).map(loginUser.getAccount(), Update.ProfileResponse.class);
@@ -112,7 +113,7 @@ class AccountServiceTest {
                 .thenReturn(Optional.of(account));
 
 //        when
-        accountService.updateProfile(loginUser, request);
+        accountServiceImpl.updateProfile(loginUser, request);
 
 //        then
         verify(accountRepository).findByEmail(account.getEmail());
@@ -133,7 +134,7 @@ class AccountServiceTest {
                 .thenReturn(Optional.of(account));
 
 //        when
-        accountService.updatePassword(loginUser, updatePasswordRequestDto);
+        accountServiceImpl.updatePassword(loginUser, updatePasswordRequestDto);
 
 //        then
         verify(accountRepository).findByEmail(account.getEmail());
@@ -151,7 +152,7 @@ class AccountServiceTest {
         when(accountRepository.findByEmailWithInterests(loginUser.getUsername())).thenReturn(account);
 
 //        when
-        accountService.getAccountInterests(loginUser);
+        accountServiceImpl.getAccountInterests(loginUser);
 
 //        then
         verify(accountRepository).findByEmailWithInterests(loginUser.getUsername());
@@ -174,7 +175,7 @@ class AccountServiceTest {
                 .thenReturn(tags);
 
 //        when
-        accountService.updateAccountInterests(loginUser, interestsUpdateRequestDto);
+        accountServiceImpl.updateAccountInterests(loginUser, interestsUpdateRequestDto);
 
 //        then
         verify(accountRepository).findByEmailWithInterests(loginUser.getUsername());
@@ -194,7 +195,7 @@ class AccountServiceTest {
                 .thenReturn(account);
 
 //        when
-        accountService.getAccountMainActivityZones(loginUser);
+        accountServiceImpl.getAccountMainActivityZones(loginUser);
 
 //        then
         verify(accountRepository).findByEmailWithMainActivityZones(loginUser.getUsername());
@@ -218,7 +219,7 @@ class AccountServiceTest {
                 .thenReturn(zones);
 
 //        when
-        accountService.updateAccountMainActivityZones(loginUser, mainActivityZonesUpdateRequestDto);
+        accountServiceImpl.updateAccountMainActivityZones(loginUser, mainActivityZonesUpdateRequestDto);
 
 //        then
         verify(accountRepository).findByEmailWithMainActivityZones(loginUser.getUsername());
@@ -240,7 +241,7 @@ class AccountServiceTest {
         when(account.getNickname()).thenReturn(nickname);
 
 //        when
-        accountService.getAccountNickname(loginUser);
+        accountServiceImpl.getAccountNickname(loginUser);
 
 //        then
         verify(loginUser).getAccount();
@@ -262,7 +263,7 @@ class AccountServiceTest {
                 .thenReturn(Optional.of(account));
 
 //        when
-        accountService.updateAccountNickname(loginUser, request);
+        accountServiceImpl.updateAccountNickname(loginUser, request);
 
 //        then
         verify(loginUser).getUsername();
@@ -279,7 +280,7 @@ class AccountServiceTest {
         when(loginUser.getAccount()).thenReturn(account);
 
 //        when
-        accountService.getAccountNotification(loginUser);
+        accountServiceImpl.getAccountNotification(loginUser);
 
 //        then
         verify(loginUser).getAccount();
@@ -299,7 +300,7 @@ class AccountServiceTest {
 
 
 //        when
-        accountService.updateAccountNotification(loginUser, request);
+        accountServiceImpl.updateAccountNotification(loginUser, request);
 
 //        then
         verify(accountRepository).findByEmail(loginUser.getUsername());
@@ -317,7 +318,7 @@ class AccountServiceTest {
         when(accountRepository.findByEmail(any())).thenReturn(Optional.of(account));
 
 //        when
-        accountService.quit(loginUser);
+        accountServiceImpl.quit(loginUser);
 
 //        then
         verify(accountRepository).findByEmail(any());
@@ -338,7 +339,7 @@ class AccountServiceTest {
         when(environment.getUrl()).thenReturn(url);
 
 //        when
-        String returnUrl = accountService.authenticateEmailToken(email, token);
+        String returnUrl = accountServiceImpl.authenticateEmailToken(email, token);
 
 //        then
         verify(account).validateToken(token);
@@ -355,7 +356,7 @@ class AccountServiceTest {
                 .thenThrow(new AccountException("회원을 찾을 수 없습니다.", ErrorCode.ACCOUNT_ERROR));
 
 //        when, then
-        assertThrows(AccountException.class, () -> accountService.authenticateEmailToken(email, token));
+        assertThrows(AccountException.class, () -> accountServiceImpl.authenticateEmailToken(email, token));
     }
 
     @Test
@@ -369,7 +370,7 @@ class AccountServiceTest {
         when(environment.getUrl()).thenReturn(anyString());
 
         // when
-        accountService.getFrontURL();
+        accountServiceImpl.getFrontURL();
 
         // then
         verify(projectEnvironmentRepository).findByDescription(front);
