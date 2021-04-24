@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,21 +89,26 @@ public class NotificationServiceTest {
         studyRepository.save(study);
 
         //when : 스터디 관련 알람이 생성되었을 때
-        Long createdId = notificationService.createNotification(NotificationType.STUDY, study.getId(), account,
+        ArrayList<Account> accountList = new ArrayList<>();
+        List<Notification> createdNotifications = notificationService.createNotification(NotificationType.STUDY, study.getId(), accountList,
                 "스터디 생성", "관심 스터디가 생성되었습니다.");
 
         //then : 알람 생성 확인
-        Optional<Notification> findNotification = notificationRepository.findById(createdId);
+        createdNotifications.forEach(it -> {
+            Optional<Notification> findNotification = notificationRepository.findById(it.getId());
+            assertThat(findNotification.isPresent());
+            Notification notification = findNotification.get();
 
-        assertThat(findNotification.isPresent());
-        Notification notification = findNotification.get();
+            assertAll(
+                    () -> assertThat(notification.getTitle()).isEqualTo("스터디 생성"),
+                    () -> assertThat(notification.getMessage()).isEqualTo("관심 스터디가 생성되었습니다."),
+                    () -> assertThat(notification.getNotificationType()).isEqualTo(NotificationType.STUDY),
+                    () -> assertThat(notification.getAccount()).isEqualTo(account),
+                    () -> assertThat(notification.getLink()).isEqualTo("/" + NotificationType.STUDY + "/" + study.getId())
+            );
+        }
+);
 
-        assertAll(
-                () -> assertThat(notification.getTitle()).isEqualTo("스터디 생성"),
-                () -> assertThat(notification.getMessage()).isEqualTo("관심 스터디가 생성되었습니다."),
-                () -> assertThat(notification.getNotificationType()).isEqualTo(NotificationType.STUDY),
-                () -> assertThat(notification.getAccount()).isEqualTo(account),
-                () -> assertThat(notification.getLink()).isEqualTo("/" + NotificationType.STUDY + "/" + study.getId())
-        );
+
     }
 }
