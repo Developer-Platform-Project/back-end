@@ -190,7 +190,18 @@
       <recent name="C:\Users\minso\intelij\DevIdea-Developer-Platform-\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in devidea.test (1)">
+  <component name="RunManager" selected="Gradle.back-end [jar]">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DevIdea-Developer-Platform- [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -272,9 +283,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.back-end [jar]" />
         <item itemvalue="JUnit.All in devidea.test (1)" />
         <item itemvalue="JUnit.All in devidea.test" />
-        <item itemvalue="Gradle.back-end [jar]" />
         <item itemvalue="Gradle.DevIdea-Developer-Platform- [clean]" />
         <item itemvalue="Gradle.back-end [compileJava]" />
       </list>
