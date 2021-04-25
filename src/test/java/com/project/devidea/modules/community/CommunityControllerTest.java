@@ -17,6 +17,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -221,13 +222,44 @@ public class CommunityControllerTest {
     public void deleteCommunity_fail() throws Exception {
         //given : 존재하지 않는 커뮤니티 id
         Long id = Long.MAX_VALUE;
+        LoginUser loginUser =
+                (LoginUser) customUserDetailService.loadUserByUsername(AccountDummy.getAccount().getEmail());
 
         //when : get, /community/{id}/delete 으로 요청 시 특정 커뮤니티 글 삭제
         //then : 존재하지 않는 id를 통한 커뮤니티 삭제 요청으로 EntityNotFoundException 발생 확인
-        mockMvc.perform(post("/community/" + id + "/delete"))
+        mockMvc.perform(post("/community/" + id + "/delete")
+                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser)))
                 .andExpect(status().is4xxClientError())
                 .andExpect(result -> {
                     assertThat(getApiResultExceptionClass(result)).isEqualTo(EntityNotFoundException.class);
         });
+    }
+
+    @Test
+    @DisplayName("커뮤니티 글 삭제_실패_권한없음(작성자 본인이 아님)")
+    public void deleteCommunity_fail_accessDenied() throws Exception {
+        //given : 작성되어있는 커뮤니티 글과, 글 작성자 본인이 아닌 다른 사용자 존재
+        List<Community> communities = communityRepository.findByWriter(accountRepository.findByEmail(AccountDummy.getAccount().getEmail()).get());
+        Community community = communities.get(0);
+
+        Account account = Account.builder()
+            .nickname("존재하지않는 새로운 닉네임")
+            .name("이름")
+            .password("123")
+            .email("newEmail@naver.com")
+            .roles("ROLE_USER")
+            .build();
+        accountRepository.saveAndFlush(account);
+        LoginUser loginUser =
+                (LoginUser) customUserDetailService.loadUserByUsername(account.getEmail());
+
+        //when : get, /community/{id}/delete 으로 요청 시 특정 커뮤니티 글 삭제
+        //then : 작성자 본인이 아닌 커뮤니티 글 삭제 요청으로 AccessDeniedException 발생 확인
+        mockMvc.perform(post("/community/" + community.getId() + "/delete")
+                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser)))
+                .andExpect(status().is4xxClientError())
+                .andExpect(result -> {
+                    assertThat(getApiResultExceptionClass(result)).isEqualTo(AccessDeniedException.class);
+                });
     }
 }

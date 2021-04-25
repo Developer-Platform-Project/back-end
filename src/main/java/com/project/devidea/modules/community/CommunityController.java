@@ -4,6 +4,7 @@ import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.error.exception.EntityNotFoundException;
 import com.project.devidea.modules.community.form.RequestCommunity;
 import com.project.devidea.modules.content.study.form.StudyMakingForm;
+import io.swagger.annotations.ApiOperation;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,24 +25,28 @@ public class CommunityController {
     private final CommunityRepository communityRepository;
 
     @PostMapping("")
+    @ApiOperation("커뮤니티 글 생성")
     public ResponseEntity createCommunity(@AuthenticationPrincipal LoginUser account, @RequestBody @Valid RequestCommunity requestCommunity) {
         Community createdCommunity = communityService.createCommunity(account.getAccount(), requestCommunity);
         return new ResponseEntity(createdCommunity,HttpStatus.OK);
     }
 
     @GetMapping("")
+    @ApiOperation("커뮤니티 전체 조회")
     public ResponseEntity getCommunities() {
         return new ResponseEntity(communityRepository.findAll(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("커뮤니티 글 상세 조회")
     public ResponseEntity getCommunityDetail(@PathVariable Long id) {
         return new ResponseEntity(communityRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("community")),HttpStatus.OK);
     }
 
     @PostMapping("/{id}/delete")
-    public ResponseEntity deleteCommunity(@AuthenticationPrincipal LoginUser account, @PathVariable Long id) {
+    @ApiOperation("커뮤니티 글 삭제")
+    public ResponseEntity deleteCommunity(@PathVariable Long id) {
         Community findCommunity = communityRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("community"));
         communityRepository.delete(findCommunity);
