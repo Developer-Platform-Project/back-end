@@ -1,8 +1,8 @@
 package com.project.devidea.modules.content.study.controller;
 
 import com.project.devidea.infra.config.security.LoginUser;
-import com.project.devidea.modules.content.study.KindsOf;
-import com.project.devidea.modules.content.study.StudyService;
+import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
+import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.form.*;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 public class StudyBasicController {
-    private final StudyService studyService;
+    private final StudyServiceImpl studyService;
     private final StudyMemberRepository studyMemberRepository;
 
     @GetMapping("/study")
@@ -29,13 +29,13 @@ public class StudyBasicController {
 
     @PostMapping("/study")
     public ResponseEntity<?> 등록(@AuthenticationPrincipal LoginUser account, @RequestBody @Valid StudyMakingForm studyMakingForm) {
-        if (account.getNickName() == null) return new ResponseEntity<>("로그인 해주십쇼.", HttpStatus.FORBIDDEN);
+//        if (account.getNickName() == null) return new ResponseEntity<>("로그인 해주십쇼.", HttpStatus.FORBIDDEN);
         return new ResponseEntity<>(studyService.makingStudy(account.getAccount(), studyMakingForm), HttpStatus.OK);
     }
 
     @PostMapping("/study/mystudy")
     public ResponseEntity<?> 내스터디(@AuthenticationPrincipal LoginUser account) {
-        return new ResponseEntity<>(studyService.myStudy(account.getAccount()), HttpStatus.OK);
+        return new ResponseEntity<>(studyService.getMyStudy(account.getAccount()), HttpStatus.OK);
     }
 
     @GetMapping("/study/{id}")
@@ -51,12 +51,12 @@ public class StudyBasicController {
 
     @GetMapping("/study/{id}/applyform")
     public ResponseEntity<?> 가입_신청폼받기(@PathVariable Long id) {
-        return new ResponseEntity<>(studyService.makeStudyForm(id), HttpStatus.OK);
+        return new ResponseEntity<>(studyService.getStudyApplyForm(id), HttpStatus.OK);
     }
 
     @PostMapping("/study/{id}/apply")
     public ResponseEntity<?> 가입_신청하기(@AuthenticationPrincipal LoginUser account,@PathVariable Long id,
-                                     @RequestBody StudyApplyForm studyApplyForm) {
+                                     @RequestBody StudyApplyForm studyApplyForm) throws  AlreadyStudyExistsException {
         return new ResponseEntity<>(studyService.applyStudy(account.getAccount(),studyApplyForm), HttpStatus.OK);
     }
     @GetMapping("/study/{id}/applylist")

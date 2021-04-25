@@ -1,7 +1,7 @@
 package com.project.devidea.modules.content.study.controller;
 
 import com.project.devidea.infra.config.security.LoginUser;
-import com.project.devidea.modules.content.study.StudyService;
+import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.modules.content.study.form.EmpowerForm;
 import com.project.devidea.modules.content.study.form.OpenRecruitForm;
 import com.project.devidea.modules.content.study.form.TagZoneForm;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class StudyAdminController {
 
-    private final StudyService studyService;
+    private final StudyServiceImpl studyService;
     private final StudyMemberRepository studyMemberRepository;
 
     @GetMapping("/study/{id}/status")
@@ -45,12 +45,12 @@ public class StudyAdminController {
 
     @PostMapping("/study/{id}/tag_zone")
     public ResponseEntity<?> 지역_태그_설정_변경(@AuthenticationPrincipal LoginUser account, @PathVariable Long id, @Valid TagZoneForm tagZoneForm) {
-        return new ResponseEntity<>(studyService.UpdateTagAndZOne(id, tagZoneForm), HttpStatus.OK);
+        return new ResponseEntity<>(studyService.UpdateTagAndZone(id, tagZoneForm), HttpStatus.OK);
     }
 
     @PostMapping("/study/{id}/delete")
     public ResponseEntity<?> 스터디_삭제(@AuthenticationPrincipal LoginUser account, @PathVariable Long id) {
-        return new ResponseEntity<>(studyService.deleteStudy(id), HttpStatus.OK);
+        return new ResponseEntity<>(studyService.deleteStudy(account.getAccount(),id), HttpStatus.OK);
     }
 
 }

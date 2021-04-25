@@ -1,7 +1,7 @@
 package com.project.devidea.modules.content.study.controller;
 
 import com.project.devidea.infra.config.security.LoginUser;
-import com.project.devidea.modules.content.study.StudyService;
+import com.project.devidea.modules.content.study.service.StudyServiceImpl;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class StudyManagerController {
-    private final StudyService studyService;
+    private final StudyServiceImpl studyService;
     private final StudyMemberRepository studyMemberRepository;
 
 
