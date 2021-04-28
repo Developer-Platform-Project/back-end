@@ -64,4 +64,8 @@ public class TagService {
 
         return dto;
     }
+
+    public List<Tag> findInterests(List<String> interests) {
+        return tagRepository.findByFirstNameIn(interests);
+    }
 }

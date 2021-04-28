@@ -55,4 +55,8 @@ public class ZoneService {
         });
         return dto;
     }
+
+    public List<Zone> findZones(Map<String, List<String>> cityProvince) {
+        return zoneRepository.findByCityInAndProvinceIn(cityProvince.get("city"), cityProvince.get("province"));
+    }
 }

@@ -13,12 +13,15 @@ import java.util.Map;
 
 public class SignUp {
 
+    // 타입 일치를 위해 작성
+    public static class SignUpRequest {}
+
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class CommonRequest{
+    public static class CommonRequest extends SignUpRequest {
 
         @NotBlank(message = "이메일을 입력해주세요.")
         @Email(message = "이메일 형식으로 입력해주세요.")
@@ -44,7 +47,7 @@ public class SignUp {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class OAuthRequest {
+    public static class OAuthRequest extends SignUpRequest {
 
         @NotBlank(message = "인증한 소셜 사이트 제공자를 입력해주세요.")
         private String provider;

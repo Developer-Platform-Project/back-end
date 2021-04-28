@@ -4,7 +4,7 @@ import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.modules.account.dto.Update;
 
 import java.util.Map;
-
+// todo : 구조 리팩토링
 public interface AccountInfoService {
 
     Update.ProfileResponse getProfile(LoginUser loginUser);

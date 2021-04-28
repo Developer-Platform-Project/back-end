@@ -237,7 +237,7 @@ public class Account {
         this.authenticateEmail = true;
     }
 
-    public static Account createAccount(SignUp.CommonRequest request, PasswordEncoder encoder) {
+    public static Account createAccount(SignUp.CommonRequest request, BCryptPasswordEncoder encoder) {
 
         return Account.builder()
             .email(request.getEmail())

@@ -1,8 +1,8 @@
 package com.project.devidea.infra;
 
 import com.project.devidea.infra.config.security.CustomUserDetailService;
-import com.project.devidea.modules.account.service.AccountServiceImpl;
 import com.project.devidea.modules.account.dto.SignUp;
+import com.project.devidea.modules.account.service.signup.CommonSignUpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 
 public class WithAccountFactory implements WithSecurityContextFactory<WithAccount> {
     @Autowired
-    AccountServiceImpl accountServiceImpl;
+    CommonSignUpServiceImpl accountServiceImpl;
 
     @Autowired
     CustomUserDetailService customUserDetailService;
