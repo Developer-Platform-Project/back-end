@@ -1,4 +1,4 @@
-package com.project.devidea.modules.account.service.signupDetail;
+package com.project.devidea.modules.account.services.signupDetail;
 
 import com.project.devidea.modules.account.dto.SignUp;
 

@@ -3,7 +3,7 @@ package com.project.devidea.modules.account;
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.error.GlobalResponse;
 import com.project.devidea.modules.account.dto.*;
-import com.project.devidea.modules.account.service.AccountService;
+import com.project.devidea.modules.account.services.AccountService;
 import com.project.devidea.modules.account.validator.NicknameValidator;
 import com.project.devidea.modules.account.validator.PasswordValidator;
 import io.swagger.annotations.ApiOperation;

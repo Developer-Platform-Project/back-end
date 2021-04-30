@@ -1,18 +1,12 @@
-package com.project.devidea.modules.account.service.signupDetail;
+package com.project.devidea.modules.account.services.signupDetail;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.Interest;
 import com.project.devidea.modules.account.MainActivityZone;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.repository.AccountRepository;
-import com.project.devidea.modules.account.repository.InterestRepository;
-import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
-import com.project.devidea.modules.account.service.interest.InterestService;
-import com.project.devidea.modules.account.service.mainActivityZone.MainActivityZoneService;
-import com.project.devidea.modules.tagzone.tag.Tag;
-import com.project.devidea.modules.tagzone.tag.TagService;
-import com.project.devidea.modules.tagzone.zone.Zone;
-import com.project.devidea.modules.tagzone.zone.ZoneService;
+import com.project.devidea.modules.account.services.interest.InterestService;
+import com.project.devidea.modules.account.services.mainActivityZone.MainActivityZoneService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

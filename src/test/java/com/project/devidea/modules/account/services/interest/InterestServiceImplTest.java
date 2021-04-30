@@ -1,9 +1,8 @@
-package com.project.devidea.modules.account.service.interest;
+package com.project.devidea.modules.account.services.interest;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.Interest;
 import com.project.devidea.modules.account.repository.InterestRepository;
-import com.project.devidea.modules.account.repository.MainActivityZoneRepository;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.tag.TagService;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

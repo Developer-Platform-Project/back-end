@@ -2,7 +2,7 @@ package com.project.devidea.modules.account.event;
 
 import com.project.devidea.modules.account.AccountDummy;
 import com.project.devidea.modules.account.dto.SignUp;
-import com.project.devidea.modules.account.service.signup.CommonSignUpServiceImpl;
+import com.project.devidea.modules.account.services.signup.CommonSignUpServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

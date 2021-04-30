@@ -237,9 +237,15 @@ public class Account {
         this.authenticateEmail = true;
     }
 
-    public static Account createAccount(SignUp.CommonRequest request, BCryptPasswordEncoder encoder) {
+    public static Account createAccount(SignUp.Request request, BCryptPasswordEncoder passwordEncoder,
+                                        String OAUTH_PASSWORD) {
+        return request instanceof SignUp.CommonRequest
+                ? createCommonAccount((SignUp.CommonRequest) request, passwordEncoder)
+                : createOAuthAccount((SignUp.OAuthRequest) request, passwordEncoder, OAUTH_PASSWORD);
+    }
 
-        return Account.builder()
+    private static Account createCommonAccount(SignUp.CommonRequest request, BCryptPasswordEncoder encoder) {
+         return Account.builder()
             .email(request.getEmail())
             .name(request.getName())
             .nickname(request.getNickname())
@@ -253,7 +259,7 @@ public class Account {
             .build();
     }
 
-    public static Account createOAuthAccount(SignUp.OAuthRequest request,
+    private static Account createOAuthAccount(SignUp.OAuthRequest request,
                                              PasswordEncoder passwordEncoder, String OAUTH_PASSWORD) {
 
         return Account.builder()

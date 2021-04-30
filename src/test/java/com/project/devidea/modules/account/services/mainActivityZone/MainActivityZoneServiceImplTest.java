@@ -1,4 +1,4 @@
-package com.project.devidea.modules.account.service.mainActivityZone;
+package com.project.devidea.modules.account.services.mainActivityZone;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.MainActivityZone;
@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

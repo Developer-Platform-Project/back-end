@@ -35,7 +35,7 @@
 //@Service
 //@Transactional
 //@RequiredArgsConstructor
-//public class AccountServiceImpl implements AccountService {
+//public class Delete_AccountServiceImpl {
 //
 //    // TODO : 구현체가 너무 많은 것을 의존하고 있다. 적절히 분리하기
 //    private final BCryptPasswordEncoder passwordEncoder;

@@ -1,4 +1,4 @@
-package com.project.devidea.modules.account.service.interest;
+package com.project.devidea.modules.account.services.interest;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.Interest;

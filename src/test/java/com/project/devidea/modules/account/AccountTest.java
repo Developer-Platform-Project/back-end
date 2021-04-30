@@ -8,10 +8,8 @@ import com.project.devidea.modules.tagzone.zone.Zone;
 import com.project.devidea.modules.tagzone.zone.ZoneDummy;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -192,10 +190,11 @@ class AccountTest {
         SignUp.CommonRequest request = AccountDummy.getSignUpRequest();
 
         // when
-        Account account = Account.createAccount(request, encoder);
+        Account account = Account.createAccount(request, encoder, "");
 
         // then
         assertNotNull(account);
+        assertNull(account.getProvider());
     }
 
     @Test
@@ -206,9 +205,10 @@ class AccountTest {
         String OAUTH_PASSWORD = "123412345";
 
         // when
-        Account oAuthAccount = Account.createOAuthAccount(request, encoder, OAUTH_PASSWORD);
+        Account oAuthAccount = Account.createAccount(request, encoder, OAUTH_PASSWORD);
 
         //then
         assertNotNull(oAuthAccount);
+        assertNotNull(oAuthAccount.getProvider());
     }
 }

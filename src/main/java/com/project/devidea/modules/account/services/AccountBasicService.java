@@ -1,4 +1,4 @@
-package com.project.devidea.modules.account.service;
+package com.project.devidea.modules.account.services;
 
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.modules.account.dto.Login;

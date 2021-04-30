@@ -1,18 +1,16 @@
-package com.project.devidea.modules.account.service.signupDetail;
+package com.project.devidea.modules.account.services.signupDetail;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.Interest;
 import com.project.devidea.modules.account.MainActivityZone;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.repository.AccountRepository;
-import com.project.devidea.modules.account.service.interest.InterestService;
-import com.project.devidea.modules.account.service.mainActivityZone.MainActivityZoneService;
-import com.project.devidea.modules.tagzone.tag.Tag;
+import com.project.devidea.modules.account.services.interest.InterestService;
+import com.project.devidea.modules.account.services.mainActivityZone.MainActivityZoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Set;
 
 @Service

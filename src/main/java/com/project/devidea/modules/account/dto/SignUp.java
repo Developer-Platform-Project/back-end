@@ -1,6 +1,7 @@
 package com.project.devidea.modules.account.dto;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -13,25 +14,16 @@ import java.util.Map;
 
 public class SignUp {
 
-    // 타입 일치를 위해 작성
-    public static class SignUpRequest {}
-
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
-    public static class CommonRequest extends SignUpRequest {
+    @SuperBuilder
+    public static class Request {
 
         @NotBlank(message = "이메일을 입력해주세요.")
         @Email(message = "이메일 형식으로 입력해주세요.")
         private String email;
-
-        @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
-        private String password;
-
-        @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
-        private String passwordConfirm;
 
         @Size(min = 2, max = 8, message = "2자 이상 입력해주세요.")
         private String name;
@@ -46,26 +38,28 @@ public class SignUp {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
-    public static class OAuthRequest extends SignUpRequest {
+    @SuperBuilder
+    public static class CommonRequest extends Request {
+
+        @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
+        private String password;
+
+        @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
+        private String passwordConfirm;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @SuperBuilder
+    public static class OAuthRequest extends Request {
 
         @NotBlank(message = "인증한 소셜 사이트 제공자를 입력해주세요.")
         private String provider;
 
-        @NotBlank(message = "이메일을 입력해주세요.")
-        @Email(message = "이메일 형식으로 입력해주세요.")
-        private String email;
-
         @NotBlank(message = "인증한 소셜 사이트의 고유 식별자 값을 입력해주세요.")
         private String id;
-
-        @NotBlank(message = "성함을 입력해주세요.")
-        private String name;
-
-        @Size(min = 2, max = 8, message = "닉네임을 2자 이상 8자 이하로 입력해주세요.")
-        private String nickname;
-
-        private String gender;
     }
 
     @Getter

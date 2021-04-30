@@ -2,7 +2,7 @@ package com.project.devidea.infra;
 
 import com.project.devidea.infra.config.security.CustomUserDetailService;
 import com.project.devidea.modules.account.dto.SignUp;
-import com.project.devidea.modules.account.service.signup.CommonSignUpServiceImpl;
+import com.project.devidea.modules.account.services.signup.CommonSignUpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
