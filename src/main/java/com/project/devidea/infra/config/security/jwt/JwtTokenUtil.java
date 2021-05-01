@@ -84,8 +84,8 @@ public class JwtTokenUtil implements Serializable {
 
     public Map<String, String> createTokenMap(String jwtToken) {
         Map<String, String> map = new HashMap<>();
-        map.put("token", "Bearer " + jwtToken);
         map.put("header", this.getHeader());
+        map.put("token", "Bearer " + jwtToken);
         return map;
     }
 }

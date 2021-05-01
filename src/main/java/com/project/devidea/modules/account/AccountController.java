@@ -56,6 +56,7 @@ public class AccountController {
         return headers;
     }
 
+    // TODO : api 수정하기, Update쪽으로 들어가는게 맞는거 같음!
     @DeleteMapping("/account/quit")
     @ApiOperation("회원탈퇴")
     public ResponseEntity<?> quit(@AuthenticationPrincipal LoginUser loginUser) {

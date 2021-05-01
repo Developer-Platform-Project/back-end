@@ -37,7 +37,6 @@ public class CommonSignUpController {
         return new ResponseEntity<>(GlobalResponse.of(signUpService.signUp(commonRequest)), HttpStatus.OK);
     }
 
-    //TODO : 구현하기
     @GetMapping("/authenticate-email-token")
     @ApiOperation("일반 회원가입 메일 인증")
     public void authenticateEmailToken(String email, String token, HttpServletResponse response) throws IOException {

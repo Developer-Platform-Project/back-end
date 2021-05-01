@@ -22,6 +22,9 @@ import java.util.Map;
 @RequestMapping("/account/settings")
 public class AccountInfoController {
 
+    /**
+     *  TODO : GetInfoAccount, UpdateInfoAccount로 분리하기, 이유 > 관심사가 다름
+     */
     private final AccountService accountService;
     private final PasswordValidator updatePasswordValidator;
     private final NicknameValidator nicknameValidator;

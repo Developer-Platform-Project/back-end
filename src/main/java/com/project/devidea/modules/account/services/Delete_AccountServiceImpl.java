@@ -51,47 +51,13 @@
 //    private final EnvironmentRepository environmentRepository;
 //    private final String OAUTH_PASSWORD = "dev_idea_oauth_password";
 //
-//    // TODO : CommonSignUpServiceImpl
-//    @Override
-//    public SignUp.Response signUp(SignUp.CommonRequest signUpRequestDto) {
-//        Account savedAccount = saveAccount(signUpRequestDto);
-//        publisher.publishEvent(SendEmailToken.builder()
-//                .token(savedAccount.getEmailCheckToken())
-//                .to(savedAccount.getEmail()).build());
-//        return modelMapper.map(savedAccount, SignUp.Response.class);
-//    }
+
 //
 //    // TODO : LoginServiceImpl 공통로직
 //    private Map<String, String> createToken(String email, JwtTokenUtil tokenUtil){
 //        String jwtToken = tokenUtil.generateToken(email);
 //        return tokenUtil.createTokenMap(jwtToken);
 //    }
-//
-//    // TODO : OAuthSignUpServiceImpl
-//    @Override
-//    public SignUp.Response signUpOAuth(SignUp.OAuthRequest request) {
-//
-//        Account savedAccount = saveOAuthAccount(request);
-//        savedAccount.generateEmailToken();
-//
-//        return SignUp.Response.builder().provider(savedAccount.getProvider())
-//                .id(savedAccount.getId().toString()).name(savedAccount.getName())
-//                .emailCheckToken(savedAccount.getEmailCheckToken()).build();
-//    }
-//
-//    // TODO : CommonSignUpServiceImpl
-//    public Account saveAccount(SignUp.CommonRequest request) {
-//        Account account = Account.createAccount(request, passwordEncoder);
-//        account.generateEmailToken();
-//        return accountRepository.save(account);
-//    }
-//
-//    // TODO : OAuthSignUpServiceImpl
-//    @Override
-//    public Account saveOAuthAccount(SignUp.OAuthRequest request) {
-//        return accountRepository.save(Account.createOAuthAccount(request, passwordEncoder, OAUTH_PASSWORD));
-//    }
-//
 //    // TODO : LoginServiceImpl 공통로직
 //    @Override
 //    public Map<String, String> login(Login.Common login) throws Exception {
@@ -135,45 +101,6 @@
 //                    Login.Response.builder().savedDetail(false).emailCheckToken(null).build());
 //        }
 //    }
-//
-//    // TODO : SignUpDetailServiceImpl
-//    @Override
-//    public void saveSignUpDetail(SignUp.DetailRequest req) {
-////        token이 없을 경우 에러 발생시키기
-//        Account account = accountRepository.findByTokenWithMainActivityZoneAndInterests(req.getToken());
-//
-////        활동지역(mainActivityZones)
-//        Map<String, List<String>> cityProvince = req.splitCitiesAndProvinces();
-//        List<Zone> zones = zoneRepository
-//                .findByCityInAndProvinceIn(cityProvince.get("city"), cityProvince.get("province"));
-//        Set<MainActivityZone> mainActivityZones = getMainActivityZones(account, zones);
-//
-////        관심기술(Interest)
-//        List<Tag> tags = tagRepository.findByFirstNameIn(req.getInterests());
-//        Set<Interest> interests = getInterests(account, tags);
-//
-////        연관관계 설정하기
-//        account.saveSignUpDetail(req, mainActivityZones, interests);
-//
-////        매핑 테이블 데이터들 save
-//        mainActivityZoneRepository.saveAll(mainActivityZones);
-//        interestRepository.saveAll(interests);
-//    }
-//
-//    // TODO : CommonSignUpServiceImpl Common만!
-//    @Override
-//    public String authenticateEmailToken(String email, String token) {
-//        Account account = accountRepository.findByEmail(email).orElseThrow(
-//                () -> new AccountException("회원을 찾을 수 없습니다.", ErrorCode.ACCOUNT_ERROR));
-//        account.validateToken(token);
-//        return getFrontURL();
-//    }
-//
-//    // TODO : CommonSignUpServiceImpl
-//    public String getFrontURL() {
-//        return environmentRepository.findByDescription("FRONT").getUrl();
-//    }
-//
 ////  TODO 여기서 부터는 Update 영역=======================================================================================
 //    @Override
 //    @Transactional(readOnly = true)
