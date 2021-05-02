@@ -1,13 +1,8 @@
 package com.project.devidea.modules.account.repository;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.QAccount;
-import com.project.devidea.modules.account.QInterest;
-import com.project.devidea.modules.account.QMainActivityZone;
+import com.project.devidea.modules.account.domains.Account;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 import static com.project.devidea.modules.account.QAccount.*;
 import static com.project.devidea.modules.account.QInterest.*;

@@ -1,7 +1,6 @@
 package com.project.devidea.modules.content.resume.project;
 
-import com.project.devidea.infra.error.exception.ErrorCode;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.AbstractService;
 import com.project.devidea.modules.content.mentoring.exception.InvalidInputException;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
@@ -10,8 +9,6 @@ import com.project.devidea.modules.content.resume.ResumeRepository;
 import com.project.devidea.modules.content.resume.form.project.CreateProjectRequest;
 import com.project.devidea.modules.content.resume.form.project.ProjectRequest;
 import com.project.devidea.modules.content.resume.form.project.UpdateProjectRequest;
-import com.project.devidea.modules.content.resume.project.Project;
-import com.project.devidea.modules.content.resume.project.ProjectRepository;
 import com.project.devidea.modules.tagzone.tag.TagRepository;
 import com.project.devidea.modules.tagzone.zone.ZoneRepository;
 import org.springframework.stereotype.Service;

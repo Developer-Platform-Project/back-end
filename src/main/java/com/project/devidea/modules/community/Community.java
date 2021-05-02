@@ -1,6 +1,6 @@
 package com.project.devidea.modules.community;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

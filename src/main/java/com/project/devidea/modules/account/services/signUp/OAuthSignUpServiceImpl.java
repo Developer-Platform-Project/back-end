@@ -1,6 +1,6 @@
 package com.project.devidea.modules.account.services.signUp;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;

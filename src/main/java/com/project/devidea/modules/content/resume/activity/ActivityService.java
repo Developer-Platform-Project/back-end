@@ -1,7 +1,6 @@
 package com.project.devidea.modules.content.resume.activity;
 
-import com.project.devidea.infra.error.exception.ErrorCode;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.InvalidInputException;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.resume.Resume;

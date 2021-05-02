@@ -1,41 +1,28 @@
 package com.project.devidea.modules.content.study.service;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.content.study.Study;
 import com.project.devidea.modules.content.study.StudyFactory;
 import com.project.devidea.modules.content.study.StudyMember;
 import com.project.devidea.modules.content.study.StudyRole;
-import com.project.devidea.modules.content.study.aop.AlreadyExistError;
 import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyRepository;
 import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
-import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
 import com.project.devidea.modules.content.study.exception.StudyNullException;
 import com.project.devidea.modules.content.study.form.*;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 import com.project.devidea.modules.content.study.repository.StudyRepository;
-import com.project.devidea.modules.notification.Notification;
-import com.project.devidea.modules.notification.NotificationRepository;
-import com.project.devidea.modules.tagzone.tag.Tag;
-import com.project.devidea.modules.tagzone.tag.TagRepository;
-import com.project.devidea.modules.tagzone.zone.Zone;
-import com.project.devidea.modules.tagzone.zone.ZoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

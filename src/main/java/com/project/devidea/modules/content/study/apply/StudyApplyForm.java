@@ -1,13 +1,10 @@
 package com.project.devidea.modules.content.study.apply;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.content.study.Study;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data

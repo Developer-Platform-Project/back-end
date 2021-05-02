@@ -1,11 +1,10 @@
 package com.project.devidea.modules.content.mentoring;
 
 import com.project.devidea.infra.config.security.CurrentUser;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.mentoring.form.CreateMentorRequest;
 import com.project.devidea.modules.content.mentoring.form.UpdateMentorRequest;
-import com.project.devidea.modules.content.mentoring.validator.MentorRequestValidator;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

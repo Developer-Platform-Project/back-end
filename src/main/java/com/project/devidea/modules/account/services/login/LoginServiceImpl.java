@@ -1,11 +1,8 @@
 package com.project.devidea.modules.account.services.login;
 
-import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
 import com.project.devidea.infra.error.exception.ErrorCode;
-import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.dto.Login;
 import com.project.devidea.modules.account.exception.AccountException;
-import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.util.LoginServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,8 +1,6 @@
 package com.project.devidea.modules.account.repository;
 
-import com.project.devidea.modules.account.Account;
-
-import java.util.Optional;
+import com.project.devidea.modules.account.domains.Account;
 
 public interface AccountRepositoryCustom {
 

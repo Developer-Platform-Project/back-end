@@ -1,7 +1,7 @@
 package com.project.devidea.infra.config.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

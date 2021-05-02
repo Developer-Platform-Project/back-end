@@ -1,25 +1,15 @@
 package com.project.devidea.modules.content.study.service;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.study.Study;
-import com.project.devidea.modules.content.study.StudyMember;
 import com.project.devidea.modules.content.study.StudyRole;
-import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
 import com.project.devidea.modules.content.study.apply.StudyApplyListForm;
 import com.project.devidea.modules.content.study.exception.AlreadyStudyExistsException;
 import com.project.devidea.modules.content.study.form.*;
-import com.project.devidea.modules.notification.Notification;
-import com.project.devidea.modules.tagzone.tag.Tag;
-import com.project.devidea.modules.tagzone.zone.Zone;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public interface StudyService {
     //스터디관련 검색 및 조회

@@ -1,7 +1,6 @@
 package com.project.devidea.modules.content.mentoring;
 
-import com.project.devidea.infra.error.exception.ErrorCode;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.AlreadyExistException;
 import com.project.devidea.modules.content.mentoring.exception.InvalidInputException;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
@@ -14,7 +13,6 @@ import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.tag.TagRepository;
 import com.project.devidea.modules.tagzone.zone.Zone;
 import com.project.devidea.modules.tagzone.zone.ZoneRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,9 @@
 package com.project.devidea.modules.account;
 
 import com.project.devidea.infra.SHA256;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.Interest;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import com.project.devidea.modules.account.dto.*;
 import com.project.devidea.modules.tagzone.tag.TagDummy;
 import com.project.devidea.modules.tagzone.zone.ZoneDummy;

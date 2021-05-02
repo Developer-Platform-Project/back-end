@@ -1,7 +1,7 @@
 package com.project.devidea.modules.account.repository;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.MainActivityZone;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

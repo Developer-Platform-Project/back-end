@@ -1,7 +1,7 @@
 package com.project.devidea.modules.account.services.mainActivityZone;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.MainActivityZone;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import com.project.devidea.modules.tagzone.zone.Zone;
 
 import java.util.HashSet;

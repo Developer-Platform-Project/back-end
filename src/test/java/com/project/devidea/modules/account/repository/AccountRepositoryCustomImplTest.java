@@ -1,12 +1,10 @@
 package com.project.devidea.modules.account.repository;
 
 import com.project.devidea.infra.TestConfig;
-import com.project.devidea.infra.config.security.CustomUserDetailService;
-import com.project.devidea.infra.config.security.LoginUser;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.AccountDummy;
-import com.project.devidea.modules.account.Interest;
-import com.project.devidea.modules.account.MainActivityZone;
+import com.project.devidea.modules.account.domains.Interest;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.tag.TagDummy;
 import com.project.devidea.modules.tagzone.tag.TagRepository;
@@ -14,19 +12,14 @@ import com.project.devidea.modules.tagzone.zone.Zone;
 import com.project.devidea.modules.tagzone.zone.ZoneDummy;
 import com.project.devidea.modules.tagzone.zone.ZoneRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;

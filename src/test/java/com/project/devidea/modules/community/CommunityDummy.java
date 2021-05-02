@@ -1,9 +1,6 @@
 package com.project.devidea.modules.community;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.AccountDummy;
-import com.project.devidea.modules.notification.Notification;
-import com.project.devidea.modules.notification.NotificationType;
+import com.project.devidea.modules.account.domains.Account;
 
 import java.util.ArrayList;
 import java.util.List;

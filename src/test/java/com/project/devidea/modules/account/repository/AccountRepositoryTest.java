@@ -1,8 +1,7 @@
 package com.project.devidea.modules.account.repository;
 
 import com.project.devidea.infra.TestConfig;
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.repository.AccountRepository;
+import com.project.devidea.modules.account.domains.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

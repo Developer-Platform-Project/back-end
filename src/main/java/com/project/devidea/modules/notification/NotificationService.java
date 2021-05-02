@@ -1,8 +1,6 @@
 package com.project.devidea.modules.notification;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.repository.InterestRepository;
-import lombok.NoArgsConstructor;
+import com.project.devidea.modules.account.domains.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

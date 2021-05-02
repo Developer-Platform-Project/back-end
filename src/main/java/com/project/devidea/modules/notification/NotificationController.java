@@ -2,8 +2,7 @@ package com.project.devidea.modules.notification;
 
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.error.exception.EntityNotFoundException;
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.content.techNews.TechSite;
+import com.project.devidea.modules.account.domains.Account;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor

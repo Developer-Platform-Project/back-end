@@ -1,6 +1,6 @@
 //package com.project.devidea.modules.content.study;
 //
-//import com.project.devidea.modules.account.Account;
+//import com.project.devidea.modules.account.domains.Account;
 //import com.project.devidea.modules.account.AccountRepository;
 //import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 //import com.project.devidea.modules.content.study.repository.StudyRepository;

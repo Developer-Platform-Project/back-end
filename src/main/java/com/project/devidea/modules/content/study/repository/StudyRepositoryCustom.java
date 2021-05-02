@@ -1,8 +1,6 @@
 package com.project.devidea.modules.content.study.repository;
 
-import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.content.study.Study;
-import com.project.devidea.modules.content.study.form.StudyListForm;
 import com.project.devidea.modules.content.study.form.StudySearchForm;
 import org.springframework.data.jpa.repository.EntityGraph;
 

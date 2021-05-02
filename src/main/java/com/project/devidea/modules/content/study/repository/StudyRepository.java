@@ -1,5 +1,4 @@
 package com.project.devidea.modules.content.study.repository;
-import com.project.devidea.modules.account.Account;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.project.devidea.modules.content.study.Study;

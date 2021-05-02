@@ -1,8 +1,8 @@
 //package com.project.devidea.modules.account.service;
 //
-//import com.project.devidea.modules.account.Account;
-//import com.project.devidea.modules.account.Interest;
-//import com.project.devidea.modules.account.MainActivityZone;
+//import com.project.devidea.modules.account.domains.Account;
+//import com.project.devidea.modules.account.domains.Interest;
+//import com.project.devidea.modules.account.domains.MainActivityZone;
 //import com.project.devidea.modules.environment.EnvironmentRepository;
 //import com.project.devidea.infra.config.security.LoginUser;
 //import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;

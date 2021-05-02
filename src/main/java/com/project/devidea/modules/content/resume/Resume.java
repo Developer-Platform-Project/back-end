@@ -1,6 +1,6 @@
 package com.project.devidea.modules.content.resume;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.resume.activity.Activity;
 import com.project.devidea.modules.content.resume.award.Award;
 import com.project.devidea.modules.content.resume.career.Career;

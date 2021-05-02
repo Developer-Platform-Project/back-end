@@ -1,5 +1,8 @@
 package com.project.devidea.modules.account;
 
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.Interest;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import com.project.devidea.modules.account.dto.*;
 import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.tagzone.tag.Tag;

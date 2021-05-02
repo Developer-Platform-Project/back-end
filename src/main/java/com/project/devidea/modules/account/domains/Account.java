@@ -1,4 +1,4 @@
-package com.project.devidea.modules.account;
+package com.project.devidea.modules.account.domains;
 
 import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.dto.SignUp;
