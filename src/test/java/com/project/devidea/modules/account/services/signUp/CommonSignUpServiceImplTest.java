@@ -1,10 +1,8 @@
-package com.project.devidea.modules.account.services.signup;
+package com.project.devidea.modules.account.services.signUp;
 
-import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.event.SendEmailToken;
-import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.environment.Environment;
 import com.project.devidea.modules.environment.EnvironmentRepository;

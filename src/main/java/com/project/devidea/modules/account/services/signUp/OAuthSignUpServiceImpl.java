@@ -1,10 +1,9 @@
-package com.project.devidea.modules.account.services.signup;
+package com.project.devidea.modules.account.services.signUp;
 
 import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

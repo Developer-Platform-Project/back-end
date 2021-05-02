@@ -6,6 +6,7 @@ import com.project.devidea.modules.account.Account;
 import com.project.devidea.modules.account.dto.Login;
 import com.project.devidea.modules.account.exception.AccountException;
 import com.project.devidea.modules.account.repository.AccountRepository;
+import com.project.devidea.modules.account.util.LoginServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,8 +23,7 @@ import java.util.Map;
 public class LoginServiceImpl implements LoginService {
 
     private final AuthenticationManager authenticationManager;
-    private final AccountRepository accountRepository;
-    private final JwtTokenUtil jwtTokenUtil;
+    private final LoginServiceUtil loginServiceUtil;
 
     @Override
     public Map<String, String> login(Login.Request request) throws Exception {
@@ -33,7 +33,8 @@ public class LoginServiceImpl implements LoginService {
             authenticate(request.getEmail(), ((Login.Common) request).getPassword());
         }
 
-        return createLoginResponse(createToken(request.getEmail()), request.getEmail());
+        Map<String, String> tokenMap = loginServiceUtil.createToken(request.getEmail());
+        return loginServiceUtil.createLoginResponse(tokenMap, request.getEmail());
     }
 
     private void authenticate(String email, String password) throws Exception {
@@ -46,21 +47,5 @@ public class LoginServiceImpl implements LoginService {
                     "가입되지 않거나, 메일과 비밀번호가 맞지 않습니다.",
                     Login.Response.builder().savedDetail(false).emailCheckToken(null).build());
         }
-    }
-
-    private Map<String, String> createToken(String email){
-        return jwtTokenUtil.createTokenMap(jwtTokenUtil.generateToken(email));
-    }
-
-    private Map<String, String> createLoginResponse(Map<String, String> response, String email) {
-        Account account = accountRepository.findByEmail(email).get();
-        if (!account.isSaveDetail()) {
-            response.put("savedDetail", "false");
-            response.put("emailCheckToken", account.getEmailCheckToken());
-            return response;
-        }
-
-        response.put("savedDetail", "true");
-        return response;
     }
 }

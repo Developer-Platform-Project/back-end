@@ -25,43 +25,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AccountController {
 
-    private final AccountService accountService;
-
-    @PostMapping("/login")
-    @ApiOperation("로그인")
-    public ResponseEntity<?> login(@Valid @RequestBody Login.Common login) throws Exception {
-
-        Map<String, String> result = accountService.login(login);
-        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)),
-                getHttpHeaders(result), HttpStatus.OK);
-    }
-
-    @PostMapping("/login/oauth")
-    @ApiOperation("로그인 - OAuth")
-    public ResponseEntity<?> loginOAuth(@Valid @RequestBody Login.OAuth login) throws Exception {
-        Map<String, String> result = accountService.loginOAuth(login);
-        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)),
-                getHttpHeaders(result), HttpStatus.OK);
-    }
-
-    private Login.Response getIsSavedDetails(Map<String, String> result) {
-        return Login.Response.builder()
-                .savedDetail(Boolean.parseBoolean(result.get("savedDetail")))
-                .emailCheckToken(result.get("emailCheckToken")).build();
-    }
-
-    private HttpHeaders getHttpHeaders(Map<String, String> result) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(result.get("header"), result.get("token"));
-        return headers;
-    }
-
     // TODO : api 수정하기, Update쪽으로 들어가는게 맞는거 같음!
     @DeleteMapping("/account/quit")
     @ApiOperation("회원탈퇴")
     public ResponseEntity<?> quit(@AuthenticationPrincipal LoginUser loginUser) {
 
-        accountService.quit(loginUser);
+//        accountService.quit(loginUser);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
     }
 }

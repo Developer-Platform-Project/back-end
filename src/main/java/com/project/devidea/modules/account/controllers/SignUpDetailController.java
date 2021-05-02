@@ -2,8 +2,7 @@ package com.project.devidea.modules.account.controllers;
 
 import com.project.devidea.infra.error.GlobalResponse;
 import com.project.devidea.modules.account.dto.SignUp;
-import com.project.devidea.modules.account.services.signup.SignUpService;
-import com.project.devidea.modules.account.services.signupDetail.SignUpDetailService;
+import com.project.devidea.modules.account.services.signUpDetail.SignUpDetailService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

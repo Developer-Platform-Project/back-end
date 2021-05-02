@@ -2,7 +2,7 @@ package com.project.devidea.modules.account.controllers;
 
 import com.project.devidea.infra.error.GlobalResponse;
 import com.project.devidea.modules.account.dto.SignUp;
-import com.project.devidea.modules.account.services.signup.SignUpAndAuthenticationEmailService;
+import com.project.devidea.modules.account.services.signUp.SignUpAndAuthenticationEmailService;
 import com.project.devidea.modules.account.validator.SignUpRequestValidator;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

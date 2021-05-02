@@ -1,4 +1,4 @@
-package com.project.devidea.modules.account.services.signup;
+package com.project.devidea.modules.account.services.signUp;
 
 import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.Account;

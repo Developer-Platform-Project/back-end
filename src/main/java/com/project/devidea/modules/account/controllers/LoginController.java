@@ -6,7 +6,6 @@ import com.project.devidea.modules.account.services.login.LoginService;
 import com.project.devidea.modules.account.util.LoginResponseUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
