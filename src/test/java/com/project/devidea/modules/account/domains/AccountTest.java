@@ -1,5 +1,6 @@
-package com.project.devidea.modules.account;
+package com.project.devidea.modules.account.domains;
 
+import com.project.devidea.modules.account.AccountDummy;
 import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.domains.Interest;
 import com.project.devidea.modules.account.domains.MainActivityZone;
