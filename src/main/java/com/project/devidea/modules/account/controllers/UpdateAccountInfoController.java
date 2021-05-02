@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/account/settings")
 public class UpdateAccountInfoController {
-    // TODO : 메서드명 가독성 좋게 변경하기
+
     private final UpdateAccountInfoService updateAccountInfoService;
     private final PasswordValidator updatePasswordValidator;
     private final NicknameValidator nicknameValidator;

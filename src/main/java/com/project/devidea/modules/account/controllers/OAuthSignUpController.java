@@ -31,7 +31,6 @@ public class OAuthSignUpController {
         binder.addValidators(signUpOAuthRequestValidator);
     }
 
-    //TODO : OAuth
     @PostMapping("/sign-up/oauth")
     @ApiOperation("회원가입 - OAuth")
     public ResponseEntity<?> signUpOAuth(@Valid @RequestBody SignUp.OAuthRequest oAuthRequest){
