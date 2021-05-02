@@ -4,9 +4,9 @@ import com.project.devidea.modules.account.domains.Account;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
-import static com.project.devidea.modules.account.QAccount.*;
-import static com.project.devidea.modules.account.QInterest.*;
-import static com.project.devidea.modules.account.QMainActivityZone.*;
+import static com.project.devidea.modules.account.domains.QAccount.*;
+import static com.project.devidea.modules.account.domains.QInterest.*;
+import static com.project.devidea.modules.account.domains.QMainActivityZone.*;
 
 @RequiredArgsConstructor
 public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
