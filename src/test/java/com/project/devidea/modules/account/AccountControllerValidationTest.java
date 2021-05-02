@@ -148,18 +148,6 @@ public class AccountControllerValidationTest {
                 .andExpect(jsonPath("$.errors.length()", is(3)));
     }
 
-    /**TODO
-     * {
-     *   "statusCode": 200,
-     *   "time": "2021-04-13T17:54:10.6931631",
-     *   "description": "요청이 정상적으로 처리되었습니다.",
-     *   "data": {
-     *     "savedDetail": false,
-     *     "emailCheckToken": null
-     *   }
-     * }
-     * @throws Exception
-     */
     @Test
     void OAuth로그인_미가입_회원의_경우() throws Exception {
 

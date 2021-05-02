@@ -2,10 +2,8 @@ package com.project.devidea.modules.account;
 
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.error.GlobalResponse;
-import com.project.devidea.infra.error.exception.ErrorCode;
 import com.project.devidea.modules.account.dto.*;
-import com.project.devidea.modules.account.exception.AccountException;
-import com.project.devidea.modules.account.validator.NicknameValidator;
+import com.project.devidea.modules.account.services.AccountService;
 import com.project.devidea.modules.account.validator.SignUpOAuthRequestValidator;
 import com.project.devidea.modules.account.validator.SignUpRequestValidator;
 import io.swagger.annotations.ApiOperation;
@@ -27,89 +25,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AccountController {
 
-    private final AccountService accountService;
-    private final SignUpRequestValidator signUpRequestValidator;
-    private final SignUpOAuthRequestValidator signUpOAuthRequestValidator;
-
-    @InitBinder("commonRequest")
-    public void initSignUpValidator(WebDataBinder binder) {
-        binder.addValidators(signUpRequestValidator);
-    }
-
-    @InitBinder("OAuthRequest")
-    public void initSignUpOAuthValidator(WebDataBinder binder) {
-        binder.addValidators(signUpOAuthRequestValidator);
-    }
-
-    @PostMapping("/sign-up")
-    @ApiOperation("회원가입")
-    public ResponseEntity<?> signUp(@Valid @RequestBody SignUp.CommonRequest commonRequest) {
-
-        return new ResponseEntity<>(GlobalResponse.of(accountService.signUp(commonRequest)), HttpStatus.OK);
-    }
-
-    /**
-     * TODO 상헌님이 os 환경변수를 설정해서 redirect를 해달라고 하셨습니다.
-     */
-    @GetMapping("/authenticate-email-token")
-    @ApiOperation("일반 회원가입 메일 인증")
-    public void authenticateEmailToken(String email, String token, HttpServletResponse response) throws IOException {
-
-        String url = accountService.authenticateEmailToken(email, token);
-        response.sendRedirect(url + "/sign-up/detail?token=" + token);
-    }
-
-    @PostMapping("/sign-up/oauth")
-    @ApiOperation("회원가입 - OAuth")
-    public ResponseEntity<?> signUpOAuth(@Valid @RequestBody SignUp.OAuthRequest oAuthRequest)
-            throws NoSuchAlgorithmException {
-
-        return new ResponseEntity<>(GlobalResponse.of(accountService.signUpOAuth(oAuthRequest)), HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    @ApiOperation("로그인")
-    public ResponseEntity<?> login(@Valid @RequestBody Login.Common login) throws Exception {
-
-        Map<String, String> result = accountService.login(login);
-        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)),
-                getHttpHeaders(result), HttpStatus.OK);
-    }
-
-    @PostMapping("/login/oauth")
-    @ApiOperation("로그인 - OAuth")
-    public ResponseEntity<?> loginOAuth(@Valid @RequestBody Login.OAuth login) throws Exception {
-        // 디테일 입력했는지 여부 확인하기
-        Map<String, String> result = accountService.loginOAuth(login);
-        return new ResponseEntity<>(GlobalResponse.of(getIsSavedDetails(result)),
-                getHttpHeaders(result), HttpStatus.OK);
-    }
-
-    private Login.Response getIsSavedDetails(Map<String, String> result) {
-        return Login.Response.builder()
-                .savedDetail(Boolean.parseBoolean(result.get("savedDetail")))
-                .emailCheckToken(result.get("emailCheckToken")).build();
-    }
-
-    private HttpHeaders getHttpHeaders(Map<String, String> result) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set(result.get("header"), result.get("token"));
-        return headers;
-    }
-
-    @PostMapping("/sign-up/detail")
-    @ApiOperation("회원가입 디테일")
-    public ResponseEntity<?> signUpDetail(@Valid @RequestBody SignUp.DetailRequest detailRequest) {
-
-        accountService.saveSignUpDetail(detailRequest);
-        return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
-    }
-
+    // TODO : api 수정하기, Update쪽으로 들어가는게 맞는거 같음!
     @DeleteMapping("/account/quit")
     @ApiOperation("회원탈퇴")
     public ResponseEntity<?> quit(@AuthenticationPrincipal LoginUser loginUser) {
 
-        accountService.quit(loginUser);
+//        accountService.quit(loginUser);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
     }
 }

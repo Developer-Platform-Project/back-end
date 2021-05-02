@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// 참고하겠습니다. -범석
 @Component
 public abstract class AbstractService {
 
