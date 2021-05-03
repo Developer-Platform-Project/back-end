@@ -24,7 +24,7 @@ class AccountEventListenerTest {
     void 인증메일_비동기_테스트() throws Exception {
 
 //        given
-        SignUp.CommonRequest request = AccountDummy.getSignUpRequest();
+        SignUp.CommonRequest request = AccountDummy.getSignUpForEvents();
 
 //        when
         commonSignUpService.signUp(request);

@@ -143,4 +143,11 @@ public class AccountDummy {
                 .emailCheckToken(UUID.randomUUID().toString())
                 .emailCheckTokenGeneratedAt(LocalDateTime.now().minusMinutes(31L)).build();
     }
+
+    public static SignUp.CommonRequest getSignUpForEvents() {
+        return SignUp.CommonRequest.builder()
+                .email("kokokoko@naver.com").name("고범석").gender("male")
+                .nickname("구직왕고범석").password(SHA256.encrypt("12341234"))
+                .passwordConfirm(SHA256.encrypt("12341234")).build();
+    }
 }

@@ -135,7 +135,7 @@ dependencies {
 //    testImplementation group: 'cz.jirutka.spring', name: 'embedmongo-spring', version: '1.1'
     implementation platform('com.google.cloud:libraries-bom:19.0.0')
     compile 'com.google.cloud:google-cloud-language'
-
+    compile group: 'org.mockito', name: 'mockito-inline', version: '3.9.0'
 }
 
 def generated='src/main/generated'
