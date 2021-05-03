@@ -6,6 +6,7 @@ import com.project.devidea.modules.account.services.signUp.SignUpService;
 import com.project.devidea.modules.account.validator.SignUpOAuthRequestValidator;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,13 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-/**
- *  OAuth 회원가입 로직
- */
 @RestController
 @RequiredArgsConstructor
 public class OAuthSignUpController {
 
+    @Qualifier("oAuthSignUpService")
     private final SignUpService signUpService;
     private final SignUpOAuthRequestValidator signUpOAuthRequestValidator;
 

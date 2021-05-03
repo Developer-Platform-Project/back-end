@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ *  회원 정보 수정
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/account/settings")

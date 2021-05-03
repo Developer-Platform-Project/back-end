@@ -130,8 +130,41 @@ public class InitService {
                 .quit(true)
                 .build();
 
+        Account quitTestAccount = Account.builder()
+                .nickname("탈퇴테스트회원")
+                .email("out@out.com")
+                .emailCheckToken("abcdefghijklmn")
+                .bio("bio")
+                .gender("남성")
+                .roles("ROLE_USER")
+                .name("고범석")
+                .password("{bcrypt}" + bCryptPasswordEncoder.encode(SHA256.encrypt("1234")))
+                .joinedAt(LocalDateTime.now())
+                .modifiedAt(LocalDateTime.now())
+                .interests(new HashSet<>())
+                .mainActivityZones(new HashSet<>())
+                .quit(false)
+                .build();
+
+        Account updateTestAccount = Account.builder()
+                .nickname("업뎃테스트")
+                .email("update@update.com")
+                .emailCheckToken("token123")
+                .bio("bio")
+                .gender("남성")
+                .roles("ROLE_USER")
+                .name("고범석")
+                .password("{bcrypt}" + bCryptPasswordEncoder.encode(SHA256.encrypt("1234")))
+                .joinedAt(LocalDateTime.now())
+                .modifiedAt(LocalDateTime.now())
+                .interests(new HashSet<>())
+                .mainActivityZones(new HashSet<>())
+                .quit(false)
+                .build();
+
         studyRepository.saveAll(studySampleGenerator.generateDumy(30));
-        accountRepository.saveAll(Arrays.asList(account,account2,account3, quitAccount));
+        accountRepository.saveAll(Arrays.asList(account,account2,account3, quitAccount, quitTestAccount,
+                updateTestAccount));
         studyRepository.findAll().stream().forEach(study -> {
             studyService.addMember(account,study, StudyRole.팀장);
             studyService.addMember(account2,study, StudyRole.회원);

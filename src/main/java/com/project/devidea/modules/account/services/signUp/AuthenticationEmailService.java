@@ -1,6 +1,6 @@
 package com.project.devidea.modules.account.services.signUp;
 
-public interface SignUpAndAuthenticationEmailService extends SignUpService{
+public interface AuthenticationEmailService {
 
     String authenticateEmailToken(String email, String token);
 }

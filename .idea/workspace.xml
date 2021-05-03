@@ -28,7 +28,42 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b5d0166-6f91-48b5-bdc5-afeed5f06884" name="Default Changelist" comment="# - 제목(title) - 50자 이내로 ---&#10;# &lt;타입(type)&gt; &lt;제목(title)&gt;&#10;# 예시(ex) : Docs(Add) Commit docs Add&#10;# --- 본문(content) - 72자마다 줄바꾸기  ---&#10;# 예시(ex) :&#10;# - Workflow&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------" />
+    <list default="true" id="3b5d0166-6f91-48b5-bdc5-afeed5f06884" name="Default Changelist" comment="# - 제목(title) - 50자 이내로 ---&#10;# &lt;타입(type)&gt; &lt;제목(title)&gt;&#10;# 예시(ex) : Docs(Add) Commit docs Add&#10;# --- 본문(content) - 72자마다 줄바꾸기  ---&#10;# 예시(ex) :&#10;# - Workflow&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/AuthenticationEmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/AuthenticationEmailServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lombok.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/CommonSignUpControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/CommonSignUpControllerValidationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/GetAccountInfoControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/LoginControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/LoginControllerValidationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/OAuthSignUpControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/OAuthSignUpControllerValidationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/SignUpDetailControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/SignUpDetailControllerValidationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers/UpdateAccountInfoControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/services/signUp/AuthenticationEmailServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/InitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/InitService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/CommonSignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/CommonSignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/OAuthSignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/OAuthSignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/UpdateAccountInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/controllers/UpdateAccountInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/CommonSignUpServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/CommonSignUpServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/OAuthSignUpServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/OAuthSignUpServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/project/devidea/modules/account/services/signUp/SignUpAndAuthenticationEmailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountControllerValidationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountControllerValidationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountDummy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountDummy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountInfoControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/AccountInfoControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/services/signUp/CommonSignUpServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/services/signUp/CommonSignUpServiceImplTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,8 +146,9 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
+        <option value="AnnotationType" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -176,15 +212,18 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\project\devidea\back-end\src\main\java" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.project.devidea.modules.account.controllers" />
+      <recent name="com.project.devidea.modules.account.services.signUp" />
       <recent name="com.project.devidea.modules.account.services.info" />
       <recent name="com.project.devidea.modules.account.util" />
       <recent name="com.project.devidea.modules.account.services.login" />
-      <recent name="com.project.devidea.modules.account.service.signup" />
-      <recent name="com.project.devidea.modules.account.service.interest" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in devidea.test">
+  <component name="RunManager" selected="JUnit.LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -198,38 +237,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="back-end [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="AccountToManyUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in devidea.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.project.devidea.modules.account.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.util" />
-      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.util.AccountToManyUtilTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -242,43 +253,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GetAccountInfoServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.project.devidea.modules.account.services.info.*" />
+          <option name="PATTERN" value="com.project.devidea.modules.account.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.services.info" />
-      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.services.info.GetAccountInfoServiceImplTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.controllers.LoginControllerTest" />
+      <option name="METHOD_NAME" value="일반_로그인_디테일을_입력받지_못한_회원" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UpdateAccountInfoServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SignUpDetailControllerTest.회원가입_상세정보_저장" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.project.devidea.modules.account.services.info.*" />
+          <option name="PATTERN" value="com.project.devidea.modules.account.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.services.info" />
-      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.services.info.UpdateAccountInfoServiceImplTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.controllers" />
+      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.controllers.SignUpDetailControllerTest" />
+      <option name="METHOD_NAME" value="회원가입_상세정보_저장" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="controllers in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="devidea.test" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원" />
+        <item itemvalue="JUnit.All in devidea.test (1)" />
         <item itemvalue="JUnit.All in devidea.test" />
-        <item itemvalue="Gradle.back-end [build]" />
-        <item itemvalue="JUnit.UpdateAccountInfoServiceImplTest" />
-        <item itemvalue="JUnit.GetAccountInfoServiceImplTest" />
-        <item itemvalue="JUnit.AccountToManyUtilTest" />
+        <item itemvalue="JUnit.controllers in devidea.test" />
+        <item itemvalue="JUnit.SignUpDetailControllerTest.회원가입_상세정보_저장" />
       </list>
     </recent_temporary>
   </component>
@@ -313,6 +334,8 @@
       <workItem from="1619863015414" duration="8510000" />
       <workItem from="1619923558841" duration="12062000" />
       <workItem from="1619947019020" duration="7958000" />
+      <workItem from="1620017971541" duration="12677000" />
+      <workItem from="1620036554268" duration="3926000" />
     </task>
     <task id="LOCAL-00001" summary="리팩토링">
       <created>1618063878165</created>
@@ -352,7 +375,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="refactor_accountupdate_test" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>

@@ -15,6 +15,7 @@ public class AccountDummy {
 
     public static SignUp.DetailRequest getSignUpDetailRequestDto() {
         return SignUp.DetailRequest.builder()
+                .token("token123")
                 .careerYears(3).receiveEmail(true).jobField("웹개발").profilePath("1234")
                 .zones(Arrays.asList("서울특별시/광진구", "서울특별시/중랑구", "경기도/수원시"))
                 .techStacks(Arrays.asList("java", "python"))
