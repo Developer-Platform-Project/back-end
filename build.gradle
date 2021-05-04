@@ -78,7 +78,6 @@ dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 //    //https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo
 //    testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
-
 }
 
 def generated='src/main/generated'
