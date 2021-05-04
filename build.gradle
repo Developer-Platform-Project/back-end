@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'jacoco'
 }
 
 group = 'com.project'
@@ -92,9 +93,65 @@ tasks.withType(JavaCompile) {
 clean.doLast {
     file(generated).deleteDir()
 }
+
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
+
+jacocoTestReport {
+    dependsOn test
+}
+
+jacoco {
+    toolVersion = "0.8.6"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        csv.enabled true
+        xml.enabled false
+    }
+
+    afterEvaluate {
+        getClassDirectories().setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/Q*'])
+        }))
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    afterEvaluate {
+        getClassDirectories().setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/Q*', '**/Q*.class'])
+        }))
+    }
+
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+            // includes = []
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+
+            excludes = ['*.TechNewsController.*','*.Q.*','*.CrawlingTest.*','*.Q*','**/Q*.class']
+        }
+
+        rule {
+        }
+
+    }
+}
+
 dependencyManagement {
     imports {
         mavenBom "com.vaadin:vaadin-bom:8.1.0"

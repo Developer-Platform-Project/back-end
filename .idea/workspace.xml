@@ -29,8 +29,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b5d0166-6f91-48b5-bdc5-afeed5f06884" name="Default Changelist" comment="# - 제목(title) - 50자 이내로 ---&#10;# &lt;타입(type)&gt; &lt;제목(title)&gt;&#10;# 예시(ex) : Docs(Add) Commit docs Add&#10;# --- 본문(content) - 72자마다 줄바꾸기  ---&#10;# 예시(ex) :&#10;# - Workflow&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------&#10;# 1. 커밋 메시지에 대한 문서 제작 추가.&#10;# 2. commit message docs add.&#10;# --- 꼬리말(footer) ---&#10;# &lt;타입(type)&gt; &lt;이슈 번호(issue number)&gt;&#10;# 예시(ex) : Fix #122&#10;# --- COMMIT END ---&#10;# &lt;타입&gt; 리스트&#10;#   init    : 초기화&#10;#   add     : 기능 추가&#10;#   update  : 기능 보완 (업그레이드)&#10;#   fix     : 버그 수정&#10;#   refactor: 리팩토링&#10;#   style   : 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)&#10;#   docs    : 문서 (문서 추가(Add), 수정, 삭제)&#10;#   test    : 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)&#10;#   chore   : 기타 변경사항 (빌드 스크립트 수정 등)&#10;# ------------------&#10;#     제목 첫 글자를 대문자로&#10;#     제목은 명령문으로&#10;#     제목 끝에 마침표(.) 금지&#10;#     제목과 본문을 한 줄 띄워 분리하기&#10;#     본문은 &quot;어떻게&quot; 보다 &quot;무엇을&quot;, &quot;왜&quot;를 설명한다.&#10;#     본문에 여러 줄의 메시지를 작성할 땐 &quot;-&quot; 혹은 &quot;번호&quot;로 구분&#10;# ------------------">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +170,7 @@
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3678441" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -191,7 +191,7 @@
       <recent name="com.project.devidea.modules.account.services.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InterestServiceImplTest.회원의_관심사_리스트_가져오기">
+  <component name="RunManager" selected="JUnit.All in devidea.test">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -205,7 +205,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in devidea.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -213,10 +213,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InterestServiceImplTest.회원_관심사_저장" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.devidea.modules.account.services.interest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.services.interest" />
+      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.services.interest.InterestServiceImplTest" />
+      <option name="METHOD_NAME" value="회원_관심사_저장" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -253,28 +261,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="controllers in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="devidea.test" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers" />
+    <configuration name="DevideaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="devidea.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.devidea.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.devidea.DevideaApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in devidea.test" />
-      <item itemvalue="JUnit.All in devidea.test (1)" />
       <item itemvalue="JUnit.LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원" />
-      <item itemvalue="JUnit.controllers in devidea.test" />
       <item itemvalue="JUnit.InterestServiceImplTest.회원의_관심사_리스트_가져오기" />
+      <item itemvalue="JUnit.InterestServiceImplTest.회원_관심사_저장" />
+      <item itemvalue="Spring Boot.DevideaApplication" />
+      <item itemvalue="JUnit.All in devidea.test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in devidea.test" />
+        <item itemvalue="Spring Boot.DevideaApplication" />
+        <item itemvalue="JUnit.InterestServiceImplTest.회원_관심사_저장" />
         <item itemvalue="JUnit.InterestServiceImplTest.회원의_관심사_리스트_가져오기" />
         <item itemvalue="JUnit.LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원" />
-        <item itemvalue="JUnit.All in devidea.test (1)" />
-        <item itemvalue="JUnit.All in devidea.test" />
-        <item itemvalue="JUnit.controllers in devidea.test" />
       </list>
     </recent_temporary>
   </component>
