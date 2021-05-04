@@ -169,7 +169,7 @@
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3678441" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -190,7 +190,7 @@
       <recent name="com.project.devidea.modules.account.services.login" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InterestServiceImplTest.회원의_관심사_리스트_가져오기">
+  <component name="RunManager" selected="JUnit.All in devidea.test">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -204,7 +204,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in devidea.test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -212,10 +212,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InterestServiceImplTest.회원_관심사_저장" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devidea.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.devidea.modules.account.services.interest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.devidea.modules.account.services.interest" />
+      <option name="MAIN_CLASS_NAME" value="com.project.devidea.modules.account.services.interest.InterestServiceImplTest" />
+      <option name="METHOD_NAME" value="회원_관심사_저장" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -252,28 +260,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="controllers in devidea.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="devidea.test" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/project/devidea/modules/account/controllers" />
+    <configuration name="DevideaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="devidea.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.devidea.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.devidea.DevideaApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in devidea.test" />
-      <item itemvalue="JUnit.All in devidea.test (1)" />
       <item itemvalue="JUnit.LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원" />
-      <item itemvalue="JUnit.controllers in devidea.test" />
       <item itemvalue="JUnit.InterestServiceImplTest.회원의_관심사_리스트_가져오기" />
+      <item itemvalue="JUnit.InterestServiceImplTest.회원_관심사_저장" />
+      <item itemvalue="Spring Boot.DevideaApplication" />
+      <item itemvalue="JUnit.All in devidea.test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in devidea.test" />
+        <item itemvalue="Spring Boot.DevideaApplication" />
+        <item itemvalue="JUnit.InterestServiceImplTest.회원_관심사_저장" />
         <item itemvalue="JUnit.InterestServiceImplTest.회원의_관심사_리스트_가져오기" />
         <item itemvalue="JUnit.LoginControllerTest.일반_로그인_디테일을_입력받지_못한_회원" />
-        <item itemvalue="JUnit.All in devidea.test (1)" />
-        <item itemvalue="JUnit.All in devidea.test" />
-        <item itemvalue="JUnit.controllers in devidea.test" />
       </list>
     </recent_temporary>
   </component>
