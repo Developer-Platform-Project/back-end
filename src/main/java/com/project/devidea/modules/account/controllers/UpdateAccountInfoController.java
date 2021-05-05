@@ -1,9 +1,9 @@
-package com.project.devidea.modules.account;
+package com.project.devidea.modules.account.controllers;
 
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.error.GlobalResponse;
-import com.project.devidea.modules.account.dto.*;
-import com.project.devidea.modules.account.services.AccountService;
+import com.project.devidea.modules.account.dto.Update;
+import com.project.devidea.modules.account.services.info.UpdateAccountInfoService;
 import com.project.devidea.modules.account.validator.NicknameValidator;
 import com.project.devidea.modules.account.validator.PasswordValidator;
 import io.swagger.annotations.ApiOperation;
@@ -15,17 +15,16 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
+/**
+ *  회원 정보 수정
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/account/settings")
-public class AccountInfoController {
+public class UpdateAccountInfoController {
 
-    /**
-     *  TODO : GetInfoAccount, UpdateInfoAccount로 분리하기, 이유 > 관심사가 다름
-     */
-    private final AccountService accountService;
+    private final UpdateAccountInfoService updateAccountInfoService;
     private final PasswordValidator updatePasswordValidator;
     private final NicknameValidator nicknameValidator;
 
@@ -39,19 +38,12 @@ public class AccountInfoController {
         binder.addValidators(nicknameValidator);
     }
 
-    @GetMapping("/profile")
-    @ApiOperation("프로필 조회")
-    public ResponseEntity<?> getProfile(@AuthenticationPrincipal LoginUser loginUser) {
-
-        return new ResponseEntity<>(GlobalResponse.of(accountService.getProfile(loginUser)), HttpStatus.OK);
-    }
-
     @PatchMapping("/profile")
     @ApiOperation("프로필 수정")
     public ResponseEntity<?> updateProfile(@AuthenticationPrincipal LoginUser loginUser,
                                            @RequestBody Update.ProfileRequest request) {
 
-        accountService.updateProfile(loginUser, request);
+        updateAccountInfoService.profile(loginUser, request);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
     }
 
@@ -60,46 +52,24 @@ public class AccountInfoController {
     public ResponseEntity<?> updatePassword(@AuthenticationPrincipal LoginUser loginUser,
                                             @Valid @RequestBody Update.PasswordRequest request) {
 
-        accountService.updatePassword(loginUser, request);
+        updateAccountInfoService.password(loginUser, request);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
-    }
-
-    @GetMapping("/interests")
-    @ApiOperation("관심기술 조회")
-    public ResponseEntity<?> getInterests(@AuthenticationPrincipal LoginUser loginUser) {
-
-        return new ResponseEntity<>(GlobalResponse.of(accountService.getAccountInterests(loginUser)), HttpStatus.OK);
     }
 
     @PatchMapping("/interests")
     @ApiOperation("관심기술 수정")
     public ResponseEntity<?> updateInterests(@AuthenticationPrincipal LoginUser loginUser,
                                              @RequestBody Update.Interest request) {
-        accountService.updateAccountInterests(loginUser, request);
+        updateAccountInfoService.interest(loginUser, request);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
-    }
-
-    @GetMapping("/mainactivityzones")
-    @ApiOperation("활동지역 조회")
-    public ResponseEntity<?> getMainActivityZones(@AuthenticationPrincipal LoginUser loginUser) {
-
-        return new ResponseEntity<>(GlobalResponse.of(accountService.getAccountMainActivityZones(loginUser)), HttpStatus.OK);
     }
 
     @PatchMapping("/mainactivityzones")
     @ApiOperation("활동지역 수정")
     public ResponseEntity<?> updateMainActivityZones(@AuthenticationPrincipal LoginUser loginUser,
                                                      @RequestBody Update.MainActivityZone request) {
-        accountService.updateAccountMainActivityZones(loginUser, request);
+        updateAccountInfoService.mainActivityZones(loginUser, request);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
-    }
-
-    @GetMapping("/nickname")
-    @ApiOperation("닉네임 조회")
-    public ResponseEntity<?> getAccountNickname(@AuthenticationPrincipal LoginUser loginUser) {
-
-        Map<String, String> map = accountService.getAccountNickname(loginUser);
-        return new ResponseEntity<>(GlobalResponse.of(map), HttpStatus.OK);
     }
 
     @PatchMapping("/nickname")
@@ -107,24 +77,23 @@ public class AccountInfoController {
     public ResponseEntity<?> updateAccountNickname(@AuthenticationPrincipal LoginUser loginUser,
                                                    @Valid @RequestBody Update.NicknameRequest request){
 
-        accountService.updateAccountNickname(loginUser, request);
+        updateAccountInfoService.nickname(loginUser, request);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
-    }
-
-    @GetMapping("/notifications")
-    @ApiOperation("알림설정 조회")
-    public ResponseEntity<?> getAccountNotifications(@AuthenticationPrincipal LoginUser loginUser) {
-
-        Update.Notification response = accountService.getAccountNotification(loginUser);
-        return new ResponseEntity<>(GlobalResponse.of(response), HttpStatus.OK);
     }
 
     @PatchMapping("/notifications")
     @ApiOperation("알림설정 수정")
     public ResponseEntity<?> updateAccountNotifications(@AuthenticationPrincipal LoginUser loginUser,
-                                                     @RequestBody Update.Notification request) {
+                                                        @RequestBody Update.Notification request) {
 
-        accountService.updateAccountNotification(loginUser, request);
+        updateAccountInfoService.notification(loginUser, request);
+        return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/quit")
+    @ApiOperation("회원탈퇴")
+    public ResponseEntity<?> quit(@AuthenticationPrincipal LoginUser loginUser) {
+        updateAccountInfoService.quit(loginUser);
         return new ResponseEntity<>(GlobalResponse.of(), HttpStatus.OK);
     }
 }

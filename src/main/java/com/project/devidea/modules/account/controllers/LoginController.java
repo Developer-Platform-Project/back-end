@@ -24,7 +24,7 @@ public class LoginController {
     private final LoginService loginService;
     private final LoginResponseUtil loginResponseUtil;
 
-    @PostMapping("/")
+    @PostMapping
     @ApiOperation("로그인")
     public ResponseEntity<?> login(@Valid @RequestBody Login.Common login) throws Exception {
         Map<String, String> response = loginService.login(login);

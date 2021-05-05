@@ -1,8 +1,8 @@
 package com.project.devidea.modules.account.services.signUpDetail;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.Interest;
-import com.project.devidea.modules.account.MainActivityZone;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.Interest;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.account.services.interest.InterestService;

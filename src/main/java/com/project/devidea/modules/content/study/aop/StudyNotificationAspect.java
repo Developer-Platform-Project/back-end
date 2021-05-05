@@ -1,14 +1,10 @@
 package com.project.devidea.modules.content.study.aop;
 
-import com.project.devidea.infra.error.exception.BusinessException;
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.repository.InterestRepository;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.study.Study;
 import com.project.devidea.modules.content.study.StudyFactory;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;
-import com.project.devidea.modules.content.study.apply.StudyApplyRepository;
 import com.project.devidea.modules.content.study.exception.StudyNullException;
-import com.project.devidea.modules.content.study.form.StudyDetailForm;
 import com.project.devidea.modules.content.study.notification.*;
 import com.project.devidea.modules.content.study.repository.StudyMemberRepository;
 import com.project.devidea.modules.content.study.repository.StudyRepository;

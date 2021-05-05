@@ -1,12 +1,11 @@
 package com.project.devidea.modules.content.resume;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.AlreadyExistException;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.resume.form.CreateResumeRequest;
 import com.project.devidea.modules.content.resume.form.UpdateResumeRequest;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

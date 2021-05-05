@@ -1,23 +1,19 @@
 package com.project.devidea.modules.content.resume;
 
 import com.project.devidea.infra.config.security.CurrentUser;
-import com.project.devidea.infra.config.security.LoginUser;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.resume.form.CreateResumeRequest;
 import com.project.devidea.modules.content.resume.form.UpdateResumeRequest;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.internal.Errors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/resume")

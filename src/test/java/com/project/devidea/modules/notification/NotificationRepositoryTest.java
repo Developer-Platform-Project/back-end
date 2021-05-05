@@ -1,7 +1,7 @@
 package com.project.devidea.modules.notification;
 
 import com.project.devidea.infra.TestConfig;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.AccountDummy;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;

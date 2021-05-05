@@ -3,7 +3,7 @@ package com.project.devidea.modules.content.study;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.devidea.infra.WithAccount;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.content.study.apply.StudyApply;
 import com.project.devidea.modules.content.study.apply.StudyApplyForm;

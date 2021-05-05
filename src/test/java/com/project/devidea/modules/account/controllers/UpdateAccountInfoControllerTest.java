@@ -1,13 +1,16 @@
-package com.project.devidea.modules.account;
+package com.project.devidea.modules.account.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.devidea.infra.config.security.CustomUserDetailService;
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
-import com.project.devidea.modules.account.dto.*;
-import lombok.extern.slf4j.Slf4j;
+import com.project.devidea.modules.account.AccountDummy;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.dto.Login;
+import com.project.devidea.modules.account.dto.Update;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,55 +21,25 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @WebAppConfiguration
 @AutoConfigureMockMvc
-@Slf4j
-class AccountInfoControllerTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class UpdateAccountInfoControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
-    @Autowired
-    ObjectMapper objectMapper;
-    @Autowired
-    CustomUserDetailService customUserDetailService;
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
-
-    @Test
-    @WithUserDetails(value = "test@test.com")
-    void 유저의_프로필_가져오기() throws Exception {
-
-//        given
-        LoginUser loginUser =
-                (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
-
-//        when
-        MvcResult result = mockMvc.perform(get("/account/settings/profile")
-                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andReturn();
-
-//        then
-        Account account = loginUser.getAccount();
-        String str = result.getResponse().getContentAsString();
-        Map<String, String> map = objectMapper.readValue(str, Map.class);
-        assertAll(() -> assertEquals(account.getEmail(), "test@test.com"),
-                () -> assertEquals(account.getNickname(), "테스트_회원"));
-    }
+    @Autowired MockMvc mockMvc;
+    @Autowired ObjectMapper objectMapper;
+    @Autowired CustomUserDetailService customUserDetailService;
+    @Autowired JwtTokenUtil jwtTokenUtil;
 
     @Test
     @WithUserDetails(value = "test@test.com")
@@ -133,22 +106,6 @@ class AccountInfoControllerTest {
 
     @Test
     @WithUserDetails(value = "test@test.com")
-    void 관심기술_가져오기() throws Exception {
-
-//        given
-        LoginUser loginUser =
-                (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
-
-//        when, then
-        mockMvc.perform(get("/account/settings/interests")
-                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(print());
-    }
-
-    @Test
-    @WithUserDetails(value = "test@test.com")
     void 관심기술_수정하기() throws Exception {
 
 //        given
@@ -170,23 +127,6 @@ class AccountInfoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.interests.length()", is(3)))
                 .andDo(print());
-    }
-
-    @Test
-    @WithUserDetails("test@test.com")
-    void 활동지역_가져오기() throws Exception {
-
-//        given
-        LoginUser loginUser =
-                (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
-
-//        when, then
-        mockMvc.perform(get("/account/settings/mainactivityzones")
-                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(jsonPath("$.data.mainActivityZones.length()", is(0)));
     }
 
     @Test
@@ -215,22 +155,6 @@ class AccountInfoControllerTest {
 
     @Test
     @WithUserDetails("test@test.com")
-    void 닉네임_가져오기() throws Exception {
-
-//        given
-        LoginUser loginUser =
-                (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
-
-//        when, then
-        mockMvc.perform(get("/account/settings/nickname")
-                .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser)))
-                .andDo(print())
-                .andExpect(jsonPath("$.data.nickname", is(loginUser.getNickName())));
-    }
-
-    @Test
-    @WithUserDetails("test@test.com")
     void 닉네임_변경하기() throws Exception {
 
 //        given
@@ -249,23 +173,6 @@ class AccountInfoControllerTest {
 //        then
         LoginUser findUser = (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
         assertThat(findUser.getNickName()).isEqualTo(request.getNickname());
-    }
-
-    @Test
-    @WithUserDetails("test@test.com")
-    void 알림_설정_가져오기() throws Exception {
-
-//        given
-        LoginUser loginUser =
-                (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
-
-//        when, then
-        mockMvc.perform(get("/account/settings/notifications")
-                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.length()", is(6)))
-                .andDo(print());
     }
 
     @Test
@@ -300,7 +207,29 @@ class AccountInfoControllerTest {
                 .andExpect(jsonPath("$.data.receiveRecruitingNotification", is(true)));
     }
 
-//    ValidationTest ===================================================================================================
+    @Test
+    @WithUserDetails("out@out.com")
+    @Order(value = Integer.MAX_VALUE - 1)
+    void 회원_탈퇴() throws Exception {
+
+//        given
+        LoginUser user =
+                (LoginUser) customUserDetailService.loadUserByUsername("out@out.com");
+
+//        when
+        mockMvc.perform(delete("/account/settings/quit")
+                .header("Authorization", jwtTokenUtil.generateToken(user))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+//        then
+        LoginUser confirm =
+                (LoginUser) customUserDetailService.loadUserByUsername("out@out.com");
+        assertTrue(confirm.getAccount().isQuit());
+    }
+
+    //    ValidationTest ===================================================================================================
     @Test
     @WithUserDetails("test@test.com")
     void 패스워드_변경_유효성_검사_1_패스워드와_패스워드확인_공백체크() throws Exception {
@@ -325,13 +254,13 @@ class AccountInfoControllerTest {
     @WithUserDetails("test@test.com")
     void 패스워드_변경_유효성_검사_2_패스워드와_패스워드확인값_불일치() throws Exception {
 
-    //        given
+        //        given
         LoginUser loginUser =
                 (LoginUser) customUserDetailService.loadUserByUsername("test@test.com");
         Update.PasswordRequest updatePasswordRequestDto = AccountDummy.getNotEqualsPasswordAndPasswordConfirm();
 
 
-    //        when, then
+        //        when, then
         mockMvc.perform(patch("/account/settings/password")
                 .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(loginUser))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -378,5 +307,21 @@ class AccountInfoControllerTest {
                 .andDo(print())
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.errors.length()", is(1)));
+    }
+
+    @Test
+    @WithUserDetails("quit@quit.com")
+    void 이미_탈퇴한_회원() throws Exception {
+
+//        given
+        LoginUser user =
+                (LoginUser) customUserDetailService.loadUserByUsername("quit@quit.com");
+
+//        when
+        mockMvc.perform(delete("/account/quit")
+                .header("Authorization", "Bearer " + jwtTokenUtil.generateToken(user))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
     }
 }

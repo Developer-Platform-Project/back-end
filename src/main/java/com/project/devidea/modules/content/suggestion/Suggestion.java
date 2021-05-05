@@ -1,6 +1,6 @@
 package com.project.devidea.modules.content.suggestion;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import lombok.*;
 
 import javax.persistence.*;

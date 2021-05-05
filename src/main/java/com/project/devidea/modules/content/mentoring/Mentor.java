@@ -1,6 +1,6 @@
 package com.project.devidea.modules.content.mentoring;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.resume.Resume;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.zone.Zone;

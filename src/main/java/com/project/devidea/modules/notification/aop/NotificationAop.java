@@ -1,7 +1,7 @@
 //package com.project.devidea.modules.notification.aop;
 //
 //
-//import com.project.devidea.modules.account.Account;
+//import com.project.devidea.modules.account.domains.Account;
 //import com.project.devidea.modules.account.repository.AccountRepository;
 //import com.project.devidea.modules.notification.Notification;
 //import com.project.devidea.modules.notification.NotificationRepository;

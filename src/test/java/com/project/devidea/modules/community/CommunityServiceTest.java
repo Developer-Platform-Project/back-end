@@ -2,7 +2,7 @@ package com.project.devidea.modules.community;
 
 import com.project.devidea.infra.config.security.CustomUserDetailService;
 import com.project.devidea.infra.config.security.LoginUser;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.AccountDummy;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.community.form.RequestCommunity;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;

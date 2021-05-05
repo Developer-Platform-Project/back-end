@@ -3,31 +3,21 @@ package com.project.devidea.modules.notification;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.devidea.infra.MockMvcTest;
-import com.project.devidea.infra.WithAccount;
 import com.project.devidea.infra.config.security.CustomUserDetailService;
 import com.project.devidea.infra.config.security.LoginUser;
 import com.project.devidea.infra.config.security.jwt.JwtTokenUtil;
-import com.project.devidea.infra.error.exception.BusinessException;
 import com.project.devidea.infra.error.exception.EntityNotFoundException;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.AccountDummy;
 import com.project.devidea.modules.account.repository.AccountRepository;
 
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.beans.HasPropertyWithValue;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;

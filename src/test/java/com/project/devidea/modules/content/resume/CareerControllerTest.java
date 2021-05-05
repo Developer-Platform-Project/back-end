@@ -2,13 +2,12 @@ package com.project.devidea.modules.content.resume;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.devidea.infra.MockMvcTest;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.content.mentoring.account.WithAccount;
 import com.project.devidea.modules.content.resume.career.Career;
 import com.project.devidea.modules.content.resume.career.CareerRepository;
 import com.project.devidea.modules.content.resume.form.career.CreateCareerRequest;
-import com.project.devidea.modules.content.resume.form.career.UpdateCareerRequest;
 import com.project.devidea.modules.tagzone.tag.Tag;
 import com.project.devidea.modules.tagzone.tag.TagRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 

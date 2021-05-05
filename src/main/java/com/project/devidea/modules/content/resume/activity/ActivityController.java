@@ -1,7 +1,7 @@
 package com.project.devidea.modules.content.resume.activity;
 
 import com.project.devidea.infra.config.security.CurrentUser;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.resume.Resume;
 import com.project.devidea.modules.content.resume.ResumeRepository;

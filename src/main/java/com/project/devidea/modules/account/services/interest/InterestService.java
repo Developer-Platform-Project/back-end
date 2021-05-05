@@ -1,7 +1,7 @@
 package com.project.devidea.modules.account.services.interest;
 
-import com.project.devidea.modules.account.Account;
-import com.project.devidea.modules.account.Interest;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.Interest;
 import com.project.devidea.modules.tagzone.tag.Tag;
 
 import java.util.HashSet;

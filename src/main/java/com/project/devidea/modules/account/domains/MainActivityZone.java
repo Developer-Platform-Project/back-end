@@ -1,5 +1,6 @@
-package com.project.devidea.modules.account;
+package com.project.devidea.modules.account.domains;
 
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.tagzone.zone.Zone;
 import lombok.*;
 

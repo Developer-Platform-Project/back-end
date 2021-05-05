@@ -1,6 +1,9 @@
 package com.project.devidea.modules.account;
 
 import com.project.devidea.infra.SHA256;
+import com.project.devidea.modules.account.domains.Account;
+import com.project.devidea.modules.account.domains.Interest;
+import com.project.devidea.modules.account.domains.MainActivityZone;
 import com.project.devidea.modules.account.dto.*;
 import com.project.devidea.modules.tagzone.tag.TagDummy;
 import com.project.devidea.modules.tagzone.zone.ZoneDummy;
@@ -12,6 +15,7 @@ public class AccountDummy {
 
     public static SignUp.DetailRequest getSignUpDetailRequestDto() {
         return SignUp.DetailRequest.builder()
+                .token("token123")
                 .careerYears(3).receiveEmail(true).jobField("웹개발").profilePath("1234")
                 .zones(Arrays.asList("서울특별시/광진구", "서울특별시/중랑구", "경기도/수원시"))
                 .techStacks(Arrays.asList("java", "python"))
@@ -138,5 +142,12 @@ public class AccountDummy {
                 .password("1234").name("고범석").roles("ROLE_USER").email("ko@naver.com")
                 .emailCheckToken(UUID.randomUUID().toString())
                 .emailCheckTokenGeneratedAt(LocalDateTime.now().minusMinutes(31L)).build();
+    }
+
+    public static SignUp.CommonRequest getSignUpForEvents() {
+        return SignUp.CommonRequest.builder()
+                .email("kokokoko@naver.com").name("고범석").gender("male")
+                .nickname("구직왕고범석").password(SHA256.encrypt("12341234"))
+                .passwordConfirm(SHA256.encrypt("12341234")).build();
     }
 }

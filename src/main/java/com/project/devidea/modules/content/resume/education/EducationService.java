@@ -1,6 +1,6 @@
 package com.project.devidea.modules.content.resume.education;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.AbstractService;
 import com.project.devidea.modules.content.mentoring.exception.InvalidInputException;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;

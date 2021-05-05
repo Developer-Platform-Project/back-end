@@ -1,6 +1,6 @@
 package com.project.devidea.modules.account.services.signUp;
 
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.dto.SignUp;
 import com.project.devidea.modules.account.event.SendEmailToken;
 import com.project.devidea.modules.account.repository.AccountRepository;
@@ -27,7 +27,6 @@ class CommonSignUpServiceImplTest {
     @Mock AccountRepository accountRepository;
     @Mock ApplicationEventPublisher publisher;
     @Mock ModelMapper modelMapper;
-    @Mock EnvironmentRepository environmentRepository;
     @InjectMocks CommonSignUpServiceImpl commonSignUpService;
 
     @Test
@@ -51,31 +50,5 @@ class CommonSignUpServiceImplTest {
             verify(publisher).publishEvent(any(SendEmailToken.class));
             verify(modelMapper).map(account, SignUp.Response.class);
         }
-    }
-
-    @Test
-    void 메일인증() throws Exception {
-
-        // given
-        Account account = mock(Account.class);
-        String email = "email";
-        String token = "token";
-        when(accountRepository.findByEmail(email))
-                .thenReturn(Optional.of(account));
-        String url = "url";
-        Environment environment = mock(Environment.class);
-        when(environmentRepository.findByDescription("FRONT"))
-                .thenReturn(environment);
-        when(environment.getUrl())
-                .thenReturn(url);
-
-        // when
-        commonSignUpService.authenticateEmailToken(email, token);
-
-        // then
-        verify(accountRepository).findByEmail(email);
-        verify(account).validateToken(token);
-        verify(environmentRepository).findByDescription("FRONT");
-        verify(environment).getUrl();
     }
 }

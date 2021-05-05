@@ -2,7 +2,7 @@ package com.project.devidea.modules.content.mentoring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.devidea.infra.MockMvcTest;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.account.repository.AccountRepository;
 import com.project.devidea.modules.content.mentoring.account.WithAccount;
 import com.project.devidea.modules.content.mentoring.form.CreateMentorRequest;

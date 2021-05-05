@@ -5,59 +5,6 @@ plugins {
     id 'jacoco'
 }
 
-test {
-    finalizedBy 'jacocoTestReport'
-}
-
-jacoco {
-    toolVersion = "0.8.5"
-}
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-        csv.enabled true
-        xml.enabled false
-    }
-
-    afterEvaluate {
-        getClassDirectories().setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it,
-                    exclude: ['**/Q*'])
-        }))
-    }
-
-    finalizedBy 'jacocoTestCoverageVerification'
-}
-
-jacocoTestCoverageVerification {
-    afterEvaluate {
-        getClassDirectories().setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/Q*', '**/Q*.class'])
-        }))
-    }
-
-    violationRules {
-        rule {
-            enabled = true
-            element = 'CLASS'
-            // includes = []
-
-            limit {
-                counter = 'LINE'
-                value = 'COVEREDRATIO'
-                minimum = 0.00
-            }
-
-            excludes = ['*.TechNewsController.*','*.Q.*','*.CrawlingTest.*','*.Q*','**/Q*.class']
-        }
-
-        rule {
-        }
-
-    }
-}
-
 group = 'com.project'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -131,11 +78,6 @@ dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 //    //https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo
 //    testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
-    // https://mvnrepository.com/artifact/cz.jirutka.spring/embedmongo-spring
-//    testImplementation group: 'cz.jirutka.spring', name: 'embedmongo-spring', version: '1.1'
-    implementation platform('com.google.cloud:libraries-bom:19.0.0')
-    compile 'com.google.cloud:google-cloud-language'
-
 }
 
 def generated='src/main/generated'
@@ -150,9 +92,65 @@ tasks.withType(JavaCompile) {
 clean.doLast {
     file(generated).deleteDir()
 }
+
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
+
+jacocoTestReport {
+    dependsOn test
+}
+
+jacoco {
+    toolVersion = "0.8.6"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        csv.enabled true
+        xml.enabled false
+    }
+
+    afterEvaluate {
+        getClassDirectories().setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/Q*'])
+        }))
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    afterEvaluate {
+        getClassDirectories().setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/Q*', '**/Q*.class'])
+        }))
+    }
+
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+            // includes = []
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+
+            excludes = ['*.TechNewsController.*','*.Q.*','*.CrawlingTest.*','*.Q*','**/Q*.class']
+        }
+
+        rule {
+        }
+
+    }
+}
+
 dependencyManagement {
     imports {
         mavenBom "com.vaadin:vaadin-bom:8.1.0"

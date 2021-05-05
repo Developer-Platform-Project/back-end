@@ -1,20 +1,18 @@
 package com.project.devidea.modules.content.resume.education;
 
 import com.project.devidea.infra.config.security.CurrentUser;
-import com.project.devidea.modules.account.Account;
+import com.project.devidea.modules.account.domains.Account;
 import com.project.devidea.modules.content.mentoring.exception.NotFoundException;
 import com.project.devidea.modules.content.resume.Resume;
 import com.project.devidea.modules.content.resume.ResumeRepository;
 import com.project.devidea.modules.content.resume.form.education.CreateEducationRequest;
 import com.project.devidea.modules.content.resume.form.education.UpdateEducationRequest;
-import com.project.devidea.modules.content.resume.validator.EducationRequestValidator;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
